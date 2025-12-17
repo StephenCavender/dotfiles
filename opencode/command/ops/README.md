@@ -13,6 +13,9 @@ Comprehensive performance analysis and bottleneck identification.
 ### [security-audit](security-audit.md)
 Security vulnerability assessment and best practices review.
 
+### [terraform](terraform.md)
+Design and manage infrastructure as code with Terraform/OpenTofu.
+
 ## Usage
 
 Commands in this category focus on:
@@ -20,6 +23,8 @@ Commands in this category focus on:
 - **Security**: Vulnerability assessment and best practices
 - **Infrastructure**: Deployment and operational concerns
 - **Monitoring**: Observability and alerting
+- **Infrastructure as Code**: Terraform/OpenTofu, state management, multi-cloud
+- **Automation**: CI/CD, GitOps, policy as code
 
 ## Common Scenarios
 
@@ -28,6 +33,10 @@ Commands in this category focus on:
 - Infrastructure deployment and management
 - Monitoring and alerting setup
 - Operational best practices implementation
+- Terraform module development
+- Infrastructure as code automation
+- Multi-cloud deployment strategies
+- State management and GitOps workflows
 
 ## Related Commands
 

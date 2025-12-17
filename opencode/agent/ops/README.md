@@ -13,6 +13,9 @@ Specializes in optimization, profiling, bottleneck identification, and performan
 ### [Security Auditor](security-auditor.md)
 Focuses on vulnerability assessment, security best practices, and compliance requirements.
 
+### [Terraform Specialist](terraform-specialist.md)
+Expert Terraform/OpenTofu specialist mastering advanced IaC automation, state management, and enterprise infrastructure patterns. Handles complex module design, multi-cloud deployments, and GitOps workflows.
+
 ## Expertise Areas
 
 - **DevOps**: CI/CD pipelines, automation, deployment strategies
@@ -20,7 +23,9 @@ Focuses on vulnerability assessment, security best practices, and compliance req
 - **Performance Optimization**: Profiling, monitoring, bottleneck analysis
 - **Security**: Vulnerability assessment, compliance, best practices
 - **Monitoring**: Observability, logging, alerting, metrics
-- **Infrastructure as Code**: Terraform, CloudFormation, Ansible
+- **Infrastructure as Code**: Terraform, OpenTofu, CloudFormation, Ansible
+- **Terraform/IaC**: Module design, state management, multi-cloud deployment
+- **Policy as Code**: OPA, Sentinel, compliance automation
 
 ## Common Tasks
 

@@ -10,12 +10,15 @@ Specialized in system design, scalability, and technical architecture.
 - **[Backend Architect](architecture/backend-architect.md)** - API design, system scalability, microservices architecture
 - **[Database Architect](architecture/database-architect.md)** - Schema design, query optimization, data modeling
 - **[System Architect](architecture/system-architect.md)** - Overall system design, technology stack decisions
+- **[SQL Specialist](architecture/sql-specialist.md)** - Modern SQL, cloud databases, OLTP/OLAP optimization
 
 ### ✍️ Content Agents
 Focused on documentation, technical writing, and content creation.
 
 - **[Content Editor](content/content-editor.md)** - Technical writing clarity, content structure and flow
 - **[Documentation Specialist](content/documentation-specialist.md)** - API docs, user guides, technical specifications
+- **[Prompt Engineer](content/prompt-engineer.md)** - LLM optimization, chain-of-thought, constitutional AI
+- **[Reference Builder](content/reference-builder.md)** - Exhaustive technical references, API documentation
 
 ### 💻 Engineering Agents
 Domain-specific implementation experts for different platforms.
@@ -29,6 +32,7 @@ Specialized in deployment, performance, security, and infrastructure.
 - **[Deployment Engineer](ops/deployment-engineer.md)** - CI/CD, Docker, cloud deployment, infrastructure as code
 - **[Performance Analyst](ops/performance-analyst.md)** - Optimization, profiling, bottleneck identification
 - **[Security Auditor](ops/security-auditor.md)** - Vulnerability assessment, security best practices
+- **[Terraform Specialist](ops/terraform-specialist.md)** - IaC automation, state management, multi-cloud deployment
 
 ### 🎯 Orchestration Agents
 Focused on workflow management, coordination, and process optimization.
@@ -41,6 +45,17 @@ Dedicated to code quality, testing, accessibility, and standards compliance.
 - **[Accessibility Engineer](quality/accessibility-engineer.md)** - A11y compliance, screen readers, inclusive design
 - **[Code Reviewer](quality/code-reviewer.md)** - Code quality, maintainability, best practices
 - **[Test Automation Engineer](quality/test-automation-engineer.md)** - Test strategy, coverage, automation frameworks
+
+### 🎨 Design Agents
+Focused on user experience, interface design, and visual validation.
+
+- **[UI/UX Designer](design/ui-ux-designer.md)** - Design systems, user research, accessibility-first design
+- **[UI Visual Validator](design/ui-visual-validator.md)** - Visual testing, regression testing, quality assurance
+
+### 🛠️ Developer Experience Agents
+Dedicated to improving developer workflows, tooling, and productivity.
+
+- **[DX Optimizer](developer-experience/dx-optimizer.md)** - Tooling, setup automation, workflow optimization
 
 ## Agent Selection
 

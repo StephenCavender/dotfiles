@@ -13,6 +13,9 @@ Specializes in schema design, query optimization, data modeling, and database pe
 ### [System Architect](system-architect.md)
 Focuses on overall system design, technology stack decisions, and integration patterns.
 
+### [SQL Specialist](sql-specialist.md)
+Master modern SQL with cloud-native databases, OLTP/OLAP optimization, and advanced query techniques. Expert in performance tuning, data modeling, and hybrid analytical systems.
+
 ## Expertise Areas
 
 - **System Design**: Scalable architecture patterns and best practices
@@ -21,6 +24,8 @@ Focuses on overall system design, technology stack decisions, and integration pa
 - **Technology Selection**: Framework choices, infrastructure decisions
 - **Performance Planning**: Scalability considerations, bottleneck analysis
 - **Integration Patterns**: Service communication, data flow design
+- **SQL Optimization**: Advanced queries, performance tuning, cloud databases
+- **Data Warehousing**: OLAP systems, analytics, hybrid HTAP architectures
 
 ## Common Tasks
 

@@ -20,6 +20,7 @@ model: model-to-use
 System design and architectural planning tasks.
 
 - **[arch](architecture/arch.md)** - System architecture analysis and design
+- **[sql](architecture/sql.md)** - Database schema design and SQL query optimization
 - **[plan](orchestration/plan.md)** - Feature planning and architectural roadmapping
 
 ### ✍️ Content Commands
@@ -29,6 +30,8 @@ Content creation, editing, and documentation tasks.
 - **[document](content/document.md)** - Technical documentation creation
 - **[edit](content/edit.md)** - Content editing and refinement
 - **[polish](content/polish.md)** - Content polishing and finalization
+- **[prompt](content/prompt.md)** - LLM prompt design and optimization
+- **[reference](content/reference.md)** - Comprehensive reference documentation generation
 
 ### 💻 Engineering Commands
 Implementation tasks for different platforms and technologies.
@@ -43,6 +46,7 @@ Deployment, performance, security, and infrastructure tasks.
 - **[optimize](ops/optimize.md)** - Performance optimization and efficiency improvements
 - **[performance-audit](ops/performance-audit.md)** - Comprehensive performance analysis
 - **[security-audit](ops/security-audit.md)** - Security vulnerability assessment
+- **[terraform](ops/terraform.md)** - Infrastructure as code with Terraform/OpenTofu
 
 ### 🎯 Orchestration Commands
 Workflow management, coordination, and process tasks.
@@ -66,6 +70,17 @@ Code analysis, testing, accessibility, and standards compliance.
 - **[tech-debt](quality/tech-debt.md)** - Technical debt identification and management
 - **[test-plan](quality/test-plan.md)** - Comprehensive test planning
 - **[write-tests](quality/write-tests.md)** - Test implementation and automation
+
+### 🎨 Design Commands
+UI/UX design, design systems, and visual validation.
+
+- **[design-system](design/design-system.md)** - Design system creation and auditing
+- **[visual-test](design/visual-test.md)** - Visual validation and regression testing
+
+### 🛠️ Developer Experience Commands
+Developer workflow optimization and tooling.
+
+- **[dx-audit](developer-experience/dx-audit.md)** - Developer experience audit and optimization
 
 ### 📊 Meta Commands
 Meta-level tasks and session management.

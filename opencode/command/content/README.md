@@ -16,6 +16,12 @@ Content editing and refinement for clarity and accuracy.
 ### [polish](polish.md)
 Content polishing and finalization for publication.
 
+### [prompt](prompt.md)
+Design and optimize LLM prompts with advanced techniques.
+
+### [reference](reference.md)
+Generate comprehensive technical reference documentation.
+
 ## Usage
 
 Commands in this category focus on:
@@ -23,6 +29,8 @@ Commands in this category focus on:
 - **Documentation**: Structured documentation systems
 - **Content Quality**: Editorial standards and consistency
 - **User Experience**: User-focused documentation
+- **Prompt Engineering**: LLM optimization and AI system design
+- **Reference Documentation**: Exhaustive technical references
 
 ## Common Scenarios
 
@@ -31,6 +39,9 @@ Commands in this category focus on:
 - Reviewing and improving existing content
 - Structuring documentation systems
 - Polishing content for publication
+- Designing LLM prompts for production
+- Generating comprehensive reference docs
+- Optimizing AI system prompts
 
 ## Related Commands
 
