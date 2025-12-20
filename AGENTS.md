@@ -21,7 +21,7 @@
 - Use logical grouping in configs (aliases, exports, settings)
 
 ### Git Configuration
-- Enforce SSH over HTTPS for GitHub/GitLab/Bitbucket
+- Enforce SSH over HTTPS
 - Use `master` as default branch
 - Enable GPG signing for commits
 - Custom aliases in gitconfig.symlink: `co`, `promote`, `wtf`, `rank-contributors`
