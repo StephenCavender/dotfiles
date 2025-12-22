@@ -5,6 +5,7 @@
 ## Inspiration
 
 - [Kainoa-h/MacSetup](https://github.com/Kainoa-h/MacSetup)
+- [Zack Reed's dotfiles](https://github.com/rubylaser/dotfiles)
 
 ## Features
 
