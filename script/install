@@ -9,5 +9,13 @@ cd "$(dirname $0)"/..
 echo "› brew bundle"
 brew bundle
 
+if [ -f "Brewfile.work" ]; then
+    read -p "› Do you want to also brew bundle Brewfile.work? (y/N) " response
+    if [[ "$response" =~ ^[Yy]$ ]]; then
+        echo "› brew bundle --file=Brewfile.work"
+        brew bundle --file=Brewfile.work
+    fi
+fi
+
 # find the installers and run them iteratively
 find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
