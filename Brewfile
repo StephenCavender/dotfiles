@@ -52,7 +52,6 @@ cask "1password"
 cask "1password-cli"
 cask "aerospace", args: { appdir: "/Applications" }
 cask "anki"
-cask "hiddenbar"
 cask "breaktimer"
 cask "discord"
 cask "font-hack-nerd-font"
