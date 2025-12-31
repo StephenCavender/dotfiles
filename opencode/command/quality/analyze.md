@@ -17,23 +17,29 @@ Automatic Routing Logic:
 - Security configs or auth files → Security Auditor
 - Performance-critical paths → Performance Analyst
 
-Analysis Includes:
-- Code quality and best practices
-- Architectural patterns and compliance
-- Performance implications
-- Security vulnerabilities
-- Testing coverage and quality
-- Documentation completeness
-- Potential improvements and refactoring
-- Domain-specific recommendations
+AOT-Enhanced Analysis Includes:
+- Code quality and best practices with atomic problem decomposition
+- Architectural patterns and compliance through DAG-based analysis
+- Performance implications with memoryless reasoning transitions
+- Security vulnerabilities with atomic sub-problem identification
+- Testing coverage and quality through independent test unit analysis
+- Documentation completeness with atomic coverage validation
+- Potential improvements and refactoring using AOT convergence
+- Domain-specific recommendations with atomic reasoning
 
-Deliverables:
-- Comprehensive analysis from appropriate specialist
-- Identified issues with severity ratings
-- Specific improvement recommendations
-- Code examples for fixes
-- Best practices guidance
-- Related files that may need updates
+AOT-Powered Deliverables:
+- Comprehensive analysis using atomic decomposition framework
+- Identified issues with severity ratings and atomic sub-problem breakdown
+- Specific improvement recommendations with AOT reasoning trajectory
+- Code examples for fixes using atomic problem solving
+- Best practices guidance with memoryless reasoning validation
+- Related files that may need updates with dependency analysis
+
+If multiple specialists are relevant, AOT analysis will include:
+1. Primary specialist atomic analysis
+2. Secondary specialist atomic consultations 
+3. AOT integration through contraction phase
+4. Quality-aware termination validation
 
 If multiple specialists are relevant, the analysis will include:
 1. Primary specialist analysis

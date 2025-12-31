@@ -32,13 +32,15 @@ Create `session_{slug}_{timestamp}.md` with the following comprehensive analysis
 - **Commands executed**: [List of commands used]
 - **Lines of code**: [Approximate count if applicable]
 
-## Efficiency Analysis
-- **Velocity**: Tasks completed vs time spent
-- **Agent utilization**: Most/least used agents and why
-- **Bottlenecks identified**: Where did the session slow down?
-- **Context switches**: How many times changed focus areas?
-- **Rework needed**: Any iterations required for quality?
-- **Best practices followed**: Quality gates passed
+## AOT-Powered Efficiency Analysis
+- **Velocity**: Tasks completed vs time spent with atomic convergence metrics
+- **Agent utilization**: Most/least used agents and why, with AOT decomposition effectiveness
+- **Bottlenecks identified**: Where did the session slow down? Analyzed through atomic sub-problem identification
+- **Context switches**: How many times changed focus areas? Minimized through memoryless state transitions
+- **Rework needed**: Any iterations required for quality? Analyzed through AOT quality-aware termination
+- **Best practices followed**: Quality gates passed with AOT reasoning validation
+- **Atomic Decomposition Success Rate**: Percentage of problems successfully solved through AOT framework
+- **Markovian Reasoning Effectiveness**: How well memoryless transitions maintained answer-equivalence
 
 ## Quality Indicators
 - Code review outcomes
@@ -54,26 +56,28 @@ Create `session_{slug}_{timestamp}.md` with the following comprehensive analysis
 - Did collaboration protocols work smoothly?
 - Any gaps in agent coordination?
 
-## Process Improvements
+## AOT-Enhanced Process Improvements
 - **What worked well**:
-  - Efficient workflows or command usage
-  - Effective agent collaboration
-  - Clear communication and requirements
-  - Time-saving shortcuts or patterns
+  - Efficient AOT workflows and atomic decomposition usage
+  - Effective agent collaboration through memoryless reasoning
+  - Clear communication and requirements with AOT validation
+  - Time-saving patterns through atomic convergence
+  - Quality-aware termination effectiveness
 
 - **What could be improved**:
-  - Unclear requirements or scope changes
-  - Missing or underutilized agents
-  - Command sequences that could be streamlined
-  - Better upfront planning opportunities
-  - Additional automation possibilities
+  - Incomplete atomic decomposition of complex problems
+  - Sub-optimal DAG dependency analysis
+  - Quality-aware termination failures requiring rework
+  - Better upfront AOT planning opportunities
+  - Additional AOT automation possibilities
 
-- **Recommendations for next session**:
-  - Suggested process changes
-  - New commands that would be helpful
-  - Agent capability enhancements needed
-  - Documentation to create
-  - Standards to establish
+- **AOT Recommendations for next session**:
+  - Enhanced atomic decomposition strategies
+  - Improved DAG dependency identification
+  - Better quality-aware termination criteria
+  - AOT capability enhancements needed
+  - Standards for memoryless reasoning transitions
+  - Better atomic convergence validation processes
 
 ## Notable Highlights
 - Clever solutions or approaches
@@ -98,11 +102,15 @@ Create `session_{slug}_{timestamp}.md` with the following comprehensive analysis
 - Alternative approaches considered
 - Impact on system design
 
-## Knowledge Capture
-- New patterns or approaches discovered
-- Reusable solutions for future reference
-- Team conventions established
-- Common pitfalls to avoid
+## AOT Knowledge Capture
+- New atomic decomposition patterns discovered
+- Reusable AOT solutions for future reference
+- Memoryless reasoning patterns established
+- Common AOT pitfalls to avoid
+- Effective DAG structures identified
+- Quality-aware termination successes and failures
+- Atomic convergence best practices
+- Markovian reasoning templates for reuse
 
 ## Session Artifacts
 - Files created: [List with purpose]
