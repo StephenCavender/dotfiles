@@ -23,10 +23,3 @@ else
     echo "❌ bordersrc file not found in $SOURCE_DIR"
     exit 1
 fi
-
-# Make the configuration executable
-chmod +x "$CONFIG_FILE"
-
-# Start borders with the configuration
-echo "Starting borders..."
-$CONFIG_FILE
