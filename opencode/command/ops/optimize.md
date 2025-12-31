@@ -28,17 +28,22 @@ Performance Analysis:
 ### System-Level Optimization
 - Configuration tuning for maximum performance
 - Resource allocation and scaling optimization
-- Network latency reduction
+- Network latency reduction and egress cost management
 - Storage I/O optimization
 - Caching layer implementation and tuning
+- Serverless compute time minimization
+- Background job offloading for long tasks
+- Spend limits and cost controls
 
 ### Frontend Optimization
 - Bundle size reduction and code splitting
-- Image and asset optimization
+- Image and asset optimization (limit public/ to 4KB)
 - Critical rendering path optimization
 - JavaScript execution optimization
 - CSS performance improvements
 - Browser caching strategies
+- Static rendering optimization over force-dynamic
+- Asset delivery cost optimization
 
 ## Performance Monitoring
 - Implement performance metrics collection
@@ -58,8 +63,10 @@ Performance Analysis:
 - Query performance analysis and optimization
 - Index strategy implementation
 - Database connection pooling optimization
-- Caching layer implementation
+- Caching layer implementation (unstable_cache, revalidateTag)
 - Database schema optimization
+- Sequential query elimination with Promise.all()
+- Single query with relations vs multiple lookups
 
 ## Network Optimization
 - Reduce round-trip times and latency
@@ -88,6 +95,8 @@ Performance Analysis:
 - Performance monitoring setup and dashboards
 - Load testing results and scaling recommendations
 - Before/after performance comparisons
+- Infrastructure cost optimization analysis
+- Build output verification (static vs dynamic routes)
 
 ## Best Practices
 - Measure before and after optimization
@@ -95,5 +104,9 @@ Performance Analysis:
 - Consider maintainability alongside performance
 - Document optimization decisions and trade-offs
 - Establish continuous performance monitoring
+- Optimize for cost efficiency alongside performance
+- Prioritize static rendering when possible
+- Use external storage for large assets (>4KB)
+- Configure restrictive image optimization patterns
 
 The optimization process ensures measurable performance improvements while maintaining system stability, security, and maintainability.

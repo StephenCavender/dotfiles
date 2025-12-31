@@ -16,15 +16,22 @@ Performance Assessment:
 - Bundle size and load time analysis
 - Memory leak detection
 - N+1 query identification
+- Build output verification (static vs dynamic routes)
+- Asset size analysis (public/ directory >4KB check)
+- Serverless compute time analysis
+- Sequential database call detection
 
 Analysis Areas:
 - Identify performance bottlenecks
-- Analyze caching opportunities
+- Analyze caching opportunities (unstable_cache, revalidateTag)
 - Evaluate database indexing strategy
 - Review connection pooling configuration
-- Assess async processing opportunities
+- Assess async processing opportunities and background job offloading
 - Examine code-level optimization needs
 - Review infrastructure scaling patterns
+- Asset delivery cost analysis
+- Static rendering optimization opportunities
+- Concurrent query optimization (Promise.all())
 
 Deliverables:
 - Performance baseline metrics
@@ -35,5 +42,9 @@ Deliverables:
 - Load testing plan
 - Performance budget recommendations
 - Monitoring and alerting configuration
+- Build output analysis (static vs dynamic route breakdown)
+- Asset size optimization report
+- Infrastructure cost optimization recommendations
+- Spend limits and cost control configuration
 
 Consult with Database Architect for query optimization and Deployment Engineer for infrastructure scaling.
