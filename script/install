@@ -4,17 +4,35 @@
 
 set -e
 
+WORK_BREWFILE=false
+
+# Parse command line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --work|-w)
+            WORK_BREWFILE=true
+            shift
+            ;;
+        *)
+            echo "Unknown argument: $1"
+            echo "Usage: $0 [--work|-w]"
+            exit 1
+            ;;
+    esac
+done
+
 cd "$(dirname $0)"/..
 
 echo "› brew bundle"
 brew bundle
 
-if [ -f "Brewfile.work" ]; then
-    read -p "› Do you want to also brew bundle Brewfile.work? (y/N) " response
-    if [[ "$response" =~ ^[Yy]$ ]]; then
-        echo "› brew bundle --file=Brewfile.work"
-        brew bundle --file=Brewfile.work
-    fi
+if [ "$WORK_BREWFILE" = true ] && [ -f "Brewfile.work" ]; then
+    echo "› brew bundle --file=Brewfile.work"
+    brew bundle --file=Brewfile.work
+elif [ "$WORK_BREWFILE" = true ] && [ ! -f "Brewfile.work" ]; then
+    echo "› Brewfile.work not found, skipping work brewfile"
+elif [ "$WORK_BREWFILE" = false ] && [ -f "Brewfile.work" ]; then
+    echo "› Brewfile.work found. Use --work flag to install work packages."
 fi
 
 # find the installers and run them iteratively
