@@ -1,56 +1,40 @@
-# Sketchybar configuration for use with Aerospace
-# This config provides a minimal status bar that works well with the Aerospace tiling window manager
+#!/bin/bash
 
-# General configuration
-sketchybar --bar height=30 position=top margin=0 y_offset=0 \
-           corner_radius=0 \
-           blur_radius=0 \
-           color=0xff000000 \
-           font="Hack Nerd Font:Regular:12.0" \
-           padding_left=10 padding_right=10
+source "$CONFIG_DIR/colors.sh" # Loads all defined colors
 
-# Global defaults
-sketchybar --default updates=when_shown \
-           drawing=on \
-           icon.font="Hack Nerd Font:Regular:12.0" \
-           label.font="Hack Nerd Font:Regular:12.0" \
-           icon.color=0xffffffff \
-           label.color=0xffffffff \
-           background.padding_left=5 \
-           background.padding_right=5
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+ITEM_DIR="$CONFIG_DIR/items"
 
-# Aerospace workspace indicator
-sketchybar --add item aerospace left \
-           --set aerospace script="$CONFIG_DIR/plugins/aerospace.sh" \
-           --set aerospace update_freq=5 \
-           --set aerospace icon.drawing=off
+##### Bar Appearance #####
+sketchybar --bar height=40 \
+                 blur_radius=0 \
+                 position=top \
+                 sticky=off \
+                 padding_left=10 \
+                 padding_right=10 \
+                 color=$BAR_COLOR
 
-# Space indicators for Aerospace
-for i in {1..10}; do
-    sketchybar --add space space.$i left \
-               --set space.$i script="$CONFIG_DIR/plugins/space.sh" \
-               --set space.$i icon="$i" \
-               --set space.$i label.drawing=off \
-               --set space.$i click_script="aerospace workspace $i"
-done
+sketchybar --add event aerospace_workspace_change
 
-# Clock
-sketchybar --add item clock right \
-           --set clock update_freq=10 \
-           --set clock script="$CONFIG_DIR/plugins/clock.sh" \
-           --set clock icon=""
+##### Changing Defaults #####
+sketchybar --default icon.font="BlexMono Nerd Font:Regular:15.5" \
+                     icon.color=$WHITE \
+                     background.color=$ITEM_BG_COLOR \
+                     label.font="BlexMono Nerd Font:Regular:15.5" \
+                     label.color=$WHITE \
+                     padding_left=5 \
+                     padding_right=5 \
+                     label.padding_left=5 \
+                     label.padding_right=5 \
+                     icon.padding_left=5 \
+                     icon.padding_right=5
 
-# Battery
-sketchybar --add item battery right \
-           --set battery update_freq=30 \
-           --set battery script="$CONFIG_DIR/plugins/battery.sh" \
-           --set battery icon=""
+# -- Left Side Items --
+source $ITEM_DIR/workspace.sh
 
-# WiFi
-sketchybar --add item wifi right \
-           --set wifi update_freq=30 \
-           --set wifi script="$CONFIG_DIR/plugins/wifi.sh" \
-           --set wifi icon=""
+# -- Right Side Items --
+source $ITEM_DIR/clock.sh
+source $ITEM_DIR/battery.sh
 
-# Final configuration
+##### Finalizing Setup #####
 sketchybar --update

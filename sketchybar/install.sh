@@ -12,6 +12,7 @@ echo "Installing SketchyBar configuration..."
 # Create the target directory if it doesn't exist
 mkdir -p "$TARGET_DIR"
 mkdir -p "$TARGET_DIR/plugins"
+mkdir -p "$TARGET_DIR/items"
 
 # Copy sketchybarrc file
 if [ -f "$SOURCE_DIR/sketchybarrc" ]; then
@@ -23,6 +24,12 @@ fi
 if [ -d "$SOURCE_DIR/plugins" ]; then
     echo "Copying plugin files to $TARGET_DIR/plugins/"
     cp -R "$SOURCE_DIR/plugins/"* "$TARGET_DIR/plugins/"
+fi
+
+# Copy items directory
+if [ -d "$SOURCE_DIR/items" ]; then
+    echo "Copying item files to $TARGET_DIR/items/"
+    cp -R "$SOURCE_DIR/items/"* "$TARGET_DIR/items/"
 fi
 
 echo "SketchyBar configuration installed successfully!"
