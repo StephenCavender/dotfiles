@@ -1,6 +1,6 @@
 ---
 description: Master workflow orchestrator that coordinates all agents and manages complex multi-agent workflows. Analyzes user requests, determines optimal agent sequences, and ensures efficient task completion. Use as PRIMARY AGENT for all development requests.
-mode: subagent
+mode: primary
 model: anthropic/claude-3-5-sonnet-20241022
 temperature: 0.2
 tools:
