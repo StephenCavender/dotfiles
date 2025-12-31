@@ -35,6 +35,7 @@ defaults write com.apple.Safari.plist ShowFavoritesBar -bool false
 
 # Hide the macOS menu bar (requires restart or logout/login)
 defaults write NSGlobalDomain _HIHideMenuBar -bool true
+defaults write NSGlobalDomain AppleMenuBarVisibleInFullscreen -bool false
 
 # Set up Safari for development.
 defaults write com.apple.Safari.SandboxBroker ShowDevelopMenu -bool true
