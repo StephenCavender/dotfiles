@@ -66,3 +66,6 @@ This specialization ensures that every task is handled by an expert with the rig
 - [Contains Studio AI Agents](https://github.com/contains-studio/agents)
 - [Seth Hobsons agents](https://github.com/wshobson/agents)
 - [Richard Hightower's subagents](https://github.com/RichardHightower/subagents)
+- Netowrk Chuck's videos:
+  - [You've been using AI the hard way](https://www.youtube.com/watch?v=MsQACpcuTkU)
+  - [You suck at prompting](https://www.youtube.com/watch?v=pwWBcsxEoLk)
