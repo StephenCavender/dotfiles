@@ -6,6 +6,7 @@
 
 - [Kainoa-h/MacSetup](https://github.com/Kainoa-h/MacSetup)
 - [Zack Reed's dotfiles](https://github.com/rubylaser/dotfiles)
+- [paulalden's dotfiles](https://github.com/paulalden/dotfiles) - Sketchybar configuration
 
 ## Features
 
