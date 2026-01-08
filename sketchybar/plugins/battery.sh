@@ -1,23 +1,68 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
-# Battery plugin for sketchybar
-PERCENTAGE=$(pmset -g batt | grep -Eo '\d+%' | cut -d% -f1)
-CHARGING=$(pmset -g batt | grep 'AC Power')
+source "$CONFIG_DIR/scripts/config.sh"
 
-if [ "$PERCENTAGE" -lt 20 ]; then
-    ICON=""
-elif [ "$PERCENTAGE" -lt 40 ]; then
-    ICON=""
-elif [ "$PERCENTAGE" -lt 60 ]; then
-    ICON=""
-elif [ "$PERCENTAGE" -lt 80 ]; then
-    ICON=""
-else
-    ICON=""
+PERCENTAGE="$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)"
+CHARGING="$(pmset -g batt | grep 'AC Power')"
+
+if [ "$PERCENTAGE" = "" ]; then
+  exit 0
 fi
 
-if [ -n "$CHARGING" ]; then
-    ICON=""
+FONT_SIZE=15
+
+case "${PERCENTAGE}" in
+[8-9][0-9] | 100)
+  ICON="󱊣"
+  COLOR=$GREEN
+  ;;
+[6-7][0-9])
+  ICON="󱊢"
+  COLOR=$YELLOW
+  ;;
+[3-5][0-9])
+  ICON="󱊢"
+  COLOR=$ORANGE
+  ;;
+[1-2][0-9])
+  ICON="󱊡"
+  COLOR=$RED
+  ;;
+*)
+  ICON="󰂎"
+  COLOR=$RED
+  ;;
+esac
+
+if [[ "$CHARGING" != "" ]]; then
+  case "${PERCENTAGE}" in
+  9[0-9] | 100)
+    ICON="󱊦"
+    COLOR=$GREEN
+    ;;
+  [6-8][0-9])
+    ICON="󱊥"
+    COLOR=$YELLOW
+    ;;
+  [3-5][0-9])
+    ICON="󱊥"
+    COLOR=$ORANGE
+    ;;
+  [1-2][0-9])
+    ICON="󱊤"
+    COLOR=$RED
+    ;;
+  *)
+    ICON="󰢟"
+    COLOR=$RED
+    ;;
+  esac
+  FONT_SIZE=20
 fi
 
-sketchybar --set "$NAME" label="$PERCENTAGE%" icon="$ICON"
+sketchybar --set "$NAME" \
+  icon="$ICON" \
+  label="${PERCENTAGE}%" \
+  icon.font="$FONT:Bold:$FONT_SIZE.0" \
+  icon.color=$COLOR \
+  label.color=$COLOR

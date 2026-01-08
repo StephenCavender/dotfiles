@@ -1,40 +1,104 @@
 #!/bin/bash
 
-source "$CONFIG_DIR/colors.sh" # Loads all defined colors
+launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 &
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 ITEM_DIR="$CONFIG_DIR/items"
 
-##### Bar Appearance #####
-sketchybar --bar height=40 \
-                 blur_radius=0 \
-                 position=top \
-                 sticky=off \
-                 padding_left=10 \
-                 padding_right=10 \
-                 color=$BAR_COLOR
+source "$CONFIG_DIR/scripts/config.sh"
+
+sketchybar --bar \
+  position=top \
+  height=35 \
+  color=$BG \
+  border_color=$PURPLE_40 \
+  corner_radius=10 \
+  blur_radius=10 \
+  border_width=0 \
+  y_offset=15 \
+  margin=15 \
+  display=all \
+  topmost=off \
+  sticky=on \
+  font_smoothing=on \
+  padding_left=10 \
+  padding_right=10
+
+default=(
+  padding_left=5
+  padding_right=5
+  icon.font="$FONT:Bold:17.0"
+  label.font="$FONT:Semibold:14.0"
+  icon.color=$FG
+  label.color=$FG
+  icon.padding_left=4
+  icon.padding_right=4
+  label.padding_left=4
+  label.padding_right=4
+  updates=on
+)
+sketchybar --default "${default[@]}"
+
+source "$ITEM_DIR/apple.sh"
 
 sketchybar --add event aerospace_workspace_change
 
-##### Changing Defaults #####
-sketchybar --default icon.font="BlexMono Nerd Font:Regular:15.5" \
-                     icon.color=$WHITE \
-                     background.color=$ITEM_BG_COLOR \
-                     label.font="BlexMono Nerd Font:Regular:15.5" \
-                     label.color=$WHITE \
-                     padding_left=5 \
-                     padding_right=5 \
-                     label.padding_left=5 \
-                     label.padding_right=5 \
-                     icon.padding_left=5 \
-                     icon.padding_right=5
+for monitor in $(aerospace list-monitors --format "%{monitor-appkit-nsscreen-screens-id}"); do
+  for sid in $(aerospace list-workspaces --monitor "$monitor"); do
+    display_id="1"
+    if [ "$sid" -ge 8 ] && [ "$sid" -le 10 ]; then
+      display_id="2"
+    fi
 
-# -- Left Side Items --
-source $ITEM_DIR/workspace.sh
+    sketchybar --add item space.$sid left \
+      --set space.$sid display="$display_id" \
+      --subscribe space.$sid aerospace_workspace_change \
+      --set space.$sid \
+      drawing=on \
+      background.color=$CURRENT_LINE \
+      background.corner_radius=8 \
+      background.drawing=on \
+      background.border_color=$PURPLE_40 \
+      background.border_width=0 \
+      background.height=28 \
+      icon="$sid" \
+      icon.padding_left=10 \
+      icon.color=$COMMENT \
+      label.font="sketchybar-app-font:Regular:16.0" \
+      label.padding_right=20 \
+      label.padding_left=0 \
+      label.y_offset=-1 \
+      label.color=$FG \
+      click_script="aerospace workspace $sid" \
+      script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+  done
+done
 
-# -- Right Side Items --
-source $ITEM_DIR/clock.sh
-source $ITEM_DIR/battery.sh
+for monitor in $(aerospace list-monitors); do
+  for sid in $(aerospace list-workspaces --monitor "$monitor" --empty no); do
+    apps=$(aerospace list-windows --workspace "$sid" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
 
-##### Finalizing Setup #####
+    icon_strip=" "
+    if [ "${apps}" != "" ]; then
+      while read -r app; do
+        icon_strip+=" $($CONFIG_DIR/plugins/icon_map_fn.sh "$app")"
+      done <<<"${apps}"
+    fi
+    sketchybar --set space.$sid label="$icon_strip"
+  done
+done
+
+source "$ITEM_DIR/front_app.sh"
+
+source "$ITEM_DIR/time.sh"
+source "$ITEM_DIR/date.sh"
+source "$ITEM_DIR/dnd.sh"
+source "$ITEM_DIR/wifi.sh"
+source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/brightness.sh"
+source "$ITEM_DIR/volume.sh"
+source "$ITEM_DIR/cpu.sh"
+source "$ITEM_DIR/homebrew.sh"
+
+sketchybar --hotload on
 sketchybar --update
