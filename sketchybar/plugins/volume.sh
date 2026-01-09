@@ -7,20 +7,20 @@ if [ "$SENDER" = "volume_change" ]; then
 
   case "$VOLUME" in
   [7-9][0-9] | 100)
-    ICON=""
+    ICON=""
     COLOR=$RED
     ;;
   [2-6][0-9])
-    ICON=""
+    ICON=""
     COLOR=$ORANGE
     ;;
   [1-9] | [1-1][0-9])
-    ICON=""
+    ICON=""
     COLOR=$GREEN
     ;;
   *)
-    ICON=""
-    COLOR=$COMMENT
+    ICON=""
+    COLOR=$FG
     ;;
   esac
 

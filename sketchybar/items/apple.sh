@@ -5,8 +5,13 @@ source "$CONFIG_DIR/scripts/config.sh"
 POPUP_OFF='sketchybar --set apple.logo popup.drawing=off'
 POPUP_CLICK_SCRIPT='sketchybar --set $NAME popup.drawing=toggle'
 
+APPLE=""
+PREFERENCES=""
+LOCK=""
+ACTIVITY="󱎴"
+
 apple_logo=(
-  icon=
+  icon=$APPLE
   icon.font="$FONT:Bold:22.0"
   icon.color=$PURPLE
   padding_right=15
@@ -24,7 +29,7 @@ apple_logo=(
 )
 
 apple_prefs=(
-  icon=
+  icon=$PREFERENCES
   icon.color=$CYAN
   label="Preferences"
   label.color=$FG
@@ -32,7 +37,7 @@ apple_prefs=(
 )
 
 apple_activity=(
-  icon=󱎴
+  icon=$ACTIVITY
   icon.color=$GREEN
   label="Activity"
   label.color=$FG
@@ -40,7 +45,7 @@ apple_activity=(
 )
 
 apple_lock=(
-  icon=
+  icon=$LOCK
   icon.color=$PINK
   label="Lock Screen"
   label.color=$FG

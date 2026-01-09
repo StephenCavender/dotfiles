@@ -25,6 +25,6 @@ esac
 
 sketchybar --set $NAME \
   label="$CPU_PERCENT%" \
-  icon= \
+  icon= \
   icon.color=$COLOR \
   label.color=$COLOR

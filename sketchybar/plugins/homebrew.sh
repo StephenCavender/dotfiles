@@ -20,7 +20,7 @@ case "${COUNT}" in
 esac
 
 sketchybar --set $NAME \
-  icon= \
+  icon= \
   label="$COUNT" \
   icon.color=$COLOR \
   label.color=$COLOR
