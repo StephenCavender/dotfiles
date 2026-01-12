@@ -43,11 +43,19 @@ source "$ITEM_DIR/apple.sh"
 
 sketchybar --add event aerospace_workspace_change
 
+monitor_count=$(aerospace list-monitors | wc -l | tr -d ' ')
+
 for monitor in $(aerospace list-monitors --format "%{monitor-appkit-nsscreen-screens-id}"); do
   for sid in $(aerospace list-workspaces --monitor "$monitor"); do
-    display_id="1"
-    if [ "$sid" -ge 8 ] && [ "$sid" -le 10 ]; then
-      display_id="2"
+    if [ "$monitor_count" -eq 1 ]; then
+      display_id="1"  # Single monitor: everything on display 1
+    else
+      # Two monitors: numbers on external (2), letters on built-in (1)
+      if [[ "$sid" =~ ^[0-9]+$ ]]; then
+        display_id="2"  # Numbered workspaces → external monitor
+      else
+        display_id="1"  # Lettered workspaces → built-in display
+      fi
     fi
 
     sketchybar --add item space.$sid left \
@@ -74,7 +82,7 @@ for monitor in $(aerospace list-monitors --format "%{monitor-appkit-nsscreen-scr
   done
 done
 
-for monitor in $(aerospace list-monitors); do
+for monitor in $(aerospace list-monitors --format "%{monitor-appkit-nsscreen-screens-id}"); do
   for sid in $(aerospace list-workspaces --monitor "$monitor" --empty no); do
     apps=$(aerospace list-windows --workspace "$sid" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
 
