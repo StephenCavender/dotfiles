@@ -43,3 +43,12 @@ defaults write com.apple.Safari.plist IncludeDevelopMenu -bool true
 defaults write com.apple.Safari.plist WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari.plist "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+# Set dark mode.
+defaults write -g AppleInterfaceStyle -string "Dark"
+
+# Enable reduce transparency for better performance and readability.
+defaults write com.apple.Accessibility EnhancedBackgroundContrastEnabled -bool true
+
+# Set wallpaper tint mode to tinted (for liquid glass effect in macOS Sequoia/Tahoe).
+defaults write -g AppleReduceDesktopTinting -bool false
