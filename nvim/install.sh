@@ -75,5 +75,19 @@ vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 EOF
 
+# Add opencode.nvim plugin
+echo "Installing opencode.nvim plugin..."
+cat > "$NVIM_CONFIG_DIR/lua/plugins/opencode.lua" << 'EOF'
+return {
+  "NickvanDyke/opencode.nvim",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+  },
+  config = function()
+    require("opencode").setup()
+  end,
+}
+EOF
+
 echo "Neovim with LazyVim and Dracula theme installed successfully!"
 echo "Run 'nvim' to start using your new configuration."
