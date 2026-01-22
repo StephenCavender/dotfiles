@@ -60,3 +60,9 @@ defaults write com.apple.WindowManager StandardHideWidgets -bool true
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock autohide-time-modifier -float 0.5
+
+# Remove default apps from dock.
+defaults write com.apple.dock persistent-apps -array
+
+# Disable default apps from launching at startup.
+osascript -e 'tell application "System Events" to delete every login item'
