@@ -50,7 +50,7 @@ brew "oven-sh/bun/bun"
 
 cask "1password"
 cask "1password-cli"
-cask "aerospace", args: { appdir: "/Applications" }
+cask "nikitabobko/tap/aerospace"
 cask "anki"
 cask "breaktimer"
 cask "discord"
@@ -63,4 +63,4 @@ cask "font-sketchybar-app-font"
 cask "thinkorswim"
 cask "vlc"
 cask "zed"
-cask "zen", args: { appdir: "/Applications" }
+cask "zen"
