@@ -69,3 +69,6 @@ defaults write com.apple.dock persistent-apps -array
 
 # Disable default apps from launching at startup.
 osascript -e 'tell application "System Events" to delete every login item'
+
+# Disable macOS startup sound.
+sudo nvram StartupMute=%01
