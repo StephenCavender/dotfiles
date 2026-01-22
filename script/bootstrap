@@ -8,6 +8,12 @@ DOTFILES_ROOT=$(pwd -P)
 set -e
 
 echo ''
+echo '  Requesting sudo access for system configuration...'
+sudo -v
+
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+echo ''
 
 info () {
   printf "\r  [ \033[00;34m..\033[0m ] $1\n"
