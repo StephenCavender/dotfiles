@@ -52,3 +52,11 @@ defaults write com.apple.Accessibility EnhancedBackgroundContrastEnabled -bool t
 
 # Set wallpaper tint mode to tinted (for liquid glass effect in macOS Sequoia/Tahoe).
 defaults write -g AppleReduceDesktopTinting -bool false
+
+# Remove widgets from the desktop.
+defaults write com.apple.WindowManager StandardHideWidgets -bool true
+
+# Automatically hide the dock.
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0.5
