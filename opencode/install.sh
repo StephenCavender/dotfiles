@@ -1,7 +1,14 @@
 #!/bin/bash
 
+echo "⏭️  Skipping OpenCode installation (temporarily disabled)"
+
+
 # Install OpenCode using the official method
 curl -fsSL https://opencode.ai/install | bash
+
+echo "⏭️  Skipping custom agents/commands installation"
+
+exit 0
 
 # Create ~/.config/opencode directories if they don't exist
 mkdir -p ~/.config/opencode
