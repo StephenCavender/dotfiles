@@ -72,3 +72,4 @@ fi
 export PATH="$HOME/.opencode/bin:$PATH"
 
 # zprof  # Uncomment with above to see timing
+eval "$(~/.local/bin/mise activate zsh)"
