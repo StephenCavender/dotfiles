@@ -54,3 +54,6 @@
 	format = ssh
 [pull]
 	rebase = false
+
+[fetch]
+    prune = true

@@ -7,7 +7,6 @@ then
 fi
 
 # The rest of my fun git aliases
-alias gl='git pull --prune'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 alias gp='git push origin HEAD'
 
@@ -34,10 +33,10 @@ alias gds='git diff --staged'
 alias gdw='git diff --word-diff'
 alias gdup='git diff @{upstream}'
 alias gf='git fetch'
-alias glog='git log --oneline --decorate --graph'
+# alias glog='git log --oneline --decorate --graph'
 alias gm='git merge'
 alias gl='git pull'
-alias gp='git push'
+# alias gp='git push'
 alias grev='git revert'
 alias gsw='git switch'
 

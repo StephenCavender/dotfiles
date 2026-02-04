@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+set -e
+
+branch="$1"
+base="$2"
+
+if [[ -z "$branch" ]]; then
+  echo "Usage: worktree-switch <branch> [base]" >&2
+  exit 1
+fi
+
+# Resolve repo root — works from anywhere, including inside a worktree
+git_common_dir="$(cd "$(git rev-parse --git-common-dir)" && pwd)"
+repo_root="$(dirname "$git_common_dir")"
+
+# Default base: whatever is checked out at repo root (main/master)
+if [[ -z "$base" ]]; then
+  base="$(cd "$repo_root" && git rev-parse --abbrev-ref HEAD)"
+fi
+
+# Worktree name: last segment of branch after final '/'
+# e.g. "feature/my-branch" → "my-branch"
+worktree_name="${branch##*/}"
+worktree_path="$repo_root/.worktrees/$worktree_name"
+
+# Ensure .worktrees/ is gitignored
+if ! grep -qx -e '.worktrees' -e '.worktrees/' "$repo_root/.gitignore" 2>/dev/null; then
+  echo '.worktrees/' >> "$repo_root/.gitignore"
+fi
+
+# Create worktree: use existing branch if it exists locally or on origin,
+# otherwise create a new branch off base
+if git rev-parse --verify "$branch" &>/dev/null || git rev-parse --verify "origin/$branch" &>/dev/null; then
+  git worktree add "$worktree_path" "$branch"
+else
+  git worktree add "$worktree_path" -b "$branch" "$base"
+fi
+
+# CoW copy all gitignored files/dirs from repo root into the new worktree.
+# .gitignore is the config — anything ignored there gets cloned for free on APFS.
+cd "$repo_root"
+while IFS= read -r item; do
+  item="${item%/}"                          # strip trailing slash from dir entries
+  [[ "$item" == ".worktrees" ]] && continue # never copy the worktrees dir itself
+  [[ -e "$item" ]] || continue
+  cp -c -r "$item" "$worktree_path/$item"
+done < <(git ls-files --others --ignored --exclude-standard --directory)
+
+cd "$worktree_path"
+exec "$SHELL"

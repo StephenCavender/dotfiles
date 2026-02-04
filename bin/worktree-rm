@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -e
+
+name="$1"
+
+if [[ -z "$name" ]]; then
+  echo "Usage: worktree-rm <worktree>" >&2
+  exit 1
+fi
+
+# Resolve repo root — works from anywhere, including inside a worktree
+git_common_dir="$(cd "$(git rev-parse --git-common-dir)" && pwd)"
+repo_root="$(dirname "$git_common_dir")"
+
+# Extract the full branch name from the porcelain worktree list
+# before the worktree is removed.  Porcelain groups entries like:
+#   worktree /absolute/path/to/.worktrees/<name>
+#   HEAD abc1234
+#   branch refs/heads/feature/my-branch
+branch=$(git worktree list --porcelain | awk -v name="$name" '
+  /^worktree / { wt = $2 }
+  /^branch /  { if (wt ~ ("/" name "$")) print substr($2, length("refs/heads/") + 1) }
+')
+
+if [[ -z "$branch" ]]; then
+  echo "No worktree found matching '$name'" >&2
+  exit 1
+fi
+
+cd "$repo_root"
+git worktree remove ".worktrees/$name"
+git branch -D "$branch"
