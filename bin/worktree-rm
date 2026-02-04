@@ -8,13 +8,17 @@ if [[ -z "$name" ]]; then
   exit 1
 fi
 
-# Resolve repo root — works from anywhere, including inside a worktree
+# Resolve project root — works from main/ or any sibling worktree.
+#   git_common_dir → /path/to/project/main/.git
+#   main_dir       → /path/to/project/main
+#   project_root   → /path/to/project
 git_common_dir="$(cd "$(git rev-parse --git-common-dir)" && pwd)"
-repo_root="$(dirname "$git_common_dir")"
+main_dir="$(dirname "$git_common_dir")"
+project_root="$(dirname "$main_dir")"
 
 # Extract the full branch name from the porcelain worktree list
 # before the worktree is removed.  Porcelain groups entries like:
-#   worktree /absolute/path/to/.worktrees/<name>
+#   worktree /path/to/project/<name>
 #   HEAD abc1234
 #   branch refs/heads/feature/my-branch
 branch=$(git worktree list --porcelain | awk -v name="$name" '
@@ -27,6 +31,5 @@ if [[ -z "$branch" ]]; then
   exit 1
 fi
 
-cd "$repo_root"
-git worktree remove ".worktrees/$name"
+git worktree remove "$project_root/$name"
 git branch -D "$branch"

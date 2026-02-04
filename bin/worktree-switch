@@ -9,26 +9,26 @@ if [[ -z "$branch" ]]; then
   exit 1
 fi
 
-# Resolve repo root — works from anywhere, including inside a worktree
+# Resolve paths — works from main/ or any sibling worktree.
+# git-common-dir always points to main/.git regardless of where you are.
+#   git_common_dir → /path/to/project/main/.git
+#   main_dir       → /path/to/project/main
+#   project_root   → /path/to/project   (flat dir all worktrees live in)
 git_common_dir="$(cd "$(git rev-parse --git-common-dir)" && pwd)"
-repo_root="$(dirname "$git_common_dir")"
+main_dir="$(dirname "$git_common_dir")"
+project_root="$(dirname "$main_dir")"
 
-# Default base: whatever is checked out at repo root (main/master)
+# Default base: whatever is checked out in main/ (main, master, etc.)
 if [[ -z "$base" ]]; then
-  base="$(cd "$repo_root" && git rev-parse --abbrev-ref HEAD)"
+  base="$(cd "$main_dir" && git rev-parse --abbrev-ref HEAD)"
 fi
 
 # Worktree name: last segment of branch after final '/'
 # e.g. "feature/my-branch" → "my-branch"
 worktree_name="${branch##*/}"
-worktree_path="$repo_root/.worktrees/$worktree_name"
+worktree_path="$project_root/$worktree_name"
 
-# Ensure .worktrees/ is gitignored
-if ! grep -qx -e '.worktrees' -e '.worktrees/' "$repo_root/.gitignore" 2>/dev/null; then
-  echo '.worktrees/' >> "$repo_root/.gitignore"
-fi
-
-# Create worktree: use existing branch if it exists locally or on origin,
+# Create worktree: use existing branch if found locally or on origin,
 # otherwise create a new branch off base
 if git rev-parse --verify "$branch" &>/dev/null || git rev-parse --verify "origin/$branch" &>/dev/null; then
   git worktree add "$worktree_path" "$branch"
@@ -36,12 +36,11 @@ else
   git worktree add "$worktree_path" -b "$branch" "$base"
 fi
 
-# CoW copy all gitignored files/dirs from repo root into the new worktree.
-# .gitignore is the config — anything ignored there gets cloned for free on APFS.
-cd "$repo_root"
+# CoW copy all gitignored files/dirs from main/ into the new worktree.
+# .gitignore defines what gets copied — zero extra config.
+cd "$main_dir"
 while IFS= read -r item; do
-  item="${item%/}"                          # strip trailing slash from dir entries
-  [[ "$item" == ".worktrees" ]] && continue # never copy the worktrees dir itself
+  item="${item%/}"          # strip trailing slash from dir entries
   [[ -e "$item" ]] || continue
   cp -c -r "$item" "$worktree_path/$item"
 done < <(git ls-files --others --ignored --exclude-standard --directory)

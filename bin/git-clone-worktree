@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -e
+
+url="$1"
+
+if [[ -z "$url" ]]; then
+  echo "Usage: git-clone-bare <repo-url>" >&2
+  exit 1
+fi
+
+# Strip trailing .git and grab repo name
+# e.g. "git@github.com:user/repo.git" → "repo"
+repo_name=$(basename "$url" .git)
+
+# Flat worktree layout:
+#   repo/
+#   ├── main/          ← normal clone lives here
+#   ├── feature-a/     ← worktree (sibling)
+#   └── hotfix-123/    ← worktree (sibling)
+mkdir "$repo_name"
+git clone "$url" "$repo_name/main"
+
+cd "$repo_name/main"
+exec "$SHELL"
