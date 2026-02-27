@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-# Neovim installation script with LazyVim and Dracula theme
-# This script sets up Neovim with LazyVim configuration
+# Neovim installation script with LazyVim
+# This script sets up Neovim with the LazyVim starter and applies personal config
 
 NVIM_CONFIG_DIR="$HOME/.config/nvim"
 
@@ -18,47 +18,7 @@ git clone https://github.com/LazyVim/starter "$NVIM_CONFIG_DIR"
 # Remove the .git directory to make it a personal config
 rm -rf "$NVIM_CONFIG_DIR/.git"
 
-# Add Dracula theme to LazyVim config
-echo "Configuring Dracula theme..."
-cat >> "$NVIM_CONFIG_DIR/lua/plugins/colorscheme.lua" << 'EOF'
-return {
-  {
-    "Mofiqul/dracula.nvim",
-    name = "dracula",
-    priority = 1000,
-    config = function()
-      require("dracula").setup({
-        -- customize dracula color palette
-        colors = {
-          bg = "#282a36",
-          fg = "#f8f8f2",
-          selection = "#44475a",
-          comment = "#6272a4",
-          red = "#ff5555",
-          orange = "#ffb86c",
-          yellow = "#f1fa8c",
-          green = "#50fa7b",
-          purple = "#bd93f9",
-          cyan = "#8be9fd",
-          pink = "#ff79c6",
-        },
-        -- show the '~' characters after the end of lines
-        show_end_of_buffer = true,
-        -- transparent background
-        transparent_bg = true,
-        -- lualine bg color
-        lualine_bg_color = "#44475a",
-        -- set italic comments
-        italic_comment = true,
-        -- overrides the default highlights with new highlight table
-        overrides = {},
-      })
-    end,
-  },
-}
-EOF
-
-# Set Dracula as the default colorscheme
+# --- lua/config/options.lua ---
 cat > "$NVIM_CONFIG_DIR/lua/config/options.lua" << 'EOF'
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
@@ -66,7 +26,6 @@ cat > "$NVIM_CONFIG_DIR/lua/config/options.lua" << 'EOF'
 
 -- Set colorscheme
 vim.opt.termguicolors = true
-vim.cmd.colorscheme "dracula"
 
 -- Additional options
 vim.opt.relativenumber = true
@@ -75,19 +34,83 @@ vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 EOF
 
-# Add opencode.nvim plugin
+# --- lua/plugins/colorscheme.lua ---
+echo "Configuring Dracula theme..."
+cat > "$NVIM_CONFIG_DIR/lua/plugins/colorscheme.lua" << 'EOF'
+return {
+  -- add dracula
+  { "Mofiqul/dracula.nvim" },
+
+  -- Configure LazyVim to load dracula
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "dracula",
+    },
+  },
+}
+EOF
+
+# --- lua/plugins/opencode.lua ---
 echo "Installing opencode.nvim plugin..."
 cat > "$NVIM_CONFIG_DIR/lua/plugins/opencode.lua" << 'EOF'
 return {
-  "NickvanDyke/opencode.nvim",
+  "nickjvandyke/opencode.nvim",
+  version = "*", -- Latest stable release
   dependencies = {
-    "nvim-lua/plenary.nvim",
+    {
+      -- `snacks.nvim` integration is recommended, but optional
+      ---@module "snacks" <- Loads `snacks.nvim` types for configuration intellisense
+      "folke/snacks.nvim",
+      optional = true,
+      opts = {
+        input = {}, -- Enhances `ask()`
+        picker = {  -- Enhances `select()`
+          actions = {
+            opencode_send = function(...) return require("opencode").snacks_picker_send(...) end,
+          },
+          win = {
+            input = {
+              keys = {
+                ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
+              },
+            },
+          },
+        },
+      },
+    },
   },
   config = function()
-    require("opencode").setup()
+    ---@type opencode.Opts
+    vim.g.opencode_opts = {
+      -- Your configuration, if any; goto definition on the type or field for details
+    }
+
+    vim.o.autoread = true -- Required for `opts.events.reload`
+
+    -- Recommended/example keymaps
+    vim.keymap.set({ "n", "x" }, "<C-a>", function() require("opencode").ask("@this: ", { submit = true }) end,
+      { desc = "Ask opencode…" })
+    vim.keymap.set({ "n", "x" }, "<C-x>", function() require("opencode").select() end,
+      { desc = "Execute opencode action…" })
+    vim.keymap.set({ "n", "t" }, "<C-.>", function() require("opencode").toggle() end, { desc = "Toggle opencode" })
+
+    vim.keymap.set({ "n", "x" }, "go", function() return require("opencode").operator("@this ") end,
+      { desc = "Add range to opencode", expr = true })
+    vim.keymap.set("n", "goo", function() return require("opencode").operator("@this ") .. "_" end,
+      { desc = "Add line to opencode", expr = true })
+
+    vim.keymap.set("n", "<S-C-u>", function() require("opencode").command("session.half.page.up") end,
+      { desc = "Scroll opencode up" })
+    vim.keymap.set("n", "<S-C-d>", function() require("opencode").command("session.half.page.down") end,
+      { desc = "Scroll opencode down" })
+
+    -- You may want these if you use the opinionated `<C-a>` and `<C-x>` keymaps above — otherwise consider `<leader>o…` (and remove terminal mode from the `toggle` keymap)
+    vim.keymap.set("n", "+", "<C-a>", { desc = "Increment under cursor", noremap = true })
+    vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement under cursor", noremap = true })
   end,
 }
 EOF
 
-echo "Neovim with LazyVim and Dracula theme installed successfully!"
-echo "Run 'nvim' to start using your new configuration."
+echo "Neovim with LazyVim installed successfully!"
+echo "Run 'nvim' to start — plugins will be installed on first launch."
