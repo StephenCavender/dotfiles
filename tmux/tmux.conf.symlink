@@ -32,8 +32,12 @@ bind '%' split-window -h -c "#{pane_current_path}"
 set-option -g status-position top
 
 # theming
+set -g @plugin 'tmux-plugins/tpm'
+# set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'catppuccin/tmux'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @catppuccin_window_status_style "rounded"
-run ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux
+# run '~/.tmux/plugins/catppuccin/tmux/catppuccin.tmux'
 
 # Make the status line pretty and add some modules
 set -g status-right-length 100
@@ -52,3 +56,6 @@ set -g @catppuccin_window_current_text " #W"
 #set -g u/catppuccin_window_default\_text "#{?#{==:#T,#h},#{?#{==:#W,zsh},#{b:pane\_current\_path},#W},#T}"
 #set -g u/catppuccin_window_text "#{?#{==:#T,#h},#{?#{==:#W,zsh},#{b:pane\_current\_path},#W},#T}"
 #set -g u/catppuccin_window_current\_text "#{?#{==:#T,#h},#{?#{==:#W,zsh},#{b:pane\_current\_path},#W},#T}"
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
