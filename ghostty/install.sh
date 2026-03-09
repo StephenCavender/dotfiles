@@ -12,8 +12,15 @@ mkdir -p "$TARGET_DIR"
 
 echo "Installing ghostty configuration..."
 
-# Ensure config file exists
-touch "$CONFIG_FILE"
+# Backup existing config if it exists
+if [ -f "$CONFIG_FILE" ]; then
+    BACKUP_FILE="$CONFIG_FILE.bak.$(date +%Y%m%d%H%M%S)"
+    cp "$CONFIG_FILE" "$BACKUP_FILE"
+    echo "Backed up existing config to $BACKUP_FILE"
+fi
+
+# Overwrite config file with fresh content
+> "$CONFIG_FILE"
 
 # Copy themes directory separately
 if [ -d "$SOURCE_DIR/themes" ]; then
@@ -33,11 +40,11 @@ for file in "$SOURCE_DIR"/*; do
         continue
     fi
 
-    # Append file content to the config file
+    # Write file content to the config file
     echo "# Contents from $(basename "$file")" >> "$CONFIG_FILE"
     cat "$file" >> "$CONFIG_FILE"
     echo "" >> "$CONFIG_FILE"  # Add empty line for separation
-    echo "Appended contents of $(basename "$file") to config"
+    echo "Wrote contents of $(basename "$file") to config"
     count=$((count+1))
 done
 
