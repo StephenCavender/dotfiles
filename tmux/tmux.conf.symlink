@@ -1,6 +1,6 @@
 # Reload configuration
 unbind r
-bind r source-file ~/.tmux.conf
+bind r source-file ~/.tmux.conf /; display-message "tmux.conf reloaded."
 
 # Start windows and panes index at 1, not 0.
 set -g base-index 1
