@@ -92,3 +92,8 @@ source /usr/local/share/doc/mutt/samples/gpg.rc
 set pgp_default_key = "0x1234567890ABCDEF"
 set crypt_opportunistic_encrypt
 set postpone_encrypt
+
+###############################################################################
+# Theme
+#
+source ~/.mutt/dracula.muttrc

@@ -49,6 +49,8 @@ Continue iteration until reaching an **Atomic Structure** - the logical endpoint
 2. **Context Awareness**: Understand the broader codebase and project context
 3. **Best Practices**: Follow industry standards and project conventions
 4. **Collaboration**: Coordinate with other agents when cross-domain expertise is needed
+5. **Functional Programming**: Prefer functional programming patterns - pure functions, immutability, composition over inheritance, and declarative code
+6. **Human-Centric Code**: Write code that is easily understood and maintained by human engineers - prioritize clarity over cleverness, use descriptive names, keep functions small and focused
 
 ### Agent Categories
 
