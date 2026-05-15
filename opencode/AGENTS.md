@@ -1,57 +1,37 @@
-# opencode/ — AI Agent & Command Toolkit
+# opencode/ — AI Agent & Skill Toolkit
 
-Specialized agents and slash commands for opencode. Install to `~/.config/opencode/` via `install.sh` (currently disabled — copy manually).
+Agents, commands, and skills for OpenCode. Installed to `~/.config/opencode/` via `opencode/install.sh`.
 
-## STRUCTURE
+## Structure
 
 ```
 opencode/
-├── agent/          # Agent definitions by domain
-│   ├── architecture/   # backend-architect, database-architect, sql-specialist, system-architect
-│   ├── content/        # content-editor, documentation-specialist, prompt-engineer, reference-builder
-│   ├── design/         # ui-ux-designer, ui-visual-validator
-│   ├── developer-experience/  # dx-optimizer
-│   ├── engineering/    # frontend-engineer, mobile-engineer
-│   ├── ops/            # deployment-engineer, performance-analyst, security-auditor, terraform-specialist
-│   ├── orchestration/  # workflow-orchestrator
-│   └── quality/        # accessibility-engineer, code-reviewer, test-automation-engineer
-└── command/        # Slash commands by domain (mirror agent domains + meta/)
-    ├── quality/        # analyze, review, refactor, bug-fix, improve, explain, test-plan, write-tests, tech-debt, remove-slop, a11y-audit
-    ├── orchestration/  # build, hotfix, invoke, new-feature, plan
-    ├── ops/            # optimize, performance-audit, security-audit, terraform
-    ├── content/        # critique, document, edit, polish, prompt, reference
-    ├── engineering/    # be, fe, mobile
-    ├── architecture/   # arch, sql
-    ├── design/         # design-system, visual-test
-    └── meta/           # session-summary
+├── agent/              # Specialist agents by domain (always installed)
+├── command/            # Slash commands by domain (always installed)
+└── skills/             # Skills separated by mode
+    ├── shared/         # Always installed (refine, etc.)
+    ├── personal/       # Installed with `dot --mode personal`
+    └── work/           # Installed with `dot --mode work`
 ```
 
-## WHERE TO LOOK
+## Installation
 
-| Task | Location |
-|------|----------|
-| Add new specialist agent | `agent/<domain>/<name>.md` |
-| Add new slash command | `command/<domain>/<name>.md` |
-| Code review / analysis | `command/quality/` |
-| Planning / feature work | `command/orchestration/` |
-| Performance / security | `command/ops/` |
-| Frontend / backend work | `command/engineering/` |
-| Documentation | `command/content/` |
+```bash
+dot --mode personal    # Side projects — shared agents + personal skills
+dot --mode work        # Otto/TeleVet — shared agents + work skills
+dot                    # Uses last saved mode (default: personal)
+```
 
-## CONVENTIONS
+Mode is saved to `~/.config/opencode/.mode` and persists between runs.
 
-- Agent files are Markdown with YAML frontmatter or structured prompt sections
-- Command files invoke agents — one command maps to one primary agent
-- Domain folders must match between `agent/` and `command/` where applicable
-- New domains need a folder in both `agent/` and `command/`
+## Adding agents/skills
 
-## ANTI-PATTERNS
+| What | Where |
+|------|-------|
+| New agent | `agent/<domain>/<name>.md` |
+| New command | `command/<domain>/<name>.md` |
+| Shared skill | `skills/shared/<name>/SKILL.md` |
+| Personal-only skill | `skills/personal/<name>/SKILL.md` |
+| Work-only skill | `skills/work/<name>/SKILL.md` |
 
-- `install.sh` is currently disabled (skips curl install) — manually copy agent/ and command/ to `~/.config/opencode/` if needed
-- Don't add commands without a corresponding agent definition
-- Don't put project-specific agents here — these are generic toolkit agents
-
-## NOTES
-
-- Agents install to `~/.config/opencode/agent/` and `~/.config/opencode/command/`
-- The `meta/` command domain has no corresponding agent (meta commands are self-contained)
+Work-specific skills for the otto workspace also live in `otto/.opencode/skills/` (project-local, not global).
