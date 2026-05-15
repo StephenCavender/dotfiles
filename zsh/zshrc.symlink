@@ -56,10 +56,6 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
-command -v fzf &>/dev/null && source <(fzf --zsh)
-
-command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
-
 # thefuck is slow to initialize - lazy load it
 if command -v thefuck &>/dev/null; then
   fuck() {
@@ -71,5 +67,20 @@ fi
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
 
+# Cache shell tool init scripts — regenerate only when the binary changes.
+# Saves ~30-80ms on each shell startup.
+_cache_init() {
+  local bin=$1 cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/${1:t}.zsh"
+  mkdir -p "${cache:h}"
+  if [[ ! -f $cache || $bin -nt $cache ]]; then
+    "${@}" > $cache
+  fi
+  source $cache
+}
+
+command -v fzf    &>/dev/null && _cache_init $(command -v fzf)    fzf --zsh
+command -v zoxide &>/dev/null && _cache_init $(command -v zoxide) zoxide init zsh
+command -v atuin  &>/dev/null && _cache_init $(command -v atuin)  atuin init zsh --disable-up-arrow
+[[ -x ~/.local/bin/mise ]] && _cache_init ~/.local/bin/mise ~/.local/bin/mise activate zsh
+
 # zprof  # Uncomment with above to see timing
-eval "$(~/.local/bin/mise activate zsh)"

@@ -2,8 +2,15 @@ alias reload!='. ~/.zshrc'
 
 alias cls='clear' # Good 'ol Clear Screen command
 
-# iCloud Drive shortcut
 export icloud=~/Library/Mobile\ Documents/com~apple~CloudDocs
+export fastmail=~/fastmail-cloud
+
+alias fastmail-sync="rclone bisync fastmail: ~/fastmail-cloud --log-file ~/.local/share/rclone/fastmail-sync.log"
+
+alias cal="khal calendar"
+alias agenda="khal list"
+alias ical="ikhal"
+alias cal-sync="vdirsyncer sync"
 
 # fcd - cd to selected directory
 # With no arg: fzf over top-level dirs (original behavior)
