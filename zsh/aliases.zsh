@@ -2,6 +2,24 @@ alias reload!='. ~/.zshrc'
 
 alias cls='clear' # Good 'ol Clear Screen command
 
+# Filesystem
+alias mkd='mkdir -pv'
+alias diff='diff --color=auto'
+
+# Kubernetes
+alias k='kubectl'
+
+# Dates (macOS BSD date compatible — no GNU-only flags)
+alias dt='date +%Y%m%d'                      # 20260515
+alias dts='date +%s'                          # epoch seconds: 1452795263
+alias dti='date +%Y%m%dT%H%M%S'              # compact ISO-ish: 20260515T143022
+alias dti-='date -u +%Y-%m-%dT%H:%M:%SZ'     # ISO 8601 UTC: 2026-05-15T14:30:22Z
+alias dttm='date -u +%Y%m%d%H%M%S'           # datetime: 20260515143022
+alias dtp='date +%Y-%m-%d'                   # readable date: 2026-05-15
+alias dto='date +%Y%j'                        # ordinal: 2026135
+alias dtwk='date +W%V'                        # week: W20
+alias dtyrwk='date +%GW%V'                   # year-week: 2026W20
+
 export icloud=~/Library/Mobile\ Documents/com~apple~CloudDocs
 export fastmail=~/fastmail-cloud
 
