@@ -1,0 +1,46 @@
+[general]
+status_path = "~/.local/share/vdirsyncer/status/"
+
+# -----------------------------------------------------------------------
+# Fastmail — all calendars (personal + work synced via Fastmail)
+# -----------------------------------------------------------------------
+# Password: same app password as neomutt.
+# Ensure it has CalDAV scope — generate a separate one at:
+#   Fastmail → Settings → Privacy & Security → App Passwords
+#
+[pair fastmail_calendar]
+a = "fastmail_calendar_local"
+b = "fastmail_calendar_remote"
+collections = ["bd75bc44-4cba-48f9-9124-1dbe3b7e8d31", "a9bcf6d6-06a5-4070-85d3-583784323dec"]
+conflict_resolution = "b wins"
+
+[storage fastmail_calendar_local]
+type = "filesystem"
+path = "~/.local/share/vdir/fastmail/calendar/"
+fileext = ".ics"
+
+[storage fastmail_calendar_remote]
+type = "caldav"
+url = "https://caldav.fastmail.com/"
+username = "steve@cavender.io"
+password.fetch = ["command", "gpg", "-q", "--decrypt", "/Users/steve/.config/vdirsyncer/calendar.gpg"]
+
+# -----------------------------------------------------------------------
+# Google Calendar — work (add later if needed)
+# -----------------------------------------------------------------------
+# [pair google_calendar]
+# a = google_calendar_local
+# b = google_calendar_remote
+# collections = ["from b"]
+# conflict_resolution = "b wins"
+#
+# [storage google_calendar_local]
+# type = "filesystem"
+# path = "~/.local/share/vdir/google/calendar/"
+# fileext = ".ics"
+#
+# [storage google_calendar_remote]
+# type = "google_calendar"
+# token_file = "~/.local/share/vdirsyncer/google_token"
+# client_id.fetch = ["command", "sh", "-c", "gpg --batch -q --decrypt ~/.config/vdirsyncer/google_client_id.gpg"]
+# client_secret.fetch = ["command", "sh", "-c", "gpg --batch -q --decrypt ~/.config/vdirsyncer/google_client_secret.gpg"]

@@ -1,0 +1,29 @@
+[calendars]
+
+[[personal]]
+path = "~/.local/share/vdir/fastmail/calendar/a9bcf6d6-06a5-4070-85d3-583784323dec/"
+color = "light blue"
+
+[[work]]
+path = "~/.local/share/vdir/fastmail/calendar/bd75bc44-4cba-48f9-9124-1dbe3b7e8d31/"
+color = "light green"
+
+# [[google]]
+# path = "~/.local/share/vdir/google/calendar/*"
+# color = "light green"
+
+[view]
+event_format = "{calendar-color}{start-end-time-style} {title}{repeat-symbol}{alarm-symbol}{calendar-color}"
+agenda_event_format = "{calendar-color}{start-end-time-style} {title}{repeat-symbol}{alarm-symbol}{calendar-color}"
+
+[sqlite]
+path = "~/.local/share/khal/khal.db"
+
+[locale]
+timeformat = "%H:%M"
+dateformat = "%Y-%m-%d"
+datetimeformat = "%Y-%m-%d %H:%M"
+longdateformat = "%A, %B %-d %Y"
+longdatetimeformat = "%A, %B %-d %Y %H:%M"
+default_timezone = "America/Indianapolis"
+local_timezone = "America/Indianapolis"
