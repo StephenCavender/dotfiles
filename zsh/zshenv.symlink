@@ -1,5 +1,3 @@
-# .zshenv is always sourced, even for non-interactive shells
-# Source .zshrc to ensure our configuration is loaded in all shell types
-if [ -f "$HOME/.zshrc" ]; then
+if [[ ! -o interactive ]] && [[ -f "$HOME/.zshrc" ]]; then
   source "$HOME/.zshrc"
 fi
