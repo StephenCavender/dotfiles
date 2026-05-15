@@ -1,17 +1,43 @@
+# Font
 font-family = Hack Nerd Font Mono
-font-size = 12
+font-size = 14
 
+# Theme
 theme = Dracula
 
-window-padding-x = 10
-window-padding-y = 10
+# Window
+window-padding-x = 5
+window-padding-y = 5
 
+# Shell
 shell-integration = zsh
+shell-integration-features = no-cursor
 
-copy-on-select = clipboard
-
-mouse-hide-while-typing = true
-
-confirm-close-surface = false
-
+# Window
+macos-titlebar-style = hidden
+background-opacity = 0.85
+background-blur = 20
+background-opacity-cells = true
 macos-option-as-alt = true
+maximize = true
+window-padding-x = 5
+window-padding-y = 5
+window-padding-balance = equal
+window-save-state = always
+
+# Cursor
+cursor-style = block
+cursor-style-blink = true
+
+# Mouse
+mouse-hide-while-typing = true
+mouse-scroll-multiplier = 3
+
+# Selection & Clipboard
+copy-on-select = clipboard
+clipboard-read = ask
+clipboard-write = allow
+clipboard-paste-protection = true
+
+# Close without confirmation
+confirm-close-surface = false
