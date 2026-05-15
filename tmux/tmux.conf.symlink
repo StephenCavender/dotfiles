@@ -1,67 +1,113 @@
-# Reload configuration
-unbind r
-bind r source-file ~/.tmux.conf /; display-message "tmux.conf reloaded."
+# ============================================
+# TMUX CONFIGURATION
+# ============================================
 
-# Start windows and panes index at 1, not 0.
+# ----------------------------------------
+# 1. TERMINAL & COMPATIBILITY
+# ----------------------------------------
+set -g default-terminal "tmux-256color"
+set -ag terminal-overrides ",xterm-ghostty:RGB,xterm-256color:RGB"
+set -as terminal-features ",xterm-ghostty:sixel"
+set -g allow-passthrough on
+set -s extended-keys on
+set -sg escape-time 10
+
+# ----------------------------------------
+# 2. GENERAL SETTINGS
+# ----------------------------------------
 set -g base-index 1
 setw -g pane-base-index 1
-
-# Ensure window index numbers get reordered on delete.
-set-option -g renumber-windows on
-
-# don't rename windows automatically
-set-option -g allow-rename off
-set-option -g automatic-rename off
-
-# Use Vi mode
-set -g mode-keys vi
+set -g renumber-windows on
+set -g mouse on
+set -g default-shell /bin/zsh
+set -g history-limit 100000
+set -g focus-events on
 set -g status-keys vi
+set -g allow-rename off
+set -g automatic-rename off
 
-set-option -g focus-events on
+setw -g monitor-activity on
+set -g visual-activity off
 
-# vim pane switching directions
-bind-key h select-pane -L
-bind-key j select-pane -D
-bind-key k select-pane -U
-bind-key l select-pane -R
+# ----------------------------------------
+# 3. KEY BINDINGS
+# ----------------------------------------
+# Reload config
+unbind r
+bind r source-file ~/.tmux.conf \; display-message "tmux.conf reloaded."
 
-# Ctrl+hjkl to switch panes without prefix
-bind-key -n C-h select-pane -L
-bind-key -n C-j select-pane -D
-bind-key -n C-k select-pane -U
-bind-key -n C-l select-pane -R
+# Splits preserve current path
 bind '"' split-window -v -c "#{pane_current_path}"
 bind '%' split-window -h -c "#{pane_current_path}"
 
-# move status bar to top
-set-option -g status-position top
+# Pane resizing (repeatable with -r)
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
 
-# theming
+# ----------------------------------------
+# 4. COPY MODE (vi)
+# ----------------------------------------
+setw -g mode-keys vi
+bind Enter copy-mode
+bind -T copy-mode-vi v send-keys -X begin-selection
+bind -T copy-mode-vi C-v send-keys -X rectangle-toggle
+bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+bind -T copy-mode-vi Escape send-keys -X cancel
+
+# ----------------------------------------
+# 5. PANE IDENTIFICATION
+# ----------------------------------------
+# Heavy borders with title showing pane name + path
+set -g pane-border-lines heavy
+set -g pane-border-indicators colour
+set -g pane-border-status top
+set -g pane-border-format ' #{?pane_active,#[fg=#89b4fa],#[fg=#585b70]}#{pane_title} #[fg=#45475a]── #[default]#{?pane_active,#[fg=#cdd6f4],#[fg=#585b70]}#{pane_current_path} '
+
+# Catppuccin Mocha border colors
+set -g pane-border-style 'fg=#45475a'
+set -g pane-active-border-style 'fg=#89b4fa'
+
+# Dim inactive panes
+set -g window-style 'bg=#181825'
+set -g window-active-style 'bg=#1e1e2e'
+
+# ----------------------------------------
+# 6. PLUGINS
+# ----------------------------------------
 set -g @plugin 'tmux-plugins/tpm'
-# set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @plugin 'catppuccin/tmux'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
-set -g @catppuccin_window_status_style "rounded"
-# run '~/.tmux/plugins/catppuccin/tmux/catppuccin.tmux'
+set -g @plugin 'sandudorogan/tmux-pane-tree'
 
-# Make the status line pretty and add some modules
+# ----------------------------------------
+# 7. PLUGIN CONFIGURATION
+# ----------------------------------------
+# Resurrect
+set -g @resurrect-capture-pane-contents 'on'
+set -g @continuum-restore 'on'
+
+# Pane Tree
+set -g @tmux_pane_tree_install_agent_hooks 1
+set -g @tmux_pane_tree_color_session '#BD93F9'
+set -g @tmux_pane_tree_color_window '#FF79C6'
+set -g @tmux_pane_tree_color_pane '#8BE9FD'
+set -g @tmux_pane_tree_session_order "dev,ops,scratch,comms"
+
+# Catppuccin Theme
+set -g @catppuccin_window_status_style "rounded"
 set -g status-right-length 100
 set -g status-left-length 100
 set -g status-left ""
 set -g status-right "#{E:@catppuccin_status_application}"
-
-set -g @catppuccin_window_text " #W"
-
 set -g @catppuccin_window_default_text " #W"
 set -g @catppuccin_window_text " #W"
 set -g @catppuccin_window_current_text " #W"
 
-# Show pane title (#T) when explicitly set (like Claude Code), otherwise show window name (#W)
-# If pane title equals hostname, show window name; if window is "zsh", show directory basename
-#set -g u/catppuccin_window_default\_text "#{?#{==:#T,#h},#{?#{==:#W,zsh},#{b:pane\_current\_path},#W},#T}"
-#set -g u/catppuccin_window_text "#{?#{==:#T,#h},#{?#{==:#W,zsh},#{b:pane\_current\_path},#W},#T}"
-#set -g u/catppuccin_window_current\_text "#{?#{==:#T,#h},#{?#{==:#W,zsh},#{b:pane\_current\_path},#W},#T}"
-
-# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+# ----------------------------------------
+# 8. TPM INITIALIZATION (MUST BE LAST)
+# ----------------------------------------
 run '~/.tmux/plugins/tpm/tpm'
