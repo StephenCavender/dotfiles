@@ -1,8 +1,5 @@
 #
-# Starter muttrc file, with just a few suggestions and settings.
-#
-# This file purposely doesn't include hooks, keybinding, macros, colors, etc.
-# Read the manual, explore, and have fun!
+# NeoMutt config — Fastmail (personal)
 #
 
 ###############
@@ -15,29 +12,37 @@ alternates "@cavender\.io$"
 set reverse_name
 
 ###############
-# IMAP/SMTP
+# IMAP
 #
 set imap_user = "steve@cavender.io"
 
-# To avoid storing your password in the .muttrc:
-# echo -n 'mypassword' | gpg --encrypt -r 0x1234567890ABCDEF > ~/.mutt/account.gpg
-set imap_pass = "`gpg --batch -q --decrypt ~/.mutt/account.gpg`"
+# Password: decrypted at runtime from ~/.mutt/account.gpg
+# To set up:
+#   gpg --gen-key   (if you don't have a key yet)
+#   echo -n 'your-fastmail-app-password' | gpg --encrypt -r steve@cavender.io > ~/.mutt/account.gpg
+# Generate the app password at: Fastmail → Settings → Privacy & Security → App Passwords
+# Note: use a separate app password from the one used for calendar sync
+set imap_pass = "`gpg -q --decrypt ~/.mutt/account.gpg`"
 
-set folder = imaps://imap.fastmail.com/INBOX/
-set spoolfile = imaps://imap.fastmail.com
-set record="!Sent"
-set postponed = "!Drafts"
+set folder    = "imaps://imap.fastmail.com/"
+set spoolfile = "+INBOX"
+set postponed = "+Drafts"
+set record    = "+Sent"
+set trash     = "+Trash"
 
+set imap_authenticators = "plain"
+set ssl_force_tls
 set mail_check = 60
 
-set ssl_force_tls
-
-set smtp_authenticators = 'gssapi:login'
-set smtp_url="smtps://$imap_user:$imap_pass@smtp.fastmail.com:465"
-# set smtp_url="smtp://$user:$pass@mail.messagingengine.com"
+###############
+# SMTP (built-in, no msmtp needed)
+#
+set smtp_url            = "smtps://steve@cavender.io@smtp.fastmail.com:465/"
+set smtp_pass           = $imap_pass
+set smtp_authenticators = "plain"
 
 ###############
-# Pager settings
+# Pager
 #
 ignore *
 unignore From Message-ID Date To Cc Bcc Subject
@@ -45,55 +50,115 @@ unignore From Message-ID Date To Cc Bcc Subject
 set pager_stop
 unset markers
 
-# Prefer plain text to html.
-# However, for brain dead clients that bundle attachments inside a
-# multipart/alternative, prefer that alternative.
-alternative_order multipart/mixed multipart/related text/plain
-
-# Consult mime.types for determining types of these attachments
+# Prefer plain text; fall back to html rendered via mailcap
+alternative_order multipart/mixed multipart/related text/plain text/html
 mime_lookup application/octet-stream
 
-# This requires a ~/.mailcap entry with the copiousoutput flag, such as:
-# text/html; lynx -dump -width ${COLUMNS:-80} %s; nametemplate=%s.html; copiousoutput
+# Render HTML email via bat (install: brew install bat)
+# Requires ~/.mailcap entry:
+#   text/html; bat --language=html --style=plain %s; copiousoutput
 auto_view text/html
 
 ###############
-# Index settings
+# Index
 #
-set quit = ask-yes
-set sort = threads
+set quit     = ask-yes
+set sort     = threads
+set sort_aux = reverse-last-date-received
 
-# Remember to `mkdir -p ~/.mutt/hcache` first:
-set header_cache= "~/.mutt/hcache"
+set header_cache   = "~/.mutt/hcache"
+set message_cachedir = "~/.mutt/mcache"
 
 ###############
-# Message composition settings
+# Composition
 #
-set edit_headers
-
-# set editor = "emacsclient -a emacs -t"
-set editor = "vim"
-
-set mime_type_query_command = "xdg-mime query filetype"
-
-# msmtp is a solid SMTP client.
-# mutt also has built-in SMTP, or you can use an MTA like exim4 or postfix.
-set sendmail = "/usr/bin/msmtp"
-
-# lbdb is a versatile contact query tool.
-# Invoke via ctrl-t in an address prompt
-set query_command = "/usr/bin/lbdbq"
+set edit_headers = yes
+set editor       = "nvim"
 
 ###############
-# GnuPG
+# GnuPG — disabled until a key is configured.
+# To enable:
+#   1. gpg --gen-key
+#   2. Set pgp_default_key to your key ID
+#   3. Uncomment the lines below
 #
-unset crypt_use_gpgme
-source /usr/local/share/doc/mutt/samples/gpg.rc
-set pgp_default_key = "0x1234567890ABCDEF"
-set crypt_opportunistic_encrypt
-set postpone_encrypt
+# source /opt/homebrew/share/doc/neomutt/samples/gpg.rc
+# set pgp_default_key       = "0xYOURKEYID"
+# set crypt_opportunistic_encrypt
+# set postpone_encrypt
 
-###############################################################################
+###############
 # Theme
 #
 source ~/.mutt/dracula.muttrc
+
+###############
+# Sidebar
+#
+set sidebar_visible
+set sidebar_width         = 25
+set sidebar_short_path                     # show "Sent Items" not full IMAP path
+set sidebar_delim_chars   = "/"
+set sidebar_folder_indent
+set sidebar_indent_string = "  "
+set sidebar_format        = "%B%<F? [%F]>%* %<N?%N >%S"
+set mail_check_stats
+
+# Auto-subscribe to all IMAP folders (picks up all your Fastmail labels)
+# Disabled — explicit mailboxes list above is faster for large folder trees
+# set imap_check_subscribed
+# set imap_list_subscribed
+
+# Folders — pinned in sidebar order, everything else auto-discovered
+mailboxes +INBOX \
+          +INBOX/area \
+          +INBOX/area/finances \
+          +INBOX/area/finances/bank \
+          +INBOX/area/finances/bills \
+          +INBOX/area/finances/shopping \
+          +INBOX/area/finances/stonks \
+          +INBOX/area/finances/subscriptions \
+          +INBOX/area/finances/taxes \
+          +INBOX/area/health \
+          +INBOX/area/home \
+          +INBOX/area/home/generator \
+          +INBOX/area/home/Utilities \
+          +INBOX/area/kids \
+          +INBOX/area/me \
+          +INBOX/area/work \
+          +INBOX/area/work/Ecl \
+          +INBOX/area/work/grifin \
+          +INBOX/area/work/hims \
+          +INBOX/area/work/otto \
+          +INBOX/project \
+          +INBOX/project/foo \
+          +INBOX/project/gymbutler \
+          +INBOX/project/simpledex \
+          +INBOX/project/vtt \
+          +INBOX/resource \
+          +INBOX/resource/newsletter \
+          +Archive \
+          +Archive/finance \
+          +Archive/finance/house \
+          +Archive/finance/house/638 \
+          +Archive/finance/house/638/refi \
+          +Archive/finance/school-loans \
+          +Archive/finance/taxes \
+          +Archive/finance/taxes/2022 \
+          +Archive/finance/taxes/2023 \
+          +Archive/finance/taxes/2024 \
+          +Archive/greenix \
+          +Archive/work \
+          +Archive/work/otto \
+          +Drafts \
+          +Notes \
+          +Scheduled \
+          +Sent \
+          +Spam \
+          +Trash
+
+# Sidebar navigation
+bind index,pager \Cp sidebar-prev
+bind index,pager \Cn sidebar-next
+bind index,pager \Ce sidebar-open
+bind index,pager \Cb sidebar-toggle-visible
