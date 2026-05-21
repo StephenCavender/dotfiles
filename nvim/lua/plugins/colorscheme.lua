@@ -1,6 +1,10 @@
 return {
-  -- add dracula
-  { "Mofiqul/dracula.nvim" },
+  {
+    "Mofiqul/dracula.nvim",
+    opts = {
+      transparent_bg = true,
+    },
+  },
 
   -- Configure LazyVim to load dracula
   {

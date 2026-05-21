@@ -70,8 +70,10 @@ set -g pane-border-style 'fg=#45475a'
 set -g pane-active-border-style 'fg=#89b4fa'
 
 # Dim inactive panes
-set -g window-style 'bg=#181825'
-set -g window-active-style 'bg=#1e1e2e'
+# set -g window-style 'bg=#181825'
+# set -g window-active-style 'bg=#1e1e2e'
+set -g window-style 'bg=default'
+set -g window-active-style 'bg=default'
 
 # ----------------------------------------
 # 6. PLUGINS
