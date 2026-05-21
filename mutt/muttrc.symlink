@@ -162,3 +162,6 @@ bind index,pager \Cp sidebar-prev
 bind index,pager \Cn sidebar-next
 bind index,pager \Ce sidebar-open
 bind index,pager \Cb sidebar-toggle-visible
+
+# Fetch new mail via IMAP (overrides built-in POP fetch)
+bind index G imap-fetch-mail
