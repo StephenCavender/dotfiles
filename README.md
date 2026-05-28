@@ -30,15 +30,15 @@
 ## Quick Start
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/.dotfiles.git ~/.dotfiles
+curl -fsSL https://raw.githubusercontent.com/StephenCavender/dotfiles/master/install.sh | sh
+```
+
+Or manually:
+
+```bash
+git clone https://github.com/StephenCavender/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-
-# Run the bootstrap script
 ./script/bootstrap
-
-# Install dependencies
-./script/install
 ```
 
 ## Structure
