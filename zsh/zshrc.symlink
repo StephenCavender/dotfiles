@@ -56,6 +56,10 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
+command -v fzf &>/dev/null && source <(fzf --zsh)
+
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
+
 # thefuck is slow to initialize - lazy load it
 if command -v thefuck &>/dev/null; then
   fuck() {
@@ -78,9 +82,5 @@ _cache_init() {
   source $cache
 }
 
-command -v fzf    &>/dev/null && _cache_init $(command -v fzf)    fzf --zsh
-command -v zoxide &>/dev/null && _cache_init $(command -v zoxide) zoxide init zsh
-command -v atuin  &>/dev/null && _cache_init $(command -v atuin)  atuin init zsh --disable-up-arrow
-[[ -x ~/.local/bin/mise ]] && _cache_init ~/.local/bin/mise ~/.local/bin/mise activate zsh
-
 # zprof  # Uncomment with above to see timing
+eval "$(/opt/homebrew/bin/mise activate zsh)"
