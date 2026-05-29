@@ -6,6 +6,34 @@ model: anthropic/claude-3-5-sonnet-20241022
 
 Plan and design the requested feature or system without implementing - explore options, estimate effort, and create a detailed roadmap.
 
+## Phase 0: Assumption Interrogation (MANDATORY — do not skip)
+
+Before any planning begins, surface hidden assumptions. This prevents building a thorough plan for the wrong problem.
+
+Ask these questions. If the answer is already explicit in the request, skip that question. Ask only what's genuinely unknown.
+
+**Scope & intent**
+- What problem does this solve, and for whom? Is there a simpler version that solves 80% of it?
+- What does "done" look like? What would make this plan wrong or obsolete in 6 months?
+
+**Constraints**
+- Are there hard constraints not mentioned — timeline, budget, team size, existing systems to integrate with, or technologies that are off-limits?
+- What existing code or infrastructure should this build on vs. replace?
+
+**Decisions already made**
+- Has an approach already been decided? If so, is this plan for validation or for implementation detail?
+- Are there political or organizational constraints that would rule out certain approaches?
+
+**Steelman the alternative**
+- What's the strongest argument *against* building this at all right now?
+- What would you have to believe for the obvious approach to be the wrong one?
+
+**Stop conditions**: If the request includes `--quick`, skip Phase 0 and proceed directly to planning. If the user has already answered these questions in their message, acknowledge what's known and ask only about genuine gaps — don't interrogate for the sake of process.
+
+Once answers are received (or it's clear enough to proceed), move into planning.
+
+---
+
 ## AOT-Powered Planning Workflow
 
 The Workflow Orchestrator coordinates comprehensive planning using Atomic of Thoughts framework:
