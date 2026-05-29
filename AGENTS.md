@@ -15,8 +15,8 @@
 | Add macOS default | `macos/set-defaults.sh` |
 | Add launchd agent | `macos/startup-config.sh` |
 | Add new tool config | New subdirectory with `*.symlink` and/or `install.sh` |
-| Add AI agent | `opencode/agent/<domain>/<name>.md` |
-| Add slash command | `opencode/command/<domain>/<name>.md` |
+| Add opencode command | `opencode/command/<domain>/<name>.md` |
+| Add opencode skill | `opencode/skills/<mode>/<name>/SKILL.md` |
 | Private env vars | `~/.localrc` (never in repo) |
 | Email config | `mutt/` |
 | Calendar config | `calendar/` |
@@ -26,7 +26,7 @@
 - `*.symlink` files → `~/.<basename>` (e.g. `zsh/zshrc.symlink` → `~/.zshrc`)
 - Private env vars → `~/.localrc` only — never in repo files
 - Zsh load order: `*.path.zsh` first → all other `*.zsh` → `compinit` → `*.completion.zsh`
-- `opencode/install.sh` copies agents/commands/skills to `~/.config/opencode/` — run it after changes
+- `opencode/install.sh` copies commands/skills to `~/.config/opencode/` — run it after changes
 
 ## CONVENTIONS
 

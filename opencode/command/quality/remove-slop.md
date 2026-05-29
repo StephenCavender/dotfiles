@@ -1,7 +1,5 @@
 ---
 description: Remove AI-generated code slop from current branch
-agent: code-reviewer
-model: anthropic/claude-3-5-sonnet-20241022
 ---
 
 Check the diff against main, and remove all AI generated slop introduced in this branch.

@@ -1,12 +1,12 @@
 #!/bin/bash
 set -e
 
-# Install OpenCode agents, commands, and skills
+# Install OpenCode commands and skills
 # Usage: opencode/install.sh [--mode personal|work]
 #
 # Modes:
-#   personal  — shared agents/commands only (side projects, simpledex)
-#   work      — shared agents/commands + work skills (otto, TeleVet)
+#   personal  — shared commands only (side projects)
+#   work      — shared commands + work skills (otto, TeleVet)
 #
 # Default: personal
 
@@ -21,15 +21,10 @@ done
 OPENCODE_DIR="$(dirname "$0")"
 CONFIG_DIR="$HOME/.config/opencode"
 
-mkdir -p "$CONFIG_DIR/agents"
 mkdir -p "$CONFIG_DIR/skills"
 
-# Always install shared agents and commands
-echo "› Installing shared agents"
-rm -rf "$CONFIG_DIR/agents"
-cp -r "$OPENCODE_DIR/agent" "$CONFIG_DIR/agents"
-
-echo "› Installing shared commands"
+# Install commands
+echo "› Installing commands"
 rm -rf "$CONFIG_DIR/commands"
 cp -r "$OPENCODE_DIR/command" "$CONFIG_DIR/commands"
 
@@ -56,6 +51,5 @@ fi
 echo "$MODE" > "$CONFIG_DIR/.mode"
 
 echo "✅ OpenCode configured (mode: $MODE)"
-echo "   Agents:   $CONFIG_DIR/agents/"
-echo "   Commands:  $CONFIG_DIR/commands/"
-echo "   Skills:   $CONFIG_DIR/skills/"
+echo "   Commands: $CONFIG_DIR/commands/"
+echo "   Skills:  $CONFIG_DIR/skills/"

@@ -30,3 +30,14 @@ Write an AGENTS.md for this project based on the template at `~/.dotfiles/AGENTS
 - No role definitions — don't tell yourself what you are
 - Don't document things inferable from reading package.json or tsconfig
 - Only include rules that prevent mistakes you'd actually make without being told
+
+## Documentation Hierarchy
+
+If the project has enough conventions to exceed ~50 lines in AGENTS.md:
+
+1. Create `docs/conventions.md` with the overflow content (code style, naming, patterns)
+2. Create `docs/testing.md` if there are non-obvious testing patterns
+3. Add one-line pointers in AGENTS.md's Extended Documentation section
+4. Keep AGENTS.md itself lean — rules, quick reference, and pointers only
+
+The goal: AGENTS.md is always loaded (costs context every session). `docs/` is loaded on demand (free until needed).
