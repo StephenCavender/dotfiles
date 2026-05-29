@@ -1,30 +1,17 @@
-# opencode/ — AI Agent & Skill Toolkit
+# opencode/
 
-Agents, commands, and skills for OpenCode. Installed to `~/.config/opencode/` via `opencode/install.sh`.
-
-## Structure
-
-```
-opencode/
-├── agent/              # Specialist agents by domain (always installed)
-├── command/            # Slash commands by domain (always installed)
-└── skills/             # Skills separated by mode
-    ├── shared/         # Always installed (refine, etc.)
-    ├── personal/       # Installed with `dot --mode personal`
-    └── work/           # Installed with `dot --mode work`
-```
+Agents, commands, and skills for OpenCode — copied to `~/.config/opencode/` by `install.sh`.
 
 ## Installation
 
 ```bash
-dot --mode personal    # Side projects — shared agents + personal skills
-dot --mode work        # Otto/TeleVet — shared agents + work skills
-dot                    # Uses last saved mode (default: personal)
+opencode/install.sh                 # personal mode (default)
+opencode/install.sh --mode work     # adds work skills (otto/TeleVet)
 ```
 
-Mode is saved to `~/.config/opencode/.mode` and persists between runs.
+Mode is saved to `~/.config/opencode/.mode` and reused on next run.
 
-## Adding agents/skills
+## Where to Add Things
 
 | What | Where |
 |------|-------|
@@ -34,4 +21,4 @@ Mode is saved to `~/.config/opencode/.mode` and persists between runs.
 | Personal-only skill | `skills/personal/<name>/SKILL.md` |
 | Work-only skill | `skills/work/<name>/SKILL.md` |
 
-Work-specific skills for the otto workspace also live in `otto/.opencode/skills/` (project-local, not global).
+Work skills for the otto workspace also live in `otto/.opencode/skills/` (project-local).
