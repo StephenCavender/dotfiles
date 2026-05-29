@@ -1,52 +1,50 @@
 # AGENTS.md
 
-## Philosophy
+<!-- Replace this comment with one sentence: what this repo is and what it does. -->
 
-- Write code a human can read, understand, and maintain without comments
-- Clarity over cleverness — if it needs a comment, rewrite it
-- Pure functions, immutability, composition over inheritance
-- Only create abstractions when used in 3+ places
-- Explicit over implicit. No magic. Name things what they are.
-- Small functions, single responsibility. Declare intent through structure.
+## Quick Reference
 
-## Rules
+| Task | Location |
+|------|----------|
+| <!-- common task --> | <!-- path --> |
 
-- No `any` — use `unknown` or narrow types
-- No `useEffect` unless truly unavoidable
-- No helper functions that save fewer than 5 lines
-- No inline comments explaining bad code — write better code
-- Favor array methods (map, filter, reduce) over imperative loops
-- Explicit return types on exported functions
-- `interface` over `type` for object shapes
-- Server Components by default — `'use client'` only when needed
-- Tests live next to source: `*.test.ts`
+## Critical Mechanics
+
+<!-- Non-obvious behaviors an agent will get wrong without being told.
+     Examples: generated files that must not be edited, side-effect imports,
+     non-standard directory layouts, required post-change commands. -->
 
 ## Stack
 
-- TypeScript strict, Next.js App Router, React (functional + hooks)
-- Tailwind v4 + shadcn/ui
-- Convex for backend state, Zustand for minimal client state
-- Vitest + React Testing Library
-- ESLint + Prettier (let them handle formatting — don't repeat their rules here)
-
-## Git
-
-- Conventional Commits: `feat|fix|chore|refactor|docs|test|perf(scope): message`
-- Branch: `feature/description`, `fix/description`
-- Squash merge for feature branches
+<!-- List the actual technologies in use. Let tooling configs (eslint, tsconfig,
+     prettier) speak for themselves — don't repeat their rules here. -->
 
 ## Commands
 
 ```bash
-npm run dev         # Dev server + Convex
-npm run build       # Production build
-npm run test        # Vitest
-npm run lint        # ESLint + Prettier
-npm run typecheck   # tsc --noEmit
+# dev        # Start dev server
+# build      # Production build
+# test       # Run tests
+# lint       # Lint + format check
+# typecheck  # Type check
 ```
 
-## When stuck
+## Anti-Patterns
+
+<!-- Rules that agents violate most often in this codebase.
+     Be specific: name the file, pattern, or mistake. -->
+
+## When Stuck
 
 - Read existing code for patterns before inventing new ones
 - Check `docs/` if the folder exists
-- Ask me if genuinely ambiguous — don't guess on architecture
+- Ask if genuinely ambiguous — don't guess on architecture
+
+## Extended Documentation
+
+<!-- Link to deeper docs agents should load on a need-to-know basis.
+     Keep this file lean; put detail in docs/.
+     Example:
+     - **Architecture**: `docs/architecture.md`
+     - **Testing patterns**: `docs/testing.md`
+-->
