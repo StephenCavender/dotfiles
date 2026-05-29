@@ -25,11 +25,15 @@ Write an AGENTS.md for this project based on the template at `~/.dotfiles/AGENTS
 ## Constraints
 
 - Under 50 lines total
+- A flat list of rules > nested headers with sparse content
 - No "where to look" tables — you can explore the codebase yourself
 - No linting/formatting rules — those belong in eslint/prettier configs
 - No role definitions — don't tell yourself what you are
 - Don't document things inferable from reading package.json or tsconfig
 - Only include rules that prevent mistakes you'd actually make without being told
+- If you can delete a line and nothing goes wrong, delete it
+- Prefer flat rules lists, zero fluff, pure signal (see https://leerob.com/stack)
+- Use `audit-context` skill periodically to trim drift
 
 ## Documentation Hierarchy
 
