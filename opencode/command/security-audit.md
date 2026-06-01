@@ -1,20 +1,16 @@
 ---
-description: Comprehensive security vulnerability assessment
+description: Audit changed code for security vulnerabilities
 ---
 
-Conduct a thorough security audit and identify vulnerabilities.
+Audit the current diff (and the code paths it touches) for security issues.
 
-Assessment:
-- OWASP Top 10 vulnerability scanning
-- Authentication and authorization review
-- Input validation and sanitization
-- Secrets and credential management
-- API security and rate limiting
-- Dependency vulnerability scanning
-- Data encryption (at rest and in transit)
+Check, with `file:line` references:
+- Untrusted input reaching queries, shell, filesystem, or eval (injection)
+- Authn/authz gaps: missing checks, broken access control, privilege escalation
+- Secrets or credentials committed or logged
+- Unsafe deserialization, SSRF, path traversal in the changed paths
+- Dependencies introduced with known vulnerabilities
 
-Deliverables:
-- Risk assessment (Critical/High/Medium/Low)
-- Identified vulnerabilities with CVSS scores
-- Remediation plan prioritized by severity
-- Specific, actionable fixes with code examples
+Output:
+- Findings by severity (Critical / High / Medium / Low), each with `file:line`, the attack scenario, and a concrete fix
+- Remediation ordered by severity
