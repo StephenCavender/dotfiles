@@ -31,8 +31,8 @@
 
 ## Anti-Patterns
 
-<!-- Rules that agents violate most often in this codebase.
-     Be specific — name the file, pattern, or mistake.
+<!-- Every rule here must come from an actual mistake. If you haven't seen the
+     failure, don't add the rule. Be specific — name the file, pattern, or mistake.
      ❌ "Don't use any" — too generic, inferable from tsconfig
      ✅ "Never import from @chakra-ui/react directly — use subpaths" — specific, non-obvious
      ✅ "Never use prisma for reads — use prismaRead from utils" — project-specific gotcha
@@ -46,10 +46,9 @@
 
 ## Extended Documentation
 
-<!-- Keep this file under ~100 lines. If a section exceeds ~10 lines of
-     procedure, extract it to docs/ and leave a one-line pointer here.
-     Example:
-     - **Conventions**: `docs/conventions.md` — code style, naming, patterns
-     - **Testing**: `docs/testing.md` — test framework, patterns, commands
-     - **Patterns**: `docs/patterns.md` — common implementation patterns
--->
+<!-- This file is loaded every session — keep it under 50 lines.
+     Move detail to docs/ and leave one-line pointers here. -->
+
+- **Conventions**: `docs/conventions.md` — code style, naming, patterns
+- **Testing**: `docs/testing.md` — test framework, patterns, commands
+- **Decisions**: `docs/decisions.md` — architecture decisions (ADR-lite)

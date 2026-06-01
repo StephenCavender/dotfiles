@@ -1,0 +1,39 @@
+#!/bin/bash
+# Concatenate key project files for re-grounding agent context.
+# Usage: context-dump [paths...]
+#   context-dump src/auth/          — all files in directory
+#   context-dump src/auth/ src/db/  — multiple directories
+#   context-dump src/index.ts       — single file
+#
+# Skips: node_modules, .git, lockfiles, binary files, build output.
+
+set -e
+
+if [ $# -eq 0 ]; then
+  echo "Usage: context-dump <path> [path...]" >&2
+  echo "Concatenates source files for agent context." >&2
+  exit 1
+fi
+
+EXCLUDE_DIRS="node_modules|\.git|dist|build|\.next|coverage|__pycache__"
+EXCLUDE_FILES="\.(lock|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|map)$"
+
+for target in "$@"; do
+  if [ -f "$target" ]; then
+    echo "=== $target ==="
+    cat "$target"
+    echo ""
+  elif [ -d "$target" ]; then
+    find "$target" -type f \
+      | grep -Ev "$EXCLUDE_DIRS" \
+      | grep -Ev "$EXCLUDE_FILES" \
+      | sort \
+      | while read -r file; do
+          echo "=== $file ==="
+          cat "$file"
+          echo ""
+        done
+  else
+    echo "Warning: $target not found" >&2
+  fi
+done

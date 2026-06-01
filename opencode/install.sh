@@ -36,15 +36,21 @@ mkdir -p "$CONFIG_DIR/skills"
 # Shared skills (always)
 if [ -d "$OPENCODE_DIR/skills/shared" ]; then
   for skill in "$OPENCODE_DIR/skills/shared"/*/; do
-    [ -d "$skill" ] && cp -r "$skill" "$CONFIG_DIR/skills/"
+    [ -d "$skill" ] && cp -r "$skill" "$CONFIG_DIR/skills/$(basename "$skill")"
   done
 fi
 
 # Mode-specific skills
 if [ -d "$OPENCODE_DIR/skills/$MODE" ]; then
   for skill in "$OPENCODE_DIR/skills/$MODE"/*/; do
-    [ -d "$skill" ] && cp -r "$skill" "$CONFIG_DIR/skills/"
+    [ -d "$skill" ] && cp -r "$skill" "$CONFIG_DIR/skills/$(basename "$skill")"
   done
+fi
+
+# Install universal rules (loaded in every project)
+if [ -f "$OPENCODE_DIR/AGENTS.universal.md" ]; then
+  echo "› Installing universal rules"
+  cp "$OPENCODE_DIR/AGENTS.universal.md" "$CONFIG_DIR/AGENTS.md"
 fi
 
 # Write current mode to a state file for reference
@@ -53,3 +59,4 @@ echo "$MODE" > "$CONFIG_DIR/.mode"
 echo "✅ OpenCode configured (mode: $MODE)"
 echo "   Commands: $CONFIG_DIR/commands/"
 echo "   Skills:  $CONFIG_DIR/skills/"
+echo "   Rules:   $CONFIG_DIR/AGENTS.md"

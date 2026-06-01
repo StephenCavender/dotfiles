@@ -24,7 +24,7 @@ Write an AGENTS.md for this project based on the template at `~/.dotfiles/AGENTS
 
 ## Constraints
 
-- Under 50 lines total
+- **Target: 30 lines. Hard cap: 50 lines.** If you're over, you haven't cut enough.
 - A flat list of rules > nested headers with sparse content
 - No "where to look" tables — you can explore the codebase yourself
 - No linting/formatting rules — those belong in eslint/prettier configs
