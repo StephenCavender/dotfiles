@@ -5,22 +5,15 @@ Commands and skills for OpenCode — copied to `~/.config/opencode/` by `install
 ## Installation
 
 ```bash
-opencode/install.sh                 # personal mode (default)
-opencode/install.sh --mode work     # adds work skills (otto/TeleVet)
+opencode/install.sh
 ```
-
-Mode is saved to `~/.config/opencode/.mode` and reused on next run.
 
 ## Where to Add Things
 
 | What | Where |
 |------|-------|
-| New command | `command/<domain>/<name>.md` |
-| Shared skill | `skills/shared/<name>/SKILL.md` |
-| Personal-only skill | `skills/personal/<name>/SKILL.md` |
-| Work-only skill | `skills/work/<name>/SKILL.md` |
-
-Work skills for the otto workspace also live in `otto/.opencode/skills/` (project-local).
+| New command | `command/<name>.md` |
+| New skill | `skills/<name>/SKILL.md` |
 
 ## Gotcha: /docs in .gitignore
 

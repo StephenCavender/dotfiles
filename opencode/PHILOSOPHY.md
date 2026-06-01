@@ -42,5 +42,5 @@ AGENTS.template.md      → Scaffold for new project-local AGENTS.md
 project/AGENTS.md       → Project-specific rules (non-obvious, earned)
 project/docs/           → On-demand detail (conventions, decisions, patterns)
 skills/                 → Reusable workflows (installed globally)
-commands/               → One-shot operations (installed globally)
+command/                → One-shot operations (installed globally)
 ```
