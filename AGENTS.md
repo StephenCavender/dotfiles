@@ -10,16 +10,13 @@
 | Add PATH entry | `system/_path.zsh` |
 | Add env var | `system/env.zsh` |
 | Add zsh function | `functions/` (autoloaded) |
-| Add custom binary/script | `bin/` |
 | Add Homebrew package | `Brewfile` |
 | Add macOS default | `macos/set-defaults.sh` |
 | Add launchd agent | `macos/startup-config.sh` |
 | Add new tool config | New subdirectory with `*.symlink` and/or `install.sh` |
-| Add opencode command | `opencode/command/<domain>/<name>.md` |
-| Add opencode skill | `opencode/skills/<mode>/<name>/SKILL.md` |
+| Add opencode command | `opencode/command/<name>.md` |
+| Add opencode skill | `opencode/skills/<name>/SKILL.md` |
 | Private env vars | `~/.localrc` (never in repo) |
-| Email config | `mutt/` |
-| Calendar config | `calendar/` |
 
 ## CRITICAL MECHANICS
 
