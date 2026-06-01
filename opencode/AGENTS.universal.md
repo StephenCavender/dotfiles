@@ -13,6 +13,7 @@ Rules that apply to every project. Born from actual mistakes.
 
 ## Agent Behavior
 
+- No emojis in code, comments, commit messages, or any written output unless the user explicitly asks
 - Read existing code for patterns before inventing new ones
 - Every rule in an AGENTS.md must come from an actual failure — no speculative rules
 - If a project has `docs/`, check it before asking
@@ -24,5 +25,5 @@ Rules that apply to every project. Born from actual mistakes.
 
 - Write or update tests for any behavior change
 - Run linting/typecheck after edits — don't declare done with errors
-- Commit messages: imperative mood, <72 chars, reference issue if one exists
+- Commit messages: `feat|fix|chore|refactor(scope): message`, imperative mood, <72 chars, reference issue if one exists
 - Never commit secrets, tokens, or credentials
