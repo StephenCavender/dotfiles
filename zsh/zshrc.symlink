@@ -60,6 +60,10 @@ command -v fzf &>/dev/null && source <(fzf --zsh)
 
 command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 
+# atuin: SQLite-backed fuzzy history search (Ctrl-R). Keep the up-arrow bound to
+# up-line-or-beginning-search above by disabling atuin's up-arrow capture.
+command -v atuin &>/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
+
 # thefuck is slow to initialize - lazy load it
 if command -v thefuck &>/dev/null; then
   fuck() {
