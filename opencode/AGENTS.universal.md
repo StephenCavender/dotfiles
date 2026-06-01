@@ -8,12 +8,15 @@ Rules that apply to every project. Born from actual mistakes.
 - Never leave empty catch blocks — handle or rethrow
 - Never delete failing tests to make a build pass
 - Fix bugs minimally — don't refactor while fixing
+- Before writing a new helper, grep for an existing one — extract shared logic instead of copy-pasting it across files
+- Name things for what they do, not how — a reader who hasn't seen the diff should understand the call site
 
 ## Agent Behavior
 
 - Read existing code for patterns before inventing new ones
 - Every rule in an AGENTS.md must come from an actual failure — no speculative rules
 - If a project has `docs/`, check it before asking
+- Apply the colleague test before acting on a vague request — if a new teammate with only this context would be confused, ask one clarifying question first
 - Ask if genuinely ambiguous — don't guess on architecture
 - When two approaches are equivalent, pick the simpler one
 
