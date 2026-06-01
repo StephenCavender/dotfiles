@@ -12,5 +12,15 @@
 #    c holm<tab>/bo<tab>
 #
 # ...to quickly jump into holman/boom, for example.
+#
+# When `zoxide` is available, a bare name (e.g. `c boom`) resolves to your
+# most-visited matching path under $PROJECTS via frecency. Falls back to the
+# literal $PROJECTS/<name> path if zoxide has no match or isn't installed.
 
-cd "$PROJECTS/$1"
+if [[ -z "$1" ]]; then
+  cd "$PROJECTS"
+elif command -v zoxide &>/dev/null; then
+  cd "$(zoxide query "$PROJECTS" "$1" 2>/dev/null || echo "$PROJECTS/$1")"
+else
+  cd "$PROJECTS/$1"
+fi
