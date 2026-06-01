@@ -1,20 +1,17 @@
 ---
-description: Comprehensive code review for quality and best practices
+description: Review the current diff for quality, correctness, and maintainability
 ---
 
-Conduct a thorough code review focusing on quality, maintainability, and best practices.
+Review the diff against the base branch (`git diff main...HEAD` or the PR base).
 
-Review Criteria:
-- Code quality and SOLID principles adherence
-- Error handling and edge cases
-- Test coverage and quality
-- Performance implications
-- Security vulnerabilities
-- Code duplication and DRY violations
-- Naming conventions and readability
+Flag, with `file:line` references:
+- Bugs, unhandled edge cases, and error paths that swallow failures
+- Duplicated logic that should be extracted (DRY)
+- Names that obscure intent at the call site
+- Missing or weak test coverage for changed behavior
+- Security-sensitive changes (auth, input handling, secrets)
 
-Provide:
-- Overall assessment (Approved/Changes Requested/Blocked)
-- Issues categorized by severity (Critical/Important/Minor)
-- Specific feedback with code examples
-- Estimated risk level
+Output:
+- Verdict: Approved / Changes Requested / Blocked
+- Findings grouped by severity (Critical / Important / Minor), each with `file:line` and a concrete fix
+- Skip praise and summaries — report only what needs action
