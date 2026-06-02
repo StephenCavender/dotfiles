@@ -9,10 +9,18 @@
 
 -- Knip language server (https://github.com/webpro-nl/knip/tree/main/packages/language-server)
 -- Not yet in nvim-lspconfig/Mason; configured via native vim.lsp API.
--- Must run after VeryLazy (vim_did_enter=1) so vim.lsp.enable() fires doautoall for open buffers.
+-- Enable lazily on first JS/TS FileType so `npx @knip/language-server` is only
+-- spawned when actually editing those files, not eagerly at startup.
 vim.lsp.config("knip", {
   cmd = { "npx", "--yes", "@knip/language-server", "--stdio" },
   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
   root_markers = { "package.json", "knip.json", "knip.jsonc" },
 })
-vim.lsp.enable("knip")
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  once = true,
+  callback = function()
+    vim.lsp.enable("knip")
+  end,
+})

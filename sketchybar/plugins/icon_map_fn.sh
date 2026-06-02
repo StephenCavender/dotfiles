@@ -719,6 +719,8 @@ function icon_map() {
 }
 ### END-OF-ICON-MAP
 
-icon_map "$1"
-
-echo "$icon_result"
+# Only run the lookup when executed directly; when sourced, expose icon_map().
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  icon_map "$1"
+  echo "$icon_result"
+fi

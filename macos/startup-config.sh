@@ -1,10 +1,21 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Startup configuration for sketchybar and borders
 # This script configures launch agents to start the applications on login
 # Aerospace uses its own start-at-login setting
 
+set -e
+
 LAUNCH_AGENTS_DIR="$HOME/Library/LaunchAgents"
+
+# (Re)load a launch agent idempotently. `launchctl load` is deprecated and errors
+# if the agent is already loaded; bootout+bootstrap re-registers cleanly on reruns.
+reload_agent() {
+  local plist="$1"
+  local domain="gui/$(id -u)"
+  launchctl bootout "$domain" "$plist" 2>/dev/null || true
+  launchctl bootstrap "$domain" "$plist"
+}
 
 # Create launch agents directory if it doesn't exist
 mkdir -p "$LAUNCH_AGENTS_DIR"
@@ -54,8 +65,8 @@ cat > "$LAUNCH_AGENTS_DIR/com.felixkratz.borders.plist" << 'EOF'
 EOF
 
 # Load the launch agents
-launchctl load "$LAUNCH_AGENTS_DIR/com.felixkratz.sketchybar.plist"
-launchctl load "$LAUNCH_AGENTS_DIR/com.felixkratz.borders.plist"
+reload_agent "$LAUNCH_AGENTS_DIR/com.felixkratz.sketchybar.plist"
+reload_agent "$LAUNCH_AGENTS_DIR/com.felixkratz.borders.plist"
 
 mkdir -p "$HOME/.local/share/rclone"
 cat > "$LAUNCH_AGENTS_DIR/com.steve.fastmail-sync.plist" << 'EOF'
@@ -86,7 +97,7 @@ cat > "$LAUNCH_AGENTS_DIR/com.steve.fastmail-sync.plist" << 'EOF'
 </plist>
 EOF
 
-launchctl load "$LAUNCH_AGENTS_DIR/com.steve.fastmail-sync.plist"
+reload_agent "$LAUNCH_AGENTS_DIR/com.steve.fastmail-sync.plist"
 
 mkdir -p "$HOME/.local/share/vdirsyncer"
 cat > "$LAUNCH_AGENTS_DIR/com.steve.vdirsyncer.plist" << 'EOF'
@@ -113,6 +124,6 @@ cat > "$LAUNCH_AGENTS_DIR/com.steve.vdirsyncer.plist" << 'EOF'
 </plist>
 EOF
 
-launchctl load "$LAUNCH_AGENTS_DIR/com.steve.vdirsyncer.plist"
+reload_agent "$LAUNCH_AGENTS_DIR/com.steve.vdirsyncer.plist"
 
 echo "Startup configuration complete. Applications will launch on next login."

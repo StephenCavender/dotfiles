@@ -1,5 +1,5 @@
 # eza — modern ls replacement
-if $(eza &>/dev/null)
+if (( $+commands[eza] ))
 then
   alias ls='eza --group-directories-first --icons=auto'
   alias l='eza -l --git --group-directories-first --no-user --no-permissions --icons=auto --time-style=relative'

@@ -33,7 +33,9 @@ done
 
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -Uz compinit
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+# Rebuild the completion dump if it's missing or older than 24h; otherwise skip
+# the (slow) security check and load the cached dump with -C.
+if [[ ! -f ~/.zcompdump || -n ~/.zcompdump(#qN.mh+24) ]]; then
   compinit
 else
   compinit -C
@@ -58,25 +60,9 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 
 command -v fzf &>/dev/null && source <(fzf --zsh)
 
-command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
-
-# atuin: SQLite-backed fuzzy history search (Ctrl-R). Keep the up-arrow bound to
-# up-line-or-beginning-search above by disabling atuin's up-arrow capture.
-command -v atuin &>/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
-
-# thefuck is slow to initialize - lazy load it
-if command -v thefuck &>/dev/null; then
-  fuck() {
-    eval "$(thefuck --alias)"
-    fuck "$@"
-  }
-fi
-
-# opencode
-export PATH="$HOME/.opencode/bin:$PATH"
-
 # Cache shell tool init scripts — regenerate only when the binary changes.
-# Saves ~30-80ms on each shell startup.
+# These tools emit deterministic init code; caching skips the subprocess spawn
+# (~30-150ms each) on every shell startup.
 _cache_init() {
   local bin=$1 cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/${1:t}.zsh"
   mkdir -p "${cache:h}"
@@ -86,5 +72,22 @@ _cache_init() {
   source $cache
 }
 
+(( $+commands[zoxide] )) && _cache_init "${commands[zoxide]}" zoxide init zsh
+
+# atuin: SQLite-backed fuzzy history search (Ctrl-R). Keep the up-arrow bound to
+# up-line-or-beginning-search above by disabling atuin's up-arrow capture.
+(( $+commands[atuin] )) && _cache_init "${commands[atuin]}" atuin init zsh --disable-up-arrow
+
+# thefuck is slow to initialize - lazy load it
+if (( $+commands[thefuck] )); then
+  fuck() {
+    eval "$(thefuck --alias)"
+    fuck "$@"
+  }
+fi
+
+# opencode
+export PATH="$HOME/.opencode/bin:$PATH"
+
 # zprof  # Uncomment with above to see timing
-eval "$(/opt/homebrew/bin/mise activate zsh)"
+(( $+commands[mise] )) && _cache_init "${commands[mise]}" mise activate zsh

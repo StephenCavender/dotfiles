@@ -43,6 +43,9 @@ source "$ITEM_DIR/apple.sh"
 
 sketchybar --add event aerospace_workspace_change
 
+# Source once so icon_map() runs in-process during the startup loops below.
+source "$CONFIG_DIR/plugins/icon_map_fn.sh"
+
 monitor_count=$(aerospace list-monitors | wc -l | tr -d ' ')
 
 for monitor in $(aerospace list-monitors --format "%{monitor-appkit-nsscreen-screens-id}"); do
@@ -89,7 +92,8 @@ for monitor in $(aerospace list-monitors --format "%{monitor-appkit-nsscreen-scr
     icon_strip=" "
     if [ "${apps}" != "" ]; then
       while read -r app; do
-        icon_strip+=" $($CONFIG_DIR/plugins/icon_map_fn.sh "$app")"
+        icon_map "$app"
+        icon_strip+=" $icon_result"
       done <<<"${apps}"
     fi
     sketchybar --set space.$sid label="$icon_strip"
