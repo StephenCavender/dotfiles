@@ -21,7 +21,14 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-cd "$(dirname $0)"/..
+cd "$(dirname "$0")"/..
+
+# Export DOTFILES_ROOT so nested install.sh files can rely on it
+export DOTFILES_ROOT
+DOTFILES_ROOT="$(pwd -P)"
+
+# ZSH is used by some installers (e.g. newsboat) as the dotfiles root alias
+export ZSH="${ZSH:-$DOTFILES_ROOT}"
 
 echo "› brew bundle"
 brew bundle
@@ -35,5 +42,28 @@ elif [ "$WORK_BREWFILE" = false ] && [ -f "Brewfile.work" ]; then
     echo "› Brewfile.work found. Use --work flag to install work packages."
 fi
 
-# find the installers and run them iteratively
-find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+# Run homebrew/install.sh first — other installers may depend on tools it provides
+if [ -f "homebrew/install.sh" ]; then
+    echo "› homebrew/install.sh"
+    bash "homebrew/install.sh"
+fi
+
+# Run all remaining installers, collecting failures
+failed=()
+
+while IFS= read -r -d '' installer; do
+    echo "› ${installer}"
+    if ! bash "${installer}"; then
+        echo "  failed: ${installer}" >&2
+        failed+=("${installer}")
+    fi
+done < <(find . -mindepth 2 -name install.sh ! -path './homebrew/*' -print0)
+
+# Summary
+if [ ${#failed[@]} -eq 0 ]; then
+    echo "› all installers completed successfully"
+else
+    echo "› ${#failed[@]} installer(s) failed:" >&2
+    printf '  %s\n' "${failed[@]}" >&2
+    exit 1
+fi

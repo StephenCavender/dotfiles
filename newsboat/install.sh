@@ -20,18 +20,11 @@ for FILE_PAIR in "${FILES[@]}"; do
     continue
   fi
 
-  # Check if the destination file exists
-  if [ -e "$DEST" ]; then
-    echo "Destination $DEST already exists. Replacing it."
-    rm -f "$DEST"
-  fi
-
-  # Create the hard link
-  ln "$SOURCE" "$DEST"
+  ln -sf "$SOURCE" "$DEST"
   if [ $? -eq 0 ]; then
-    echo "Hard link created: $DEST -> $SOURCE"
+    echo "linked: $DEST -> $SOURCE"
   else
-    echo "Failed to create hard link for $SOURCE -> $DEST"
+    echo "Failed to link $SOURCE -> $DEST"
   fi
 done
 

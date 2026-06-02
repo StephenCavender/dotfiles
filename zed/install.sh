@@ -1,9 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Create ~/.config/zed directory if it doesn't exist
+set -e
+
+SRC="$(dirname "$0")/settings.json"
+
+if [ ! -f "$SRC" ]; then
+    echo "zed/settings.json not found, skipping" >&2
+    exit 1
+fi
+
 mkdir -p ~/.config/zed
-
-# Copy settings.json to the Zed config directory
-cp "$(dirname "$0")/settings.json" ~/.config/zed/settings.json
-
-echo "✅ Zed settings installed successfully to ~/.config/zed/settings.json"
+cp "$SRC" ~/.config/zed/settings.json
+echo "› zed settings installed"
