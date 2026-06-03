@@ -10,6 +10,7 @@ set -ag terminal-overrides ",xterm-ghostty:RGB,xterm-256color:RGB"
 set -as terminal-features ",xterm-ghostty:sixel"
 set -g allow-passthrough on
 set -s extended-keys on
+set -g extended-keys-format csi-u
 set -sg escape-time 10
 
 # ----------------------------------------
