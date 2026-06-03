@@ -4,6 +4,11 @@ description: Review the current diff for quality, correctness, and maintainabili
 
 Review the diff against the base branch (`git diff main...HEAD` or the PR base).
 
+**Intensity** (pass as argument, default: normal):
+- `quick` — Changed lines only. Flag obvious bugs and missing error handling. Skip style, naming, and test coverage.
+- `normal` — Changed lines + immediate context. Full checklist below.
+- `thorough` — Follow changed code into callers/callees (2 hops). Assess cross-module impact, concurrency, and data-flow invariants.
+
 Flag, with `file:line` references:
 - Bugs, unhandled edge cases, and error paths that swallow failures
 - Duplicated logic that should be extracted (DRY)

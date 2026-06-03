@@ -8,6 +8,7 @@ How we think about agent-assisted development. Derived from practice, not theory
 - Project knowledge should be hierarchical: lean entry point → on-demand detail
 - AGENTS.md is the index (~30 lines). `docs/` is the library (loaded when needed)
 - If you can delete a line and nothing goes wrong, delete it
+- Subagent output is injected into main context — constrain its format (file paths + one-line descriptions, not essays) to extend session lifetime
 
 ## Scar tissue only
 

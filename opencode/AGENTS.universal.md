@@ -20,6 +20,7 @@ Rules that apply to every project. Born from actual mistakes.
 - Apply the colleague test before acting on a vague request — if a new teammate with only this context would be confused, ask one clarifying question first
 - Ask if genuinely ambiguous — don't guess on architecture
 - When two approaches are equivalent, pick the simpler one
+- Match communication density to stakes — be terse for routine work, be explicit and unambiguous for security warnings, destructive operations, and irreversible actions
 
 ## Workflow
 
