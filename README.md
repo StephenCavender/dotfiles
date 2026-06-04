@@ -20,12 +20,13 @@ cd ~/.dotfiles
 
 ## Features
 
-### OpenCode AI Toolkit
+### AI Agent Toolkit
 
-Lean commands and skills for OpenCode — agent definitions were stripped out in favor of focused, composable skills:
+Skills and universal rules live in a harness-neutral `.agents/` directory so multiple coding agents (OpenCode, [pi](https://pi.dev), caveman) can share one source of truth. OpenCode-specific commands stay under `opencode/`. Each harness's `install.sh` symlinks the shared `.agents/skills` into its own config location.
 
-- **Commands**: `review`, `security-audit`, `a11y-audit`, `remove-slop`
-- **Skills**: `audit-context` (trim agent instruction bloat), `clarify` (Socratic interrogation), `init-agents` (scaffold AGENTS.md), `refine` (iterate on prompts)
+- **Skills** (`.agents/skills/`): `audit-context` (trim agent instruction bloat), `clarify` (Socratic interrogation), `github-cli` (gh CLI in place of the GitHub MCP), `init-agents` (scaffold AGENTS.md), `plan`, `refine`, `reground`, `tdd-loop`
+- **Commands** (`opencode/command/`): `review`, `security-audit`, `a11y-audit`, `remove-slop`, `commit`, `spec`
+- **Harnesses**: `opencode/` and `pi/` each carry an `install.sh` that wires the shared skills + `AGENTS.universal.md` into the right place. pi is installed separately via `curl -fsSL https://pi.dev/install.sh | sh`.
 
 ### Shell Environment
 
@@ -59,7 +60,9 @@ Custom scripts for branch management, conflict resolution, and productivity:
 ```
 .dotfiles/
 ├── install.sh          # Remote bootstrap (curl pipe)
-├── opencode/           # Commands + skills for AI toolkit
+├── .agents/            # Harness-neutral skills + universal rules (shared)
+├── opencode/           # OpenCode commands + install.sh
+├── pi/                 # pi config + install.sh
 ├── bin/                # Custom scripts and utilities
 ├── zsh/                # Shell configuration
 ├── git/                # Git configuration and aliases
