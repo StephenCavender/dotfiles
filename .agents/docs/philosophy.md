@@ -61,13 +61,3 @@ project/docs/           → On-demand detail (conventions, decisions, patterns)
 skills/                → Reusable workflows (installed globally)
 command/                → One-shot operations (installed globally)
 ```
-
-## Sources
-
-This philosophy is synthesized from practitioners working in the open:
-
-- Jamon Holmgren — [The eight best ways I've improved my AI agent's code](https://jamon.dev/8ways)
-- Harper Reed — [Waterfall in 15 minutes](https://harper.blog/2025/04/10/waterfall-in-15-minutes-or-your-money-back/) · [My LLM codegen workflow](https://harper.blog/2025/02/16/my-llm-codegen-workflow-atm/) · [Basic Claude Code](https://harper.blog/2025/05/08/basic-claude-code/) · [Email, productivity, MCP agents](https://harper.blog/2025/12/03/claude-code-email-productivity-mcp-agents/) · [An LLM codegen hero's journey](https://harper.blog/2025/04/17/an-llm-codegen-heros-journey/) · [Auto-generate git commit messages](https://harper.blog/2024/03/11/use-an-llm-to-automagically-generate-meaningful-git-commit-messages/) · [AI agents & social media](https://harper.blog/2025/09/30/ai-agents-social-media-performance-lambo-doomscrolling/) · [Claude Code on your phone](https://harper.blog/2026/01/05/claude-code-is-better-on-your-phone/)
-- Lee Robinson — [Stack](https://leerob.com/stack) · [Agents](https://leerob.com/agents) · [Pixo](https://leerob.com/pixo) · [AI](https://leerob.com/ai) · [Personal software](https://leerob.com/personal-software)
-- Peter Steinberger — [Just talk to it](https://steipete.me/posts/just-talk-to-it) · [Shipping at inference speed](https://steipete.me/posts/2025/shipping-at-inference-speed) · [agent-scripts](https://github.com/steipete/agent-scripts) · [CLAUDE.md gist](https://gist.github.com/steipete/d3b9db3fa8eb1d1a692b7656217d8655)
-- byme8 — [You don't need a CLAUDE.md](https://dev.to/byme8/you-dont-need-a-claudemd-jgf)
