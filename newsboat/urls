@@ -5,6 +5,7 @@ https://medium.com/feed/@_ericelliott dev
 https://jrsinclair.com/index.rss dev
 https://registerspill.thorstenball.com/feed dev
 https://thorstenball.com/atom.xml dev
+https://siv.rs/feed.xml
 "query:dev Articles:tags # \"dev\""
 "query:Unread Articles:unread = \"yes\""
 https://www.youtube.com/feeds/videos.xml?channel_id=UCUyeluBRhGPCW4rPe_UvBZQ dev video
