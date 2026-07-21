@@ -29,25 +29,13 @@ Rules that apply to every project. Born from actual mistakes.
 - Before multi-step work, restate what "done" looks like in 1-3 bullets — confirm with the user before starting
 - Commit messages: `feat|fix|chore|refactor(scope): message`, imperative mood, <72 chars, reference issue if one exists
 - Never commit secrets, tokens, or credentials
+- Never push to main/master directly
+- Never overwrite existing conventions without explicit approval
 
-## Autonomy Tiers
+## Ask First (pause and confirm)
 
-### Always (autopilot — no confirmation needed)
-- Run linting/typecheck after edits
-- Read existing code for patterns before inventing new ones
-- Write or update tests for behavior changes
-- Check docs/ before asking questions
-
-### Ask First (pause and confirm)
 - Architecture decisions affecting multiple systems
 - Adding new dependencies
 - Deleting files or removing features
 - Changes that cross module boundaries
 - Choosing between two reasonable approaches with different tradeoffs
-
-### Never (hard block)
-- Suppress type errors (`as any`, `@ts-ignore`, `@ts-expect-error`)
-- Commit secrets, tokens, or credentials
-- Delete failing tests to make a build pass
-- Push to main/master directly
-- Overwrite existing conventions without explicit approval
