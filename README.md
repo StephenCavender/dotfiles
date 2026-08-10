@@ -22,11 +22,12 @@ cd ~/.dotfiles
 
 ### AI Agent Toolkit
 
-Skills and universal rules live in a harness-neutral `.agents/` directory so multiple coding agents (OpenCode, [pi](https://pi.dev), caveman) can share one source of truth. OpenCode-specific commands stay under `opencode/`. Each harness's `install.sh` symlinks the shared `.agents/skills` into its own config location.
+Skills and universal rules live in a harness-neutral `.agents/` directory so multiple coding agents (OpenCode, [pi](https://pi.dev), Claude Code, Gemini CLI, caveman) can share one source of truth. OpenCode-specific commands stay under `opencode/`.
 
 - **Skills** (`.agents/skills/`): `audit-context` (trim agent instruction bloat), `clarify` (Socratic interrogation), `github-cli` (gh CLI in place of the GitHub MCP), `init-agents` (scaffold AGENTS.md), `plan`, `refine`, `reground`, `tdd-loop`
 - **Commands** (`opencode/command/`): `review`, `security-audit`, `a11y-audit`, `remove-slop`, `commit`, `spec`
-- **Harnesses**: `opencode/` and `pi/` each carry an `install.sh` that wires the shared skills + `AGENTS.universal.md` into the right place. pi is installed separately via `curl -fsSL https://pi.dev/install.sh | sh`.
+- **Universal rules** (`.agents/AGENTS.universal.md`): one canonical ruleset. `.agents/install.sh` symlinks it into each harness's global config under whatever filename that harness reads — `~/.config/opencode/AGENTS.md`, `~/.pi/agent/AGENTS.md`, `~/.claude/CLAUDE.md`, `~/.gemini/GEMINI.md`.
+- **Harnesses**: `opencode/` wires its commands, `pi/` its settings; both share `.agents/skills`. pi is installed separately via `curl -fsSL https://pi.dev/install.sh | sh`.
 
 ### Shell Environment
 

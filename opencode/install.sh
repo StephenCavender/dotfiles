@@ -1,11 +1,14 @@
 #!/bin/bash
 set -e
 
-# Install OpenCode commands, skills, and universal rules to ~/.config/opencode/
+# Install OpenCode commands and skills to ~/.config/opencode/
 #
-# Skills and universal rules now live in the harness-neutral ~/.dotfiles/.agents/
-# directory so opencode, pi, and caveman can all share one source of truth.
-# Commands stay opencode-specific (their format is not portable).
+# Skills live in the harness-neutral ~/.dotfiles/.agents/ directory so opencode,
+# pi, and caveman can all share one source of truth. Commands stay
+# opencode-specific (their format is not portable).
+#
+# Universal rules are NOT wired here — .agents/install.sh owns that for every
+# harness, so the symlink logic lives in one place instead of four.
 
 OPENCODE_DIR="$(cd "$(dirname "$0")" && pwd)"
 DOTFILES_ROOT="$(cd "$OPENCODE_DIR/.." && pwd)"
@@ -24,13 +27,8 @@ echo "› Installing skills (shared from .agents/)"
 rm -rf "$CONFIG_DIR/skills"
 ln -sf "$AGENTS_DIR/skills" "$CONFIG_DIR/skills"
 
-# Install universal rules (loaded in every project)
-if [ -f "$AGENTS_DIR/AGENTS.universal.md" ]; then
-  echo "› Installing universal rules"
-  ln -sf "$AGENTS_DIR/AGENTS.universal.md" "$CONFIG_DIR/AGENTS.md"
-fi
 
 echo "✅ OpenCode configured"
 echo "   Commands: $CONFIG_DIR/commands/  (opencode-specific)"
 echo "   Skills:   $CONFIG_DIR/skills/    -> .agents/skills (shared)"
-echo "   Rules:    $CONFIG_DIR/AGENTS.md  -> .agents/AGENTS.universal.md (shared)"
+echo "   Rules:    handled by .agents/install.sh (shared)"

@@ -7,13 +7,14 @@ set -e
 # pi has no MCP support by design — capabilities live in skills (CLI tools +
 # README), so the shared skills dir is the whole integration surface.
 #
+# Universal rules are NOT wired here — .agents/install.sh owns that for every
+# harness, so the symlink logic lives in one place instead of four.
+#
 # Does NOT install pi itself. Run separately when ready (official installer —
 # wraps `npm install -g --ignore-scripts @earendil-works/pi-coding-agent`):
 #   curl -fsSL https://pi.dev/install.sh | sh
 
 PI_DIR="$(cd "$(dirname "$0")" && pwd)"
-DOTFILES_ROOT="$(cd "$PI_DIR/.." && pwd)"
-AGENTS_DIR="$DOTFILES_ROOT/.agents"
 CONFIG_DIR="$HOME/.pi/agent"
 
 mkdir -p "$CONFIG_DIR"
@@ -22,16 +23,11 @@ mkdir -p "$CONFIG_DIR"
 echo "› Installing pi settings"
 ln -sf "$PI_DIR/settings.json" "$CONFIG_DIR/settings.json"
 
-# Universal rules — pi auto-loads ~/.pi/agent/AGENTS.md globally
-if [ -f "$AGENTS_DIR/AGENTS.universal.md" ]; then
-  echo "› Installing universal rules"
-  ln -sf "$AGENTS_DIR/AGENTS.universal.md" "$CONFIG_DIR/AGENTS.md"
-fi
 
 echo "✅ pi configured"
 echo "   Settings: $CONFIG_DIR/settings.json -> dotfiles/pi/settings.json"
 echo "   Skills:   .agents/skills (via settings skills[])"
-echo "   Rules:    $CONFIG_DIR/AGENTS.md -> .agents/AGENTS.universal.md (shared)"
+echo "   Rules:    handled by .agents/install.sh (shared)"
 echo ""
 echo "   pi not installed. To install:"
 echo "     curl -fsSL https://pi.dev/install.sh | sh"
