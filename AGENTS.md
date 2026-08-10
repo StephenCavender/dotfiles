@@ -16,6 +16,7 @@
 | Add new tool config | New subdirectory with `*.symlink` and/or `install.sh` |
 | Add opencode command | `opencode/command/<name>.md` |
 | Add opencode skill | `opencode/skills/<name>/SKILL.md` |
+| Change package cooldown window | `supply-chain/` (npm/pnpm/bun/pip minimum release age) |
 | Private env vars | `~/.localrc` (never in repo) |
 
 ## CRITICAL MECHANICS
