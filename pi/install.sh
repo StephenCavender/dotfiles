@@ -23,11 +23,16 @@ mkdir -p "$CONFIG_DIR"
 echo "› Installing pi settings"
 ln -sf "$PI_DIR/settings.json" "$CONFIG_DIR/settings.json"
 
-
 echo "✅ pi configured"
 echo "   Settings: $CONFIG_DIR/settings.json -> dotfiles/pi/settings.json"
 echo "   Skills:   .agents/skills (via settings skills[])"
 echo "   Rules:    handled by .agents/install.sh (shared)"
-echo ""
-echo "   pi not installed. To install:"
-echo "     curl -fsSL https://pi.dev/install.sh | sh"
+
+# pi ships via its own installer, not this repo — only nudge when it is absent.
+if command -v pi > /dev/null 2>&1; then
+  echo "   Binary:   $(command -v pi)"
+else
+  echo ""
+  echo "   pi not installed. To install:"
+  echo "     curl -fsSL https://pi.dev/install.sh | sh"
+fi
