@@ -1,3 +1,4 @@
+# Blogs
 https://lazybear.io/index.xml dev
 https://garrit.xyz/rss.xml dev
 https://feeds2.feedburner.com/TheArtOfManliness life
@@ -6,13 +7,39 @@ https://jrsinclair.com/index.rss dev
 https://registerspill.thorstenball.com/feed dev
 https://thorstenball.com/atom.xml dev
 https://siv.rs/feed.xml
+https://joelclaw.com/feed.xml dev
+# https://joelhooks.com/ dev # no feed :(
+https://harper.blog/index.xml
+
+# Groups
 "query:dev Articles:tags # \"dev\""
 "query:Unread Articles:unread = \"yes\""
+
+# Video
+
+# Prime: https://www.youtube.com/channel/UCUyeluBRhGPCW4rPe_UvBZQ
 https://www.youtube.com/feeds/videos.xml?channel_id=UCUyeluBRhGPCW4rPe_UvBZQ dev video
+
+# Theo: https://www.youtube.com/channel/UCbRP3c757lWg9M-U7TyEkXA
 https://www.youtube.com/feeds/videos.xml?channel_id=UCbRP3c757lWg9M-U7TyEkXA dev video
+
+# NetworkChuck: https://www.youtube.com/channel/UC9x0AN7BWHpCDHSm9NiJFJQ
 https://www.youtube.com/feeds/videos.xml?channel_id=UC9x0AN7BWHpCDHSm9NiJFJQ tech video
+
+# Typecraft: https://www.youtube.com/channel/UCo71RUe6DX4w-Vd47rFLXPg
 https://www.youtube.com/feeds/videos.xml?channel_id=UCo71RUe6DX4w-Vd47rFLXPg tech video
+
+# fireship: https://www.youtube.com/channel/UCsBjURrPoezykLs9EqgamOA
 https://www.youtube.com/feeds/videos.xml?channel_id=UCsBjURrPoezykLs9EqgamOA tech video
+
+# Wes Huff: https://www.youtube.com/channel/UCJX2EazMKUqBQV048px2aoA
 https://www.youtube.com/feeds/videos.xml?channel_id=UCJX2EazMKUqBQV048px2aoA life video
+
+# Diary of a CEO: https://www.youtube.com/channel/UCGq-a57w-aPwyi3pW7XLiHw
 https://www.youtube.com/feeds/videos.xml?channel_id=UCGq-a57w-aPwyi3pW7XLiHw life video
+
+# Diary of a CEO Clips: https://www.youtube.com/channel/UCnjgxChqYYnyoqO4k_Q1d6Q
 https://www.youtube.com/feeds/videos.xml?channel_id=UCnjgxChqYYnyoqO4k_Q1d6Q life video
+
+# PragerU: https://www.youtube.com/channel/UCZWlSUNDvCCS1hBiXV0zKcA
+https://www.youtube.com/feeds/videos.xml?channel_id=UCZWlSUNDvCCS1hBiXV0zKcA life video
