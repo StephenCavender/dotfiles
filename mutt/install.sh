@@ -6,6 +6,13 @@
 
 set -e
 
+# Remove old single-file hcache if it exists (pre-directory-cache setup)
+for path in "$HOME/.mutt/hcache" "$HOME/.mutt/mcache"; do
+  if [ -f "$path" ]; then
+    rm -f "$path" "${path}-lock" 2>/dev/null || true
+  fi
+done
+
 mkdir -p "$HOME/.mutt/hcache"
 mkdir -p "$HOME/.mutt/mcache"
 
