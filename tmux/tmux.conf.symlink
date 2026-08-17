@@ -3,6 +3,24 @@
 # ============================================
 
 # ----------------------------------------
+# 0. PALETTE (Dracula - matches ghostty, nvim, sketchybar)
+# ----------------------------------------
+# Single source of truth for tmux colors. Referenced as #{@c_*} in formats.
+# Note: tmux-pane-tree options below must stay literal hex - its Python UI
+# reads raw option values and cannot expand tmux formats.
+set -g @c_bg      "#282a36"
+set -g @c_fg      "#f8f8f2"
+set -g @c_line    "#44475a"
+set -g @c_comment "#6272a4"
+set -g @c_cyan    "#8be9fd"
+set -g @c_green   "#50fa7b"
+set -g @c_orange  "#ffb86c"
+set -g @c_pink    "#ff79c6"
+set -g @c_purple  "#bd93f9"
+set -g @c_red     "#ff5555"
+set -g @c_yellow  "#f1fa8c"
+
+# ----------------------------------------
 # 1. TERMINAL & COMPATIBILITY
 # ----------------------------------------
 set -g default-terminal "tmux-256color"
@@ -64,26 +82,55 @@ bind -T copy-mode-vi Escape send-keys -X cancel
 set -g pane-border-lines heavy
 set -g pane-border-indicators colour
 set -g pane-border-status top
-set -g pane-border-format ' #{?pane_active,#[fg=#89b4fa],#[fg=#585b70]}#{pane_title} #[fg=#45475a]── #[default]#{?pane_active,#[fg=#cdd6f4],#[fg=#585b70]}#{pane_current_path} '
+set -g pane-border-format ' #{?pane_active,#[fg=#{@c_purple}],#[fg=#{@c_line}]}#{pane_title} #[fg=#{@c_line}]── #[default]#{?pane_active,#[fg=#{@c_fg}],#[fg=#{@c_comment}]}#{pane_current_path} '
 
-# Catppuccin Mocha border colors
-set -g pane-border-style 'fg=#45475a'
-set -g pane-active-border-style 'fg=#89b4fa'
+set -g pane-border-style 'fg=#{@c_line}'
+# Matches borders/aerospace window border accent so focus reads the same at
+# both the OS-window and tmux-pane level.
+set -g pane-active-border-style 'fg=#{@c_purple}'
 
-# Dim inactive panes
-# set -g window-style 'bg=#181825'
-# set -g window-active-style 'bg=#1e1e2e'
 set -g window-style 'bg=default'
 set -g window-active-style 'bg=default'
-set -g status-style 'bg=default'
+
+# ----------------------------------------
+# 5b. STATUS BAR
+# ----------------------------------------
+# Division of labour - the bar only shows what nothing else can:
+#   pane-tree sidebar -> sessions / windows / panes / agent badges
+#   pure prompt       -> git branch + dirty for the pane you type in
+#   sketchybar        -> clock, battery, cpu, mem, wifi, volume, agent alerts
+#   this bar          -> tmux modal state, and git for panes running an agent
 set -g status on
+set -g status-position bottom
+set -g status-justify left
+set -g status-style 'bg=default,fg=#{@c_comment}'
+set -g status-interval 5
+set -g status-left-length 40
+set -g status-right-length 120
+
+# The sidebar owns the window list.
+set -g window-status-format ''
+set -g window-status-current-format ''
+
+set -g status-left "\
+#{?client_prefix,#[fg=#{@c_bg}#,bg=#{@c_yellow}#,bold] PREFIX #[default],}\
+#{?pane_in_mode,#[fg=#{@c_bg}#,bg=#{@c_cyan}#,bold] COPY #[default],}\
+#{?window_zoomed_flag,#[fg=#{@c_bg}#,bg=#{@c_orange}#,bold] ZOOM #[default],}\
+#{?pane_synchronized,#[fg=#{@c_bg}#,bg=#{@c_red}#,bold] SYNC #[default],}"
+
+# Git state for agent panes only - pure already covers the pane you type in.
+# Must be set before the tpm line: tmux-continuum appends its save hook to
+# whatever status-right holds when it loads.
+set -g status-right "#(~/.dotfiles/tmux/scripts/agent-git.sh '#{session_name}')"
+
+set -g message-style 'bg=#{@c_line},fg=#{@c_fg}'
+set -g mode-style 'bg=#{@c_purple},fg=#{@c_bg}'
 
 # ----------------------------------------
 # 6. PLUGINS
 # ----------------------------------------
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'christoomey/vim-tmux-navigator'
-set -g @plugin 'catppuccin/tmux'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'sandudorogan/tmux-pane-tree'
@@ -101,16 +148,6 @@ set -g @tmux_pane_tree_color_session '#BD93F9'
 set -g @tmux_pane_tree_color_window '#FF79C6'
 set -g @tmux_pane_tree_color_pane '#8BE9FD'
 set -g @tmux_pane_tree_session_order "dev,ops,scratch,comms"
-
-# Catppuccin Theme
-set -g @catppuccin_window_status_style "rounded"
-set -g status-right-length 100
-set -g status-left-length 100
-set -g status-left ""
-set -g status-right "#{E:@catppuccin_status_application}"
-set -g @catppuccin_window_default_text " #W"
-set -g @catppuccin_window_text " #W"
-set -g @catppuccin_window_current_text " #W"
 
 # ----------------------------------------
 # 8. TPM INITIALIZATION (MUST BE LAST)
