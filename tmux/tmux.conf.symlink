@@ -141,6 +141,10 @@ set -g @plugin 'sandudorogan/tmux-pane-tree'
 # Resurrect
 set -g @resurrect-capture-pane-contents 'on'
 set -g @continuum-restore 'on'
+# resurrect restores the pane-tree sidebar's title/geometry but not its
+# @tmux_sidebar_owned marker, so pane-tree can't recognize the restored pane
+# as its own and spawns a second one. Kill the unmarked leftover post-restore.
+set -g @resurrect-hook-post-restore-all 'bash ~/.dotfiles/tmux/scripts/kill-stale-sidebar-panes.sh'
 
 # Pane Tree
 set -g @tmux_pane_tree_install_agent_hooks 1
