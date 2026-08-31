@@ -2,6 +2,46 @@
 
 Rules that apply to every project. Born from actual mistakes.
 
+## AI-Assisted Development Philosophy
+
+AI is autocomplete on steroids — a tool, not a partner. It accelerates; humans own.
+
+### Core Principles
+
+- **Human primacy**: Code must be readable and maintainable by humans without AI assistance
+- **Small tasks default**: Less context, faster loops, cheaper mistakes
+- **Specs persist with code**: `docs/specs/` in-repo, or it rots
+
+### Process: Spec → Plan → Impl → Review → Test → Deploy
+
+Iterate at any step, even on small tasks.
+
+- **Spec depth**: Acceptance criteria — inputs/outputs, constraints, error cases, out-of-scope. Not user stories (too thin), not pseudo-code (too thick)
+- **Circuit breaker**: 3 attempts max, then human takes over
+- **Architecture boundary**: Everything fair game with sufficient spec
+
+### Testing
+
+- **Standard**: TDD — tests before implementation
+- **Coverage**: Local pre-push hook, not in CI pipeline
+- **Layers**: Unit → Contract → Integration → System (all, always)
+
+### Review
+
+- **Bar**: Reviewer must explain any function without running it
+- **Authority**: Human approves all, owns all
+
+### Knowledge Capture
+
+- **What/How**: Self-documenting code + inline comments where code can't
+- **Why**: Specs in `docs/specs/`, versioned with code
+
+### Refactoring
+
+- **When**: When it causes pain, not preemptively
+- **Who**: Anyone — human or AI
+- **Gate**: Human approval required
+
 ## Code Quality
 
 - Never suppress type errors (`as any`, `@ts-ignore`, `@ts-expect-error`)
