@@ -22,10 +22,10 @@ cd ~/.dotfiles
 
 ### AI Agent Toolkit
 
-Skills and universal rules live in a harness-neutral `.agents/` directory so multiple coding agents (OpenCode, [pi](https://pi.dev), Claude Code, Gemini CLI, caveman) can share one source of truth. OpenCode-specific commands stay under `opencode/`.
+Skills and universal rules live in a harness-neutral `.agents/` directory so multiple coding agents (OpenCode, [pi](https://pi.dev), Claude Code, Gemini CLI) can share one source of truth. OpenCode-specific commands stay under `opencode/`.
 
 - **Skills** (`.agents/skills/`): `audit-context` (trim agent instruction bloat), `clarify` (Socratic interrogation), `github-cli` (gh CLI in place of the GitHub MCP), `init-agents` (scaffold AGENTS.md), `plan`, `refine`, `reground`, `tdd-loop`
-- **Commands** (`opencode/command/`): `review`, `security-audit`, `a11y-audit`, `remove-slop`, `commit`, `spec`
+- **Commands** (`opencode/command/`): `review`, `security-audit`, `a11y-audit`, `remove-slop`, `commit`, `spec`, plus the caveman set (`caveman`, `caveman-commit`, `caveman-review`, `caveman-help`)
 - **Universal rules** (`.agents/AGENTS.universal.md`): one canonical ruleset. `.agents/install.sh` symlinks it into each harness's global config under whatever filename that harness reads — `~/.config/opencode/AGENTS.md`, `~/.pi/agent/AGENTS.md`, `~/.claude/CLAUDE.md`, `~/.gemini/GEMINI.md`.
 - **Harnesses**: `opencode/` wires its commands, `pi/` its settings; both share `.agents/skills`. pi is installed separately via `curl -fsSL https://pi.dev/install.sh | sh`.
 
@@ -61,18 +61,19 @@ Custom scripts for branch management, conflict resolution, and productivity:
 ```
 .dotfiles/
 ├── install.sh          # Remote bootstrap (curl pipe)
+├── .rules              # Repo guide (symlinked as AGENTS.md / CLAUDE.md / GEMINI.md)
 ├── .agents/            # Harness-neutral skills + universal rules (shared)
 ├── opencode/           # OpenCode commands + install.sh
 ├── pi/                 # pi config + install.sh
+├── docs/               # Coding philosophy — loaded on demand, not every session
 ├── bin/                # Custom scripts and utilities
-├── zsh/                # Shell configuration
-├── git/                # Git configuration and aliases
-├── nvim/               # Neovim (LazyVim) config
-├── vim/                # Legacy Vim configuration
-├── ghostty/            # Ghostty terminal config
-├── tmux/               # Tmux configuration
-├── system/             # System-wide settings
-└── script/             # Installation and setup scripts
+├── script/             # Installation and setup scripts
+├── system/             # PATH, env, and aliases sourced by zsh
+├── functions/          # Autoloaded zsh functions
+├── macos/              # System defaults + launchd agents
+├── supply-chain/       # Package manager cooldown windows
+├── zsh/ git/ nvim/ vim/ ghostty/ tmux/ zed/
+└── ...                 # One directory per tool, each with install.sh and/or *.symlink
 ```
 
 ## Management

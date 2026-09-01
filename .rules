@@ -15,7 +15,7 @@
 | Add launchd agent | `macos/startup-config.sh` |
 | Add new tool config | New subdirectory with `*.symlink` and/or `install.sh` |
 | Add opencode command | `opencode/command/<name>.md` |
-| Add opencode skill | `opencode/skills/<name>/SKILL.md` |
+| Add agent skill | `.agents/skills/<name>/SKILL.md` (shared by opencode, pi, Claude, Gemini) |
 | Change package cooldown window | `supply-chain/` (npm/pnpm/bun/pip minimum release age) |
 | Private env vars | `~/.localrc` (never in repo) |
 
@@ -24,7 +24,7 @@
 - `*.symlink` files → `~/.<basename>` (e.g. `zsh/zshrc.symlink` → `~/.zshrc`)
 - Private env vars → `~/.localrc` only — never in repo files
 - Zsh load order: `*.path.zsh` first → all other `*.zsh` → `compinit` → `*.completion.zsh`
-- `opencode/install.sh` copies commands/skills to `~/.config/opencode/` — run it after changes
+- `.agents/install.sh` wires universal rules into every harness; `opencode/install.sh` installs commands + symlinks `.agents/skills` — run after changes
 
 ## CONVENTIONS
 

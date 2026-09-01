@@ -5,81 +5,64 @@ description: Audit agent instructions (AGENTS.md, CLAUDE.md, skills, commands) f
 
 # Audit Context
 
-Review all agent-facing files in this project and ruthlessly cut anything that wastes context without preventing real mistakes.
+Cut anything in this project's agent-facing files that costs tokens without preventing a real mistake.
 
-## Philosophy
+## The test (non-negotiable)
 
-From https://steipete.me/posts/just-talk-to-it:
-- Telling a model "You are an expert X specializing in Y" changes nothing. The model already has that knowledge.
-- Capability lists are context poison — they consume tokens without improving output.
-- What helps: documentation, examples, do/don't rules. What doesn't: personality roleplay.
-- MCPs that dump 23k tokens of tool descriptions are waste; CLIs the model already knows are free.
-- Agent files should be "organizational scar tissue" — earned through actual mistakes, not imagined ones.
+Every line faces one filter:
 
-From https://leerob.com/stack:
-- An entire AGENTS.md can be ~20 lines of actual rules.
-- No roleplay, no capability lists. Just constraints and project-specific facts.
-- "React Compiler is enabled, skip manual useMemo" — things the model would get wrong without being told.
+> "Delete this line — does the model produce worse output?"
 
-## The Test
+- YES → keep.
+- NO or UNSURE → cut. Add it back when the mistake actually happens.
 
-For every line in an agent instruction file, apply this filter:
+## Cut on sight
 
-> "If I delete this line, will the model produce worse output?"
+Role definitions · capability lists · knowledge-base sections · behavioral traits · generic best practices ("follow SOLID", "write maintainable code") · output-format scaffolding the model ignores · collaboration protocols ("when called by Security Auditor...") · example interactions · framework jargon (Markov states, DAGs, "atomic convergence").
 
-- If YES → keep it. It's preventing a real mistake.
-- If NO → delete it. It's context tax.
-- If UNSURE → delete it. You can always add it back when the mistake actually happens.
+## Keep
 
-## What to Cut
+- Constraints the model would violate without being told
+- Non-obvious patterns that differ from defaults ("use prismaRead for queries, not ctx.db")
+- Do/Don't rules born from actual failures ("Don't delete StripePaymentIntent records — protected")
+- Commands the model needs, when non-standard
+- Architecture decisions overriding model defaults ("Server Components by default — 'use client' only when needed")
+- Deprecated paths the model might reach for ("v3 audiences are deprecated — use v4")
 
-- **Capability lists** ("Masters RESTful APIs, GraphQL, event-driven architecture...")
-- **Role definitions** ("You are an expert backend architect specializing in...")
-- **Generic best practices** ("Follow SOLID principles", "Write maintainable code")
-- **Output format templates** (200-line response scaffolding the model will ignore anyway)
-- **Collaboration protocols** ("When Called by Security Auditor, implement...")
-- **Knowledge base sections** ("Deep expertise in React, TypeScript, CSS...")
-- **Behavioral traits** ("Communicates technical decisions clearly with rationale")
-- **Example interactions** ("Design a RESTful API for a multi-tenant e-commerce system")
-- **AOT/framework jargon** (Markov states, DAGs, "atomic convergence" — pure noise)
+## Score what survives (0–2 each)
 
-## What to Keep
+| # | Dimension | 0 | 1 | 2 |
+|---|-----------|---|---|---|
+| 1 | **Scar tissue** — rules earned from real failures | Generic best practices | Mix of earned + generic | Every line prevents a specific, non-obvious mistake |
+| 2 | **No poison** — no roleplay, capability lists, role defs | Multiple poison sections | Some flavor text | Zero. Constraints + facts only |
+| 3 | **Density** — terse signal | Prose paragraphs, hedging | Readable but wordy | `[thing][action][reason]`. Fluff cut |
+| 4 | **Placement** — cost matches load frequency | Detail in an always-loaded file | Some misplacement | Always-loaded = index; detail on-demand |
+| 5 | **Output constraint** (skills/commands; else N/A) | Unbounded essay output | Loose | Constrained format (paths + one-liners) |
 
-- **Project-specific constraints** the model would violate without being told
-- **Non-obvious patterns** that differ from common defaults (e.g., "use prismaRead for queries, not ctx.db")
-- **Do/Don't rules** born from actual mistakes ("Don't delete StripePaymentIntent records — protected")
-- **Commands** the model needs to run (build, test, lint — but only if non-standard)
-- **Architecture decisions** that override the model's defaults ("Server Components by default — 'use client' only when needed")
-- **Deprecated paths** the model might use ("v3 audiences are deprecated — use v4")
+Verdict: **8–10** KEEP with minor trims · **5–7** REWRITE · **0–4** CUT hard or delete. Any **0 on dim 1 or 2** → mandatory REWRITE regardless of total. Below ~5 useful lines after cuts → delete the file.
+
+**Never compress**: code, commands, quoted errors, identifiers, security/destructive warnings, acceptance criteria. These stay verbatim even when verbose — compressing them risks misread.
+
+## Skills and commands
+
+- Frontmatter `description` is the only always-loaded part → concrete trigger phrases, not capability claims. Bad: "handles data tasks". Good: "when asked to 'query the database', 'how many X', 'check prod'".
+- Body loads on demand → may run longer, still scar-tissue-gated.
+- Nested AGENTS.md → only what contradicts or extends the root. Restating "follow good practices" → delete.
 
 ## Process
 
-1. Find all agent-facing files:
-   ```
-   AGENTS.md, CLAUDE.md, .cursor/rules/*, .opencode/skills/*, docs/conventions.md
-   ```
+1. Find agent-facing files: `AGENTS.md`, `CLAUDE.md`, `.rules`, `.cursor/rules/*`, `.agents/skills/*`, `opencode/command/*`, `docs/*.md`.
+2. Cost each: **lines × load frequency**. Always-loaded lines are expensive; on-demand lines are near-free.
+3. Score, verdict, cut.
+4. Check for orphans (files nothing references), duplicated rules across files, and paths that no longer exist. Stale pointers are worse than bloat — the agent acts on them.
 
-2. For each file, measure: **lines × frequency of loading = context cost**.
-   - AGENTS.md loads every session — every line is expensive
-   - docs/*.md loads on demand — lines there are cheap
+## Report
 
-3. Apply the test to each section. Cut aggressively.
+```
+FILE: path (lines: N, load: always|on-demand)
+Scores: [scar:_ poison:_ density:_ placement:_ output:_] = _/10
+Verdict: KEEP | REWRITE | CUT
+Cuts: <lines/sections removed>
+```
 
-4. If a file drops below ~5 useful lines → delete it entirely.
-
-5. If a file has signal buried in noise → extract the signal, delete the rest.
-
-6. After cutting, check: are there nested AGENTS.md files that duplicate the root?
-   - Subdirectory AGENTS.md should ONLY contain info that contradicts or extends the root
-   - If it's just restating "follow good practices" → delete it
-
-## Metrics
-
-Report at the end:
-- Files audited: N
-- Files deleted: N
-- Lines before: N
-- Lines after: N
-- Net reduction: N lines (X%)
-
-A good audit removes 60-90% of existing context. If you removed less than 50%, you weren't aggressive enough.
+Then totals: files audited, files deleted, lines before → after, percent reduction. A good audit removes 60–90% from failing files. Under 50% on a file scored ≤4 means you weren't aggressive enough.
