@@ -23,7 +23,7 @@ update() {
   sketchybar --set $NAME \
     icon="$ICON" \
     label="$LABEL" \
-    icon.color="$COLOR" \
+    icon.color=$FG \
     label.color="$COLOR" \
     icon.font="$FONT:Bold:18.0" \
     label.font="$FONT:Semibold:13.0"

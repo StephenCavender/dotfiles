@@ -9,7 +9,7 @@ config-version = 2
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
     'exec-and-forget sketchybar',
-    'exec-and-forget borders active_color=0xff97d1e9 inactive_color=0xff4e5663 width=5.0',
+    'exec-and-forget borders active_color=0xff97d1e9 inactive_color=0xff4e5663 width=5.0 style=square',
 ]
 
 # Start AeroSpace at login
@@ -44,8 +44,8 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = false
 
-# Notify Sketchybar about workspace change and update icons
-exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE && ~/.config/sketchybar/plugins/update_workspace_icons.sh']
+# Notify Sketchybar about workspace change
+exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE']
 
 # List of workspaces that should stay alive even when they contain no windows,
 # even when they are invisible.
@@ -76,7 +76,7 @@ on-mode-changed = []
     inner.vertical =   15
     outer.left =       15
     outer.bottom =     15
-    outer.top =        [{ monitor."Built-in Retina Display" = 30 }, 65]
+    outer.top =        [{ monitor."Built-in Retina Display" = 18 }, 50]  # bar height (35) + 15 gap; built-in already gets 32pt reserved by macOS for the notch, so only needs 18 more
     outer.right =      15
 
 # 'main' binding mode declaration

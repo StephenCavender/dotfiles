@@ -6,6 +6,6 @@ sketchybar --add item battery right \
   --set battery \
   update_freq=120 \
   icon.drawing=on \
-  padding_right=10 \
+  label.drawing=off \
   script="$PLUGIN_DIR/battery.sh" \
   --subscribe battery system_woke power_source_change

@@ -66,6 +66,15 @@ bind -r K resize-pane -U 5
 bind -r L resize-pane -R 5
 
 # ----------------------------------------
+# 3b. DEV LAYOUTS
+# ----------------------------------------
+# c/cx/cy shorthand -> opencode/claude/codex (mapped inside tdl itself, see
+# ~/.dotfiles/functions/tdl - doesn't touch the `c` project-jump function)
+bind D command-prompt -p "agent:" -I "opencode" "send-keys 'tdl %%' Enter"
+bind S send-keys "tds" Enter
+bind M command-prompt -p "agent:" -I "opencode" "send-keys 'tdlm %%' Enter"
+
+# ----------------------------------------
 # 4. COPY MODE (vi)
 # ----------------------------------------
 setw -g mode-keys vi

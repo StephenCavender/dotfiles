@@ -1,0 +1,26 @@
+#!/bin/zsh
+#
+# One tdl window per subdirectory of the current directory - great for
+# monorepos or a folder of separate project checkouts.
+# Usage: tdlm [agent] [second_agent]
+[[ -z $TMUX ]] && { echo "You must start tmux to use tdlm."; return 1; }
+
+local ai="${1:-opencode}"
+local ai2="$2"
+local base_dir="$PWD"
+local first=true
+
+tmux rename-session "$(basename "$base_dir" | tr '.:' '--')"
+
+for dir in "$base_dir"/*/; do
+  [[ -d $dir ]] || continue
+  local dirpath="${dir%/}"
+
+  if $first; then
+    tmux send-keys -t "$TMUX_PANE" "cd '$dirpath' && tdl $ai $ai2" C-m
+    first=false
+  else
+    local pane_id=$(tmux new-window -c "$dirpath" -P -F '#{pane_id}')
+    tmux send-keys -t "$pane_id" "tdl $ai $ai2" C-m
+  fi
+done

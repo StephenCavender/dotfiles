@@ -1,0 +1,19 @@
+#!/bin/zsh
+#
+# Tmux Dev Square: editor top-left, diff watch top-right, terminal bottom-left,
+# opencode bottom-right.
+# Usage: tds
+[[ -z $TMUX ]] && { echo "You must start tmux to use tds."; return 1; }
+
+local current_dir="${PWD}"
+local editor_pane="$TMUX_PANE" terminal_pane diff_pane opencode_pane
+
+tmux rename-window -t "$editor_pane" "$(basename "$current_dir")"
+terminal_pane=$(tmux split-window -v -p 50 -t "$editor_pane" -c "$current_dir" -P -F '#{pane_id}')
+diff_pane=$(tmux split-window -h -p 50 -t "$editor_pane" -c "$current_dir" -P -F '#{pane_id}')
+opencode_pane=$(tmux split-window -h -p 50 -t "$terminal_pane" -c "$current_dir" -P -F '#{pane_id}')
+
+tmux send-keys -t "$editor_pane" "nvim ." C-m
+tmux send-keys -t "$diff_pane" "git diff --stat -- ." C-m
+tmux send-keys -t "$opencode_pane" "opencode" C-m
+tmux select-pane -t "$editor_pane"

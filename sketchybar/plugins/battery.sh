@@ -15,23 +15,18 @@ FONT_SIZE=15
 case "${PERCENTAGE}" in
 [8-9][0-9] | 100)
   ICON="󱊣"
-  COLOR=$GREEN
   ;;
 [6-7][0-9])
   ICON="󱊢"
-  COLOR=$YELLOW
   ;;
 [3-5][0-9])
   ICON="󱊢"
-  COLOR=$ORANGE
   ;;
 [1-2][0-9])
   ICON="󱊡"
-  COLOR=$RED
   ;;
 *)
   ICON="󰂎"
-  COLOR=$RED
   ;;
 esac
 
@@ -39,23 +34,18 @@ if [[ "$CHARGING" != "" ]]; then
   case "${PERCENTAGE}" in
   9[0-9] | 100)
     ICON="󱊦"
-    COLOR=$GREEN
     ;;
   [6-8][0-9])
     ICON="󱊥"
-    COLOR=$YELLOW
     ;;
   [3-5][0-9])
     ICON="󱊥"
-    COLOR=$ORANGE
     ;;
   [1-2][0-9])
     ICON="󱊤"
-    COLOR=$RED
     ;;
   *)
     ICON="󰢟"
-    COLOR=$RED
     ;;
   esac
   FONT_SIZE=20
@@ -63,7 +53,5 @@ fi
 
 sketchybar --set "$NAME" \
   icon="$ICON" \
-  label="${PERCENTAGE}%" \
   icon.font="$FONT:Bold:$FONT_SIZE.0" \
-  icon.color=$COLOR \
-  label.color=$COLOR
+  icon.color=$FG

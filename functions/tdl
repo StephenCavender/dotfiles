@@ -1,0 +1,38 @@
+#!/bin/zsh
+#
+# Tmux Dev Layout: editor left, AI agent right, terminal bottom.
+# Usage: tdl [agent] [second_agent]
+#
+# Shorthand agent names (kept local to tdl - doesn't touch the `c` project-jump
+# function): c -> opencode, cx -> claude, cy -> codex. Anything else is run
+# as-is, so `tdl claude --permission-mode auto` also works.
+[[ -z $TMUX ]] && { echo "You must start tmux to use tdl."; return 1; }
+
+local current_dir="${PWD}"
+local ai="${1:-opencode}"
+local ai2="$2"
+local editor_pane="$TMUX_PANE" ai_pane ai2_pane
+
+case "$ai" in
+  c) ai="opencode" ;;
+  cx) ai="claude" ;;
+  cy) ai="codex" ;;
+esac
+case "$ai2" in
+  c) ai2="opencode" ;;
+  cx) ai2="claude" ;;
+  cy) ai2="codex" ;;
+esac
+
+tmux rename-window -t "$editor_pane" "$(basename "$current_dir")"
+tmux split-window -v -p 15 -t "$editor_pane" -c "$current_dir"
+ai_pane=$(tmux split-window -h -p 30 -t "$editor_pane" -c "$current_dir" -P -F '#{pane_id}')
+
+if [[ -n $ai2 ]]; then
+  ai2_pane=$(tmux split-window -v -t "$ai_pane" -c "$current_dir" -P -F '#{pane_id}')
+  tmux send-keys -t "$ai2_pane" "$ai2" C-m
+fi
+
+tmux send-keys -t "$ai_pane" "$ai" C-m
+tmux send-keys -t "$editor_pane" "nvim ." C-m
+tmux select-pane -t "$editor_pane"
