@@ -7,7 +7,7 @@ if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
     background.drawing=on \
     background.color=$FG \
     background.corner_radius=0 \
-    background.height=11
+    background.height=16
 else
   sketchybar --set $NAME \
     background.drawing=off

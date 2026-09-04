@@ -63,8 +63,8 @@ for monitor in $(aerospace list-monitors --format "%{monitor-appkit-nsscreen-scr
       drawing=on \
       icon="$sid" \
       icon.font="$FONT:Bold:18.0" \
-      icon.padding_left=0 \
-      icon.padding_right=0 \
+      icon.padding_left=2 \
+      icon.padding_right=3 \
       padding_left=8 \
       padding_right=8 \
       label.drawing=off \
