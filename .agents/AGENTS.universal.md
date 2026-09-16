@@ -1,43 +1,28 @@
-# Universal Rules
+# How I work
 
-Rules that apply to every project. Born from actual mistakes.
+Personal scope only. Rules true in every repo live in `cross-repo-policy.md` (imported below). Anything unique to a repo lives in that repo's `AGENTS.md`. Procedures are skills. Each instruction lives at the widest scope where it is true, and nowhere else.
 
-## Code Quality
+@~/.dotfiles/.agents/cross-repo-policy.md
 
-- Never suppress type errors (`as any`, `@ts-ignore`, `@ts-expect-error`)
-- Never leave empty catch blocks — handle or rethrow
-- Never delete failing tests to make a build pass
-- Fix bugs minimally — don't refactor while fixing
-- Before writing a new helper, grep for an existing one — extract shared logic instead of copy-pasting it across files
-- Name things for what they do, not how — a reader who hasn't seen the diff should understand the call site
+## Sessions
 
-## Agent Behavior
+- One task per session. A new task gets a new session, not a new prompt.
+- Clear between tasks, never compact. Compaction keeps the noise and drops the decisions. If a session must outlive a task, `/clear` first. Auto-compact stays off.
 
-- No emojis in code, comments, commit messages, or any written output unless the user explicitly asks
-- Read existing code for patterns before inventing new ones
-- Every rule in an AGENTS.md must come from an actual failure — no speculative rules
-- If a project has `docs/`, check it before asking
-- Apply the colleague test before acting on a vague request — if a new teammate with only this context would be confused, ask one clarifying question first
-- Ask if genuinely ambiguous — don't guess on architecture
-- When two approaches are equivalent, pick the simpler one
-- Match communication density to stakes — be terse for routine work, be explicit and unambiguous for security warnings, destructive operations, and irreversible actions
-- Stop after 3 failed attempts at the same fix — hand back to the human
+## Communication
 
-## Workflow
+- No emojis in code, comments, commits, or prose unless asked.
+- Terse by default: no preamble, pleasantries, or hedging. Technical terms exact, errors quoted verbatim, code untouched.
+- Match density to stakes: terse for routine work, explicit and unambiguous for security warnings, destructive operations, and irreversible actions.
+- Recommend, do not survey. When two approaches are equivalent, take the simpler one and say so.
+- Ship the lazy version and question the rest in the same reply: "Did X; Y covers it. Need full X? Say so." Never stall on something you can default.
+- Before multi-step work, restate what done looks like in 1-3 bullets and confirm before starting.
+- Colleague test: if a new teammate with only this context would be confused, ask one clarifying question first. Otherwise proceed. Genuine architectural ambiguity is the other case for asking.
+- Stop after 3 failed attempts at the same fix and hand back.
 
-- Write or update tests for any behavior change
-- Run linting/typecheck after edits — don't declare done with errors
-- Before multi-step work, restate what "done" looks like in 1-3 bullets — confirm with the user before starting
-- Specs live in `docs/specs/`, versioned with the code they describe
-- Commit messages: `feat|fix|chore|refactor(scope): message`, imperative mood, <72 chars, reference issue if one exists
-- Never commit secrets, tokens, or credentials
-- Never push to main/master directly
-- Never overwrite existing conventions without explicit approval
+## Working agreement
 
-## Ask First (pause and confirm)
-
-- Architecture decisions affecting multiple systems
-- Adding new dependencies
-- Deleting files or removing features
-- Changes that cross module boundaries
-- Choosing between two reasonable approaches with different tradeoffs
+- Fix bugs minimally. Do not refactor while fixing. Out-of-scope problems get a `TECH-DEBT` marker and a mention, never a fix in the same change.
+- Never overwrite an existing convention without explicit approval.
+- Ask first: architecture decisions spanning systems, new dependencies, deleting files or removing features, changes crossing module boundaries, choosing between approaches with different tradeoffs.
+- A rule enters a repo `AGENTS.md` only after an observed agent failure. Policy docs are exempt and say so at the top. When the same rule appears at two scopes, delete the narrower copy.
