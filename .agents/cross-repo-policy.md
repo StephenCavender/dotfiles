@@ -6,7 +6,7 @@ Review by: 2026-12-16.
 
 ## Small diffs
 
-- One reviewable concern per PR. One ticket = one PR. Never combine concerns.
+- One reviewable concern per PR. One ticket = one PR, unless the ticket's `SPEC.md` `## Plan` names reviewable seams; then one PR per plan row, in dependency order. Never combine concerns.
 - Target under 300 changed lines, excluding lockfiles and generated code.
 - Above 500 changed lines, stop and split. Do not open the PR; propose the split first. If the ceiling is visible before code is written, split then. Mid-implementation discovery is the expensive case.
 - Roughly 15 files touched. More than 3 new files needs a flag before creating them.
