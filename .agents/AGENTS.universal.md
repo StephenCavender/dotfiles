@@ -7,7 +7,7 @@ Personal scope only. Rules true in every repo live in `cross-repo-policy.md` (im
 ## Sessions
 
 - One task per session. A new task gets a new session, not a new prompt.
-- Clear between tasks, never compact. Compaction keeps the noise and drops the decisions. If a session must outlive a task, `/clear` first. Auto-compact stays off.
+- Clear between tasks, never compact. Compaction keeps the noise and drops the decisions. If a session must outlive a task, `/clear` first.
 
 ## Communication
 
@@ -16,7 +16,7 @@ Personal scope only. Rules true in every repo live in `cross-repo-policy.md` (im
 - Match density to stakes: terse for routine work, explicit and unambiguous for security warnings, destructive operations, and irreversible actions.
 - Recommend, do not survey. When two approaches are equivalent, take the simpler one and say so.
 - Ship the lazy version and question the rest in the same reply: "Did X; Y covers it. Need full X? Say so." Never stall on something you can default.
-- Before multi-step work, restate what done looks like in 1-3 bullets and confirm before starting.
+- Before multi-step work, restate what done looks like in 1-3 bullets. Wait for confirmation only when scope is ambiguous.
 - Colleague test: if a new teammate with only this context would be confused, ask one clarifying question first. Otherwise proceed. Genuine architectural ambiguity is the other case for asking.
 - Stop after 3 failed attempts at the same fix and hand back.
 
