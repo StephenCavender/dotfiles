@@ -7,30 +7,35 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "format_on_save": "on",
+  "edit_predictions": {
+    "provider": "copilot",
+  },
+  "cli_default_open_behavior": "new_window",
+  "project_panel": {
+    "dock": "left",
+  },
   "show_edit_predictions": false,
   "agent": {
     "default_profile": "write",
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-3.7-sonnet"
-    }
-  },
-  "features": {
-    "edit_prediction_provider": "copilot"
+      "model": "claude-3.7-sonnet",
+    },
   },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "soft_wrap": "editor_width",
-  "ui_font_size": 12,
-  "buffer_font_size": 12,
+  "ui_font_size": 14,
+  "buffer_font_size": 14,
   "ui_font_family": "Hack Nerd Font Mono",
   "buffer_font_family": "Hack Nerd Font Mono",
   "tab_size": 2,
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Dracula"
-  }
+    "dark": "Dracula",
+  },
 }
