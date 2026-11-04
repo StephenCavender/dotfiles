@@ -30,6 +30,7 @@
         #
         # Setting to git 2.0 default to suppress warning message
         default = simple
+        autoSetupRemote = true   # Automatically set upstream branch on push
 [credential]
 	helper = osxkeychain
 [diff "spaceman-diff"]
@@ -65,3 +66,15 @@
 
 [merge]
     conflictStyle = zdiff3
+
+# From Omarchy/omadots
+[diff]
+    algorithm = histogram    # Clearer diffs on moved/edited lines
+    colorMoved = plain       # Highlight moved blocks in diffs
+[branch]
+    sort = -committerdate    # Most recent branches first
+[tag]
+    sort = -version:refname  # Sort version numbers as expected
+[rerere]
+    enabled = true           # Record and reuse conflict resolutions
+    autoupdate = true
