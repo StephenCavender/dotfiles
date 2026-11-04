@@ -10,9 +10,7 @@ set -e
 # Universal rules are NOT wired here — .agents/install.sh owns that for every
 # harness, so the symlink logic lives in one place instead of four.
 #
-# Does NOT install pi itself. Run separately when ready (official installer —
-# wraps `npm install -g --ignore-scripts @earendil-works/pi-coding-agent`):
-#   curl -fsSL https://pi.dev/install.sh | sh
+# Installs pi itself via the official installer when it is missing (see bottom).
 
 PI_DIR="$(cd "$(dirname "$0")" && pwd)"
 CONFIG_DIR="$HOME/.pi/agent"
@@ -28,11 +26,16 @@ echo "   Settings: $CONFIG_DIR/settings.json -> dotfiles/pi/settings.json"
 echo "   Skills:   .agents/skills (via settings skills[])"
 echo "   Rules:    handled by .agents/install.sh (shared)"
 
-# pi ships via its own installer, not this repo — only nudge when it is absent.
+# pi ships via its own installer (managed install: own dir, independent of the
+# mise node version). Piped through cat so stdout isn't a TTY and the
+# installer skips its "Start pi now?" prompt mid-install.
 if command -v pi > /dev/null 2>&1; then
   echo "   Binary:   $(command -v pi)"
 else
-  echo ""
-  echo "   pi not installed. To install:"
-  echo "     curl -fsSL https://pi.dev/install.sh | sh"
+  echo "› Installing pi"
+  if command -v mise > /dev/null 2>&1; then
+    curl -fsSL https://pi.dev/install.sh | mise exec node@lts -- sh | cat
+  else
+    curl -fsSL https://pi.dev/install.sh | sh | cat
+  fi
 fi
