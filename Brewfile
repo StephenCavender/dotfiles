@@ -3,6 +3,7 @@ tap "felixkratz/formulae"
 tap "dlvhdr/formulae"
 
 brew "bat"
+brew "btop"
 brew "curl"
 brew "webp"
 brew "dlvhdr/formulae/diffnav"
