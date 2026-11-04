@@ -130,7 +130,7 @@ set -g window-active-style 'bg=default'
 # ----------------------------------------
 # Division of labour - the bar only shows what nothing else can:
 #   pane-tree sidebar -> sessions / windows / panes / agent badges
-#   pure prompt       -> git branch + dirty for the pane you type in
+#   starship prompt   -> git branch + dirty for the pane you type in
 #   sketchybar        -> clock, battery, cpu, mem, wifi, volume, agent alerts
 #   this bar          -> tmux modal state, and git for panes running an agent
 set -g status on
@@ -151,7 +151,7 @@ set -g status-left "\
 #{?window_zoomed_flag,#[fg=#{@c_bg}#,bg=#{@c_orange}#,bold] ZOOM #[default],}\
 #{?pane_synchronized,#[fg=#{@c_bg}#,bg=#{@c_red}#,bold] SYNC #[default],}"
 
-# Git state for agent panes only - pure already covers the pane you type in.
+# Git state for agent panes only - starship already covers the pane you type in.
 # Must be set before the tpm line: tmux-continuum appends its save hook to
 # whatever status-right holds when it loads.
 set -g status-right "#(~/.dotfiles/tmux/scripts/agent-git.sh '#{session_name}')"
