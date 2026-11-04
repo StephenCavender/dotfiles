@@ -55,16 +55,31 @@ if [ -f "homebrew/install.sh" ]; then
     bash "homebrew/install.sh"
 fi
 
-# Run all remaining installers, collecting failures
+# Run all remaining installers, collecting failures.
+# Order matters for a few: mise provides node for pi/ and npm/, and
+# supply-chain sets the npm/pip/bun release-age cooldown before anything
+# installs packages. Those run first; the rest run in sorted order so runs
+# are reproducible.
+FIRST=(mise supply-chain)
 failed=()
 
-while IFS= read -r -d '' installer; do
-    echo "› ${installer}"
-    if ! bash "${installer}"; then
-        echo "  failed: ${installer}" >&2
-        failed+=("${installer}")
+run_installer() {
+    echo "› $1"
+    if ! bash "$1"; then
+        echo "  failed: $1" >&2
+        failed+=("$1")
     fi
-done < <(find . -mindepth 2 -name install.sh ! -path './homebrew/*' -print0)
+}
+
+for dir in "${FIRST[@]}"; do
+    [ -f "./$dir/install.sh" ] && run_installer "./$dir/install.sh"
+done
+
+while IFS= read -r -d '' installer; do
+    dir="${installer#./}"; dir="${dir%%/*}"
+    [[ " homebrew ${FIRST[*]} " == *" $dir "* ]] && continue
+    run_installer "$installer"
+done < <(find . -mindepth 2 -name install.sh -print0 | sort -z)
 
 # Summary
 if [ ${#failed[@]} -eq 0 ]; then

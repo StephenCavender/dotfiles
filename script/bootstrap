@@ -181,7 +181,6 @@ setup_shell () {
 
 setup_gitconfig
 install_dotfiles
-setup_shell
 
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
@@ -194,6 +193,9 @@ then
     fail "error installing dependencies"
   fi
 fi
+
+# After bin/dot: Homebrew zsh doesn't exist on a fresh machine until then
+setup_shell
 
 echo ''
 echo '  All installed!'
