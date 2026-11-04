@@ -25,6 +25,10 @@
 #
 # Project-level config beats user-level in every one of these tools. A global
 # cooldown is not a backstop for a repo that sets its own value.
+#
+# Known bypass: pi's official installer (pi/install.sh) passes
+# --min-release-age=0. pi publishes npm-shrinkwrap.json, so its dependency tree
+# is pinned; only the pi package itself skips the cooldown. Accepted tradeoff.
 
 set -e
 
