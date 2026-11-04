@@ -1,3 +1,7 @@
 {
-  "skills": ["~/.dotfiles/.agents/skills"]
+  "skills": [
+    "~/.dotfiles/.agents/skills"
+  ],
+  "defaultProvider": "github-copilot",
+  "defaultModel": "claude-opus-5.5"
 }
