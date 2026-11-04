@@ -1,0 +1,10 @@
+[tools]
+node = "lts"
+python = "latest"
+
+[settings]
+disable_backends = ["aqua"]
+
+[settings.status]
+show_tools = false
+missing_tools = "never"
