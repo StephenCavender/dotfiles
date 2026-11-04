@@ -18,6 +18,13 @@ cd ~/.dotfiles
 ./script/bootstrap
 ```
 
+Manual steps after bootstrap:
+
+- Sign in to the App Store before bootstrap so `mas` entries in the Brewfile install
+- `gh auth login`, then re-run `gh/install.sh` for gh extensions
+- Rex Beta: download manually (not on Homebrew)
+- Work machine only: `./script/install --work` to add Brewfile.work
+
 ## Features
 
 ### AI Agent Toolkit

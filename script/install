@@ -30,6 +30,13 @@ DOTFILES_ROOT="$(pwd -P)"
 # ZSH is used by some installers (e.g. newsboat) as the dotfiles root alias
 export ZSH="${ZSH:-$DOTFILES_ROOT}"
 
+# Homebrew 7 refuses to load formulae/casks from untrusted third-party taps.
+# Tap + trust up front so `brew bundle` can install from them.
+TRUSTED_TAPS=(nikitabobko/tap felixkratz/formulae dlvhdr/formulae)
+echo "› brew trust ${TRUSTED_TAPS[*]}"
+for tap in "${TRUSTED_TAPS[@]}"; do brew tap "$tap"; done
+brew trust --tap "${TRUSTED_TAPS[@]}"
+
 echo "› brew bundle"
 brew bundle
 
