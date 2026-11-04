@@ -63,6 +63,12 @@ defaults write -g AppleReduceDesktopTinting -bool false
 # Remove widgets from the desktop.
 defaults write com.apple.WindowManager StandardHideWidgets -bool true
 
+# Don't click the wallpaper to reveal the desktop (Omarchy/omamac).
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
+
+# Don't rearrange Spaces by most recent use; keeps AeroSpace workspaces stable.
+defaults write com.apple.dock mru-spaces -bool false
+
 # Automatically hide the dock.
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-delay -float 0
@@ -76,3 +82,6 @@ osascript -e 'tell application "System Events" to delete every login item'
 
 # Disable macOS startup sound.
 sudo nvram StartupMute=%01
+
+# Suppress the "Last login" banner in new terminals.
+touch "$HOME/.hushlogin"
