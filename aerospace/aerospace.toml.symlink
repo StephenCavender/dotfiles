@@ -9,7 +9,7 @@ config-version = 2
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
     'exec-and-forget sketchybar',
-    'exec-and-forget borders active_color=0xff97d1e9 inactive_color=0xff4e5663 width=5.0 style=square',
+    'exec-and-forget borders active_color=0xff97d1e9 inactive_color=0xff4e5663 width=5.0 style=round',
 ]
 
 # Start AeroSpace at login
