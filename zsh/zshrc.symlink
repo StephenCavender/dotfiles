@@ -72,20 +72,6 @@ _cache_init() {
   source $cache
 }
 
-(( $+commands[zoxide] )) && _cache_init "${commands[zoxide]}" zoxide init zsh
-
-# atuin: SQLite-backed fuzzy history search (Ctrl-R). Keep the up-arrow bound to
-# up-line-or-beginning-search above by disabling atuin's up-arrow capture.
-(( $+commands[atuin] )) && _cache_init "${commands[atuin]}" atuin init zsh --disable-up-arrow
-
-# thefuck is slow to initialize - lazy load it
-if (( $+commands[thefuck] )); then
-  fuck() {
-    eval "$(thefuck --alias)"
-    fuck "$@"
-  }
-fi
-
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
 

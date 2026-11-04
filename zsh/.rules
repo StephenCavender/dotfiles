@@ -14,8 +14,7 @@ zshenv → zshrc:
 
 ## Notes
 
-- `thefuck` is lazy-loaded — bootstraps on first call. Don't eager-load it.
-- `fzf`, `zoxide`, `mise` are conditionally activated at end of `zshrc.symlink`
+- `fzf`, `mise` are conditionally activated at end of `zshrc.symlink`
 - Functions in `functions/` autoloaded via `autoload -U $ZSH/functions/*(:t)` in `config.zsh`
 - `$PROJECTS` = `~/code` (used by `c` function for directory jumping)
 - `~/.localrc` = private/machine-specific config (never committed)
