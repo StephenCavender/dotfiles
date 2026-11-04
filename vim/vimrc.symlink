@@ -7,7 +7,7 @@ endif
 
 " Plugins
 call plug#begin('~/.vim/plugged')
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'ghifarit53/tokyonight-vim'
 call plug#end()
 
 syntax on
@@ -15,4 +15,12 @@ syntax on
 " Wrap gitcommit file types at the appropriate length
 filetype indent plugin on
 
-colorscheme dracula
+" Tokyo Night (matches ghostty, nvim, tmux). Truecolor; the t_8f/t_8b codes
+" make it work inside tmux.
+if has('termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+let g:tokyonight_style = 'night'
+silent! colorscheme tokyonight

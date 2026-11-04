@@ -43,8 +43,8 @@ Skills and universal rules live in a harness-neutral `.agents/` directory so mul
 
 ### Editor & Terminal
 
-- **Neovim** — LazyVim distribution, tracked in-repo with autocmds, transparent Dracula theme
-- **Ghostty** — terminal emulator config with Challenger Deep theme, custom padding and window decorations
+- **Neovim** — LazyVim distribution, tracked in-repo with autocmds, transparent Tokyo Night theme
+- **Ghostty** — terminal emulator config with TokyoNight Night theme, JetBrains Mono, custom padding and window decorations
 - **Tmux** — transparent background, sensible defaults
 - **Vim & Zed** — additional editor configs
 

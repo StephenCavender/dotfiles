@@ -1,17 +1,14 @@
 browser "open %u"
 
-# Dark theme based on Dracula color scheme for newsboat.
-#
-# In order to use this color scheme, you must first configure
-# your terminal emulator to use the Dracula palette.
-# See <https://draculatheme.com/> for more information.
+# Tokyo Night theme. Uses the terminal's ANSI colors, so it follows
+# ghostty's TokyoNight Night palette (color4 blue, color6 cyan, color8 muted).
 
 color background default default
-color listnormal color255 default
-color listfocus color238 color255 standout
-color listnormal_unread color47 default
-color listfocus_unread color238 color47 standout
-color info color141 color236
+color listnormal default default
+color listfocus color0 color4 bold
+color listnormal_unread color6 default bold
+color listfocus_unread color0 color6 bold
+color info color4 color0
 
 # highlights
 highlight all "---.*---" yellow

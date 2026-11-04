@@ -1,0 +1,44 @@
+###############################################################################
+# Tokyo Night theme for NeoMutt.
+#
+# Uses the terminal's 16 ANSI colors, so it follows ghostty's TokyoNight Night
+# palette: color1 red, color2 green, color3 yellow, color4 blue, color5 magenta,
+# color6 cyan, color8 muted, color15 bright foreground.
+
+# general ------------ foreground ---- background -----------------------------
+color error		color0		color1
+color indicator		color15		color8
+color markers		color1		default
+color message		default		default
+color normal		default		default
+color prompt		default		default
+color search		color2		default
+color status		color4		color0
+color tilde		color8		default
+color tree		color5		default
+
+# message index ------ foreground ---- background -----------------------------
+color index		color1		default		~D # deleted messages
+color index		color2		default		~F # flagged messages
+color index		color6		default		~N # new messages
+color index		color5		default		~Q # messages which have been replied to
+color index		color3		default		~T # tagged messages
+color index		color4		default		~v # messages part of a collapsed thread
+
+# message headers ---- foreground ---- background -----------------------------
+color hdrdefault	color6		default
+color header		color15		default		^Subject:.*
+
+# message body ------- foreground ---- background -----------------------------
+color attachment	color3		default
+color body		color15		default		[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+               # email addresses
+color body		color3		default		(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+        # URLs
+color body		color15		default		(^|[[:space:]])\\*[^[:space:]]+\\*([[:space:]]|$) # *bold* text
+color body		color15		default		(^|[[:space:]])_[^[:space:]]+_([[:space:]]|$)     # _underlined_ text
+color body		color15		default		(^|[[:space:]])/[^[:space:]]+/([[:space:]]|$)     # /italic/ text
+color quoted		color8		default
+color quoted1		color6		default
+color quoted2		color2		default
+color quoted3		color3		default
+color quoted4		color5		default
+color signature		color5		default

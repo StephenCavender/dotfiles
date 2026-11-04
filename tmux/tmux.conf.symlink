@@ -3,22 +3,23 @@
 # ============================================
 
 # ----------------------------------------
-# 0. PALETTE (Dracula - matches ghostty, nvim, sketchybar)
+# 0. PALETTE (Tokyo Night - matches ghostty, nvim, sketchybar, borders)
 # ----------------------------------------
 # Single source of truth for tmux colors. Referenced as #{@c_*} in formats.
 # Note: tmux-pane-tree options below must stay literal hex - its Python UI
 # reads raw option values and cannot expand tmux formats.
-set -g @c_bg      "#282a36"
-set -g @c_fg      "#f8f8f2"
-set -g @c_line    "#44475a"
-set -g @c_comment "#6272a4"
-set -g @c_cyan    "#8be9fd"
-set -g @c_green   "#50fa7b"
-set -g @c_orange  "#ffb86c"
-set -g @c_pink    "#ff79c6"
-set -g @c_purple  "#bd93f9"
-set -g @c_red     "#ff5555"
-set -g @c_yellow  "#f1fa8c"
+# Names kept from the old Dracula palette; @c_purple is the primary accent.
+set -g @c_bg      "#1a1b26"
+set -g @c_fg      "#a9b1d6"
+set -g @c_line    "#414868"
+set -g @c_comment "#565f89"
+set -g @c_cyan    "#7dcfff"
+set -g @c_green   "#9ece6a"
+set -g @c_orange  "#ff9e64"
+set -g @c_pink    "#bb9af7"
+set -g @c_purple  "#7aa2f7"
+set -g @c_red     "#f7768e"
+set -g @c_yellow  "#e0af68"
 
 # ----------------------------------------
 # 1. TERMINAL & COMPATIBILITY
@@ -157,9 +158,9 @@ set -g @resurrect-hook-post-restore-all 'bash ~/.dotfiles/tmux/scripts/kill-stal
 
 # Pane Tree
 set -g @tmux_pane_tree_install_agent_hooks 1
-set -g @tmux_pane_tree_color_session '#BD93F9'
-set -g @tmux_pane_tree_color_window '#FF79C6'
-set -g @tmux_pane_tree_color_pane '#8BE9FD'
+set -g @tmux_pane_tree_color_session '#7AA2F7'
+set -g @tmux_pane_tree_color_window '#BB9AF7'
+set -g @tmux_pane_tree_color_pane '#7DCFFF'
 set -g @tmux_pane_tree_session_order "dev,ops,scratch,comms"
 
 # ----------------------------------------

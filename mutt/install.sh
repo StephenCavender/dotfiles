@@ -16,7 +16,9 @@ done
 mkdir -p "$HOME/.mutt/hcache"
 mkdir -p "$HOME/.mutt/mcache"
 
-ln -sf "$DOTFILES_ROOT/mutt/dracula.muttrc" "$HOME/.mutt/dracula.muttrc"
+# Remove the link to the old Dracula theme, which no longer exists in the repo
+rm -f "$HOME/.mutt/dracula.muttrc"
+ln -sf "$DOTFILES_ROOT/mutt/tokyonight.muttrc" "$HOME/.mutt/tokyonight.muttrc"
 
 # Create a minimal mailcap if one doesn't exist.
 # text/html entry renders HTML email via bat (fallback: cat).

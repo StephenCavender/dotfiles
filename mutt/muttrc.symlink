@@ -90,7 +90,7 @@ set editor       = "nvim"
 ###############
 # Theme
 #
-source ~/.mutt/dracula.muttrc
+source ~/.mutt/tokyonight.muttrc
 
 ###############
 # Sidebar

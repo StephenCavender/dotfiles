@@ -8,6 +8,9 @@
 // command palette
 {
   "format_on_save": "on",
+  "auto_install_extensions": {
+    "tokyo-night": true,
+  },
   "edit_predictions": {
     "provider": "copilot",
   },
@@ -30,12 +33,12 @@
   "soft_wrap": "editor_width",
   "ui_font_size": 14,
   "buffer_font_size": 14,
-  "ui_font_family": "Hack Nerd Font Mono",
-  "buffer_font_family": "Hack Nerd Font Mono",
+  "ui_font_family": "JetBrainsMono Nerd Font Mono",
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "tab_size": 2,
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Dracula",
+    "dark": "Tokyo Night",
   },
 }

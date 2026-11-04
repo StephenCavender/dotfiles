@@ -1,56 +1,57 @@
 #!/bin/bash
 
-# Dracula Color Scheme for Sketchybar
-# https://draculatheme.com/contribute
+# Tokyo Night Color Scheme for Sketchybar (matches Omarchy's tokyo-night theme)
+# https://github.com/folke/tokyonight.nvim
+# Variable names kept from the previous Dracula palette so items/plugins are unchanged.
 
 # Font configuration
-export FONT="Hack Nerd Font Mono"
+export FONT="JetBrainsMono Nerd Font Mono"
 
 # ============================================
-# Dracula Official Color Palette
+# Tokyo Night Palette
 # ============================================
 
 # Base colors
-export BG=0xff282a36              # Background
-export FG=0xfff8f8f2              # Foreground
-export CURRENT_LINE=0xff44475a    # Current Line
-export COMMENT=0xff6272a4         # Comment
-export SELECTION=0xff44475a       # Selection
+export BG=0xff1a1b26              # Background
+export FG=0xffa9b1d6              # Foreground
+export CURRENT_LINE=0xff292e42    # Selection / current line
+export COMMENT=0xff565f89         # Comment
+export SELECTION=0xff292e42       # Selection
 
 # Accent colors
-export CYAN=0xff8be9fd            # Cyan
-export GREEN=0xff50fa7b           # Green
-export ORANGE=0xffffb86c          # Orange
-export PINK=0xffff79c6            # Pink
-export PURPLE=0xffbd93f9          # Purple (primary accent)
-export RED=0xffff5555             # Red
-export YELLOW=0xfff1fa8c          # Yellow
+export CYAN=0xff7dcfff            # Cyan
+export GREEN=0xff9ece6a           # Green
+export ORANGE=0xffff9e64          # Orange
+export PINK=0xfff7768e            # Pink (Tokyo Night red-pink)
+export PURPLE=0xff7aa2f7          # Primary accent (Tokyo Night blue)
+export RED=0xfff7768e             # Red
+export YELLOW=0xffe0af68          # Yellow
 
 # ============================================
 # Transparency Variants
 # ============================================
 
 # Background with transparency
-export BG_80=0xcc282a36           # 80% opacity
-export BG_60=0x99282a36           # 60% opacity
-export BG_40=0x66282a36           # 40% opacity
-export BG_20=0x33282a36           # 20% opacity
+export BG_80=0xcc1a1b26           # 80% opacity
+export BG_60=0x991a1b26           # 60% opacity
+export BG_40=0x661a1b26           # 40% opacity
+export BG_20=0x331a1b26           # 20% opacity
 
-# Purple with transparency
-export PURPLE_80=0xccbd93f9       # 80% opacity
-export PURPLE_60=0x99bd93f9       # 60% opacity
-export PURPLE_40=0x66bd93f9       # 40% opacity
-export PURPLE_20=0x33bd93f9       # 20% opacity
+# Accent with transparency
+export PURPLE_80=0xcc7aa2f7       # 80% opacity
+export PURPLE_60=0x997aa2f7       # 60% opacity
+export PURPLE_40=0x667aa2f7       # 40% opacity
+export PURPLE_20=0x337aa2f7       # 20% opacity
 
 # Pink with transparency
-export PINK_80=0xccff79c6         # 80% opacity
-export PINK_60=0x99ff79c6         # 60% opacity
-export PINK_40=0x66ff79c6         # 40% opacity
+export PINK_80=0xccf7768e         # 80% opacity
+export PINK_60=0x99f7768e         # 60% opacity
+export PINK_40=0x66f7768e         # 40% opacity
 
 # Cyan with transparency
-export CYAN_80=0xcc8be9fd         # 80% opacity
-export CYAN_60=0x998be9fd         # 60% opacity
-export CYAN_40=0x668be9fd         # 40% opacity
+export CYAN_80=0xcc7dcfff         # 80% opacity
+export CYAN_60=0x997dcfff         # 60% opacity
+export CYAN_40=0x667dcfff         # 40% opacity
 
 # Transparent
 export TRANSPARENT=0x00000000
