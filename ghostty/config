@@ -7,7 +7,8 @@ theme = TokyoNight Night
 
 # Shell
 shell-integration = zsh
-shell-integration-features = no-cursor
+# ssh-env: forward TERM/terminfo over ssh (Omarchy)
+shell-integration-features = no-cursor,ssh-env
 
 # Window
 window-decoration = none
@@ -33,3 +34,14 @@ clipboard-paste-protection = true
 
 # Close without confirmation
 confirm-close-surface = false
+
+# Keys (Omarchy)
+# Send Shift+Enter as CSI-u so TUIs can tell it from Enter.
+keybind = shift+enter=csi:13;2u
+# Legacy encoding sends Alt+Shift+Enter as Alt+Enter; CSI-u lets tmux match M-S-Enter.
+keybind = alt+shift+enter=csi:13;4u
+
+# Quake console, Omarchy's SUPER+grave (alt is the WM modifier here).
+# global: needs Accessibility permission for Ghostty.
+keybind = global:alt+grave_accent=toggle_quick_terminal
+quick-terminal-position = top
