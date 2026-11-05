@@ -28,6 +28,11 @@ chflags nohidden ~/Library
 
 # Set a really fast key repeat.
 defaults write NSGlobalDomain KeyRepeat -int 1
+# Short delay before repeat starts (omamac).
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+
+# 24-hour clock.
+defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
 
 # Set the Finder prefs for showing a few different volumes on the Desktop.
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
