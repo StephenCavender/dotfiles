@@ -10,7 +10,7 @@ if [ "$PERCENTAGE" = "" ]; then
   exit 0
 fi
 
-FONT_SIZE=15
+FONT_SIZE=18
 
 case "${PERCENTAGE}" in
 [8-9][0-9] | 100)
@@ -48,7 +48,7 @@ if [[ "$CHARGING" != "" ]]; then
     ICON="󰢟"
     ;;
   esac
-  FONT_SIZE=20
+  FONT_SIZE=22
 fi
 
 sketchybar --set "$NAME" \

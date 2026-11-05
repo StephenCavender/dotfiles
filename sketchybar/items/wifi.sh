@@ -4,6 +4,8 @@ source "$CONFIG_DIR/scripts/config.sh"
 
 wifi=(
   label.width=0
+  padding_left=6
+  padding_right=6
   icon=󰖪
   label.color=$COMMENT
   script="$CONFIG_DIR/plugins/wifi.sh"

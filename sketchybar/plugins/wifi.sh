@@ -25,7 +25,7 @@ update() {
     label="$LABEL" \
     icon.color=$FG \
     label.color="$COLOR" \
-    icon.font="$FONT:Bold:18.0" \
+    icon.font="$FONT:Bold:21.0" \
     label.font="$FONT:Semibold:13.0"
 }
 

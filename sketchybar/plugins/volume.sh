@@ -22,6 +22,6 @@ if [ "$SENDER" = "volume_change" ]; then
 
   sketchybar --set "$NAME" \
     icon="$ICON" \
-    icon.font="$FONT:Bold:20.0" \
+    icon.font="$FONT:Bold:22.0" \
     icon.color=$FG
 fi
