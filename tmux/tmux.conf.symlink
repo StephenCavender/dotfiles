@@ -45,6 +45,8 @@ set -g focus-events on
 set -g status-keys vi
 set -g allow-rename off
 set -g automatic-rename off
+# Killing the last window of a session switches to another session instead of detaching (Omarchy)
+set -g detach-on-destroy off
 
 setw -g monitor-activity on
 set -g visual-activity off
@@ -72,6 +74,15 @@ bind '%' split-window -h -c "#{pane_current_path}"
 # owns alt-enter (new terminal) and alt-shift-* before tmux sees them.
 bind h split-window -v -c "#{pane_current_path}"
 bind v split-window -h -c "#{pane_current_path}"
+
+# Omarchy window/session keys. x stays tmux's confirmed kill-pane; k confirms
+# too (same reason M-Escape is skipped). K stays resize, so no kill-session key.
+bind c new-window -c "#{pane_current_path}"
+bind k confirm-before -p "kill-window #W? (y/n)" kill-window
+bind R command-prompt -I "#S" "rename-session -- '%%'"
+bind C new-session -c "#{pane_current_path}"
+bind P switch-client -p
+bind N switch-client -n
 
 # Omarchy pane navigation / resize without prefix
 bind -n C-M-Left select-pane -L
