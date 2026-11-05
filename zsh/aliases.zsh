@@ -54,3 +54,23 @@ fcda() {
   local dir
   dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
 }
+
+# Omarchy/omadots
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+alias eff='$EDITOR "$(ff)"'
+
+# nvim, defaulting to the current directory
+n() { if [ "$#" -eq 0 ]; then command nvim . ; else command nvim "$@"; fi; }
+
+alias t='tmux attach || tmux new -s Work'
+
+# Agents. `c` stays the project jump; opencode is reached via tdl/ic.
+alias cx='claude'
+alias cy='codex'
+alias ic='tdl c'
+alias ix='tdl cx'
+alias icx='tdl c cx'

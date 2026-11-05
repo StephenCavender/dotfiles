@@ -6,6 +6,8 @@ then
   alias ll='eza -l --git --icons=auto --time-style=relative'
   alias la='eza -la --git --icons=auto'
   alias lt='eza --tree --level=2 --git-ignore --icons=auto'
+  alias lsa='ls -a'
+  alias lta='lt -a'
   alias lr='eza -l --sort=modified --icons=auto --time-style=relative'
   alias lts='eza -lh --total-size --icons=auto'
 fi
