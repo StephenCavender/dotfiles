@@ -72,9 +72,6 @@ _cache_init() {
   source $cache
 }
 
-# opencode
-export PATH="$HOME/.opencode/bin:$PATH"
-
 # zprof  # Uncomment with above to see timing
 (( $+commands[mise] )) && _cache_init "${commands[mise]}" mise activate zsh
 

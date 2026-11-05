@@ -1,9 +1,12 @@
 [tools]
 node = "lts"
 python = "latest"
+ruby = "latest"
 
 [settings]
 disable_backends = ["aqua"]
+# Honor .ruby-version files (what rbenv used to do)
+idiomatic_version_file_enable_tools = ["ruby"]
 
 [settings.status]
 show_tools = false
