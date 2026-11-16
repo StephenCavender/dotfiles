@@ -224,3 +224,18 @@ on-mode-changed = []
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
 
+
+# App -> workspace rules. Laptop-screen workspaces (A/X/Z) hold comms so the
+# external monitor (1-7) stays for terminal/browser work.
+[[on-window-detected]]
+    if.app-id = 'com.tinyspeck.slackmacgap'
+    run = 'move-node-to-workspace A'
+
+[[on-window-detected]]
+    if.app-id = 'com.google.Chrome'
+    run = 'move-node-to-workspace X'
+
+# Zoom spawns many small windows (toolbars, share bars, popups); float them all.
+[[on-window-detected]]
+    if.app-id = 'us.zoom.xos'
+    run = ['layout floating', 'move-node-to-workspace Z']
