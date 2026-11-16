@@ -66,13 +66,18 @@ command -v fzf &>/dev/null && source <(fzf --zsh)
 _cache_init() {
   local bin=$1 cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/${1:t}.zsh"
   mkdir -p "${cache:h}"
-  if [[ ! -f $cache || $bin -nt $cache ]]; then
-    "${@}" > $cache
+  # -s: an empty cache (failed generation) would otherwise stick forever,
+  # since -nt compares against the binary's old build mtime.
+  if [[ ! -s $cache || $bin -nt $cache ]]; then
+    "${@[2,-1]}" > $cache.tmp && [[ -s $cache.tmp ]] && mv $cache.tmp $cache
+    rm -f $cache.tmp
   fi
   source $cache
 }
 
 # zprof  # Uncomment with above to see timing
 (( $+commands[mise] )) && _cache_init "${commands[mise]}" mise activate zsh
+# zoxide (Omarchy): z/zi, and feeds the frecency lookup in functions/c
+(( $+commands[zoxide] )) && _cache_init "${commands[zoxide]}" zoxide init zsh
 
 # pi lives in its managed install (~/.local/bin/pi, see pi/install.sh); no node path needed.

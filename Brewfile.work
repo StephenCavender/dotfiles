@@ -6,6 +6,7 @@ brew "docker-credential-helper"
 brew "googleworkspace-cli"
 brew "helm"
 brew "kubernetes-cli"
+brew "lazydocker"
 brew "libpq" # keg-only; psql on PATH via system/_path.zsh
 brew "pgformatter"
 brew "pre-commit"

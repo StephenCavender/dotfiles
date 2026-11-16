@@ -61,6 +61,21 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+
+# cd through zoxide (Omarchy): real paths cd normally, anything else is a
+# frecency jump. Completion is wired in zsh/completion.zsh.
+zd() {
+  if [ $# -eq 0 ]; then
+    builtin cd ~
+  elif [ -d "$1" ]; then
+    builtin cd "$1"
+  else
+    z "$@" && pwd || echo "Error: Directory not found"
+  fi
+}
+# Interactive only: ~/.zshenv sources this file for zsh scripts too, where a
+# missing dir must fail rather than frecency-jump.
+[[ -o interactive ]] && alias cd='zd'
 alias eff='$EDITOR "$(ff)"'
 
 # nvim, defaulting to the current directory
