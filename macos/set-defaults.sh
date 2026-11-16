@@ -85,6 +85,9 @@ defaults write com.apple.dock persistent-apps -array
 # Disable default apps from launching at startup.
 osascript -e 'tell application "System Events" to delete every login item'
 
+# Xcode: Vim key bindings (Settings > Text Editing > Editing > Vim Mode).
+defaults write com.apple.dt.Xcode KeyBindingsMode -string Vi
+
 # Disable macOS startup sound.
 sudo nvram StartupMute=%01
 

@@ -5,7 +5,9 @@ brew "docker-compose"
 brew "docker-credential-helper"
 brew "googleworkspace-cli"
 brew "helm"
+brew "k9s" # k8s TUI (replaces Freelens)
 brew "kubernetes-cli"
+brew "lazysql" # DB TUI alongside DBeaverLite
 brew "lazydocker"
 brew "libpq" # keg-only; psql on PATH via system/_path.zsh
 brew "pgformatter"
@@ -20,6 +22,14 @@ brew "cocoapods"
 brew "fastlane"
 brew "watchman"
 brew "xcodes"
+
+# Native iOS/macOS: Xcode from nvim + agents
+tap "getsentry/xcodebuildmcp"
+brew "getsentry/xcodebuildmcp/xcodebuildmcp" # MCP server for claude/opencode
+brew "swiftformat"
+brew "swiftlint"
+brew "xcbeautify" # xcodebuild output formatter (xcodebuild.nvim dep)
+brew "xcode-build-server" # sourcekit-lsp <-> xcodeproj bridge (xcodebuild.nvim dep)
 
 cask "android-studio"
 cask "dbeaverlite"
