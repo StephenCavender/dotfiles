@@ -137,7 +137,7 @@ on-mode-changed = []
     alt-enter = 'exec-and-forget open -na Ghostty'   # new terminal window
     alt-shift-b = 'exec-and-forget open -a Zen'       # browser
     alt-shift-enter = 'exec-and-forget open -a Zen'   # browser (Omarchy SUPER+SHIFT+RETURN)
-    alt-shift-n = 'exec-and-forget open -a Zed'       # editor
+    alt-shift-n = 'exec-and-forget open -na Ghostty --args -e /bin/zsh -ic nvim'  # editor; zsh -i for PATH + mise
     alt-shift-f = 'exec-and-forget open ~'            # file manager (Finder)
     alt-shift-slash = 'exec-and-forget open -a 1Password'
     alt-shift-space = 'exec-and-forget sketchybar --bar hidden=toggle'  # toggle top bar

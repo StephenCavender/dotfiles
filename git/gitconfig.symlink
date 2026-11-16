@@ -14,7 +14,7 @@
         ui = true
 [core]
         excludesfile = ~/.gitignore
-        editor = vim
+        editor = nvim
         pager = delta
 [apply]
         whitespace = nowarn
