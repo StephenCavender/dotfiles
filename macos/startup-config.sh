@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Startup configuration for sketchybar and borders
-# This script configures launch agents to start the applications on login
-# Aerospace uses its own start-at-login setting
+# Launch agents for background sync jobs (fastmail rclone, vdirsyncer).
+# Sketchybar and borders are started by AeroSpace's after-startup-command,
+# not launchd.
 
 set -e
 
@@ -19,54 +19,6 @@ reload_agent() {
 
 # Create launch agents directory if it doesn't exist
 mkdir -p "$LAUNCH_AGENTS_DIR"
-
-# Sketchybar launch agent
-cat > "$LAUNCH_AGENTS_DIR/com.felixkratz.sketchybar.plist" << 'EOF'
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>Label</key>
-    <string>com.felixkratz.sketchybar</string>
-    <key>ProgramArguments</key>
-    <array>
-        <string>/usr/local/bin/sketchybar</string>
-    </array>
-    <key>RunAtLoad</key>
-    <true/>
-    <key>KeepAlive</key>
-    <true/>
-</dict>
-</plist>
-EOF
-
-# Borders launch agent
-cat > "$LAUNCH_AGENTS_DIR/com.felixkratz.borders.plist" << 'EOF'
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>Label</key>
-    <string>com.felixkratz.borders</string>
-    <key>ProgramArguments</key>
-    <array>
-        <string>/usr/local/bin/borders</string>
-        <string>active_color=0xff89b4fa</string>
-        <string>inactive_color=0xff313244</string>
-        <string>width=2.0</string>
-        <string>style=round</string>
-    </array>
-    <key>RunAtLoad</key>
-    <true/>
-    <key>KeepAlive</key>
-    <true/>
-</dict>
-</plist>
-EOF
-
-# Load the launch agents
-reload_agent "$LAUNCH_AGENTS_DIR/com.felixkratz.sketchybar.plist"
-reload_agent "$LAUNCH_AGENTS_DIR/com.felixkratz.borders.plist"
 
 mkdir -p "$HOME/.local/share/rclone"
 cat > "$LAUNCH_AGENTS_DIR/com.steve.fastmail-sync.plist" << 'EOF'
@@ -126,4 +78,4 @@ EOF
 
 reload_agent "$LAUNCH_AGENTS_DIR/com.steve.vdirsyncer.plist"
 
-echo "Startup configuration complete. Applications will launch on next login."
+echo "Startup configuration complete."
