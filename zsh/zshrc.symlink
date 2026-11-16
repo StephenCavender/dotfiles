@@ -79,5 +79,7 @@ _cache_init() {
 (( $+commands[mise] )) && _cache_init "${commands[mise]}" mise activate zsh
 # zoxide (Omarchy): z/zi, and feeds the frecency lookup in functions/c
 (( $+commands[zoxide] )) && _cache_init "${commands[zoxide]}" zoxide init zsh
+# atuin: must follow `fzf --zsh` so it owns Ctrl-R. Up arrow stays prefix search.
+(( $+commands[atuin] )) && _cache_init "${commands[atuin]}" atuin init zsh --disable-up-arrow
 
 # pi lives in its managed install (~/.local/bin/pi, see pi/install.sh); no node path needed.
