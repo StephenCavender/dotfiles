@@ -1,6 +1,7 @@
 tap "nikitabobko/tap"
 tap "felixkratz/formulae"
 tap "dlvhdr/formulae"
+tap "kitlangton/tap"
 
 brew "atuin"
 brew "bat"
@@ -27,6 +28,7 @@ brew "khal"
 brew "lazygit"
 brew "mas"
 brew "mise"
+brew "mole"
 brew "neomutt"
 brew "neovim"
 brew "newsboat"
@@ -58,6 +60,7 @@ cask "ghostty"
 cask "hex" # on-device push-to-talk dictation
 cask "localsend"
 cask "raycast"
+cask "kitlangton/tap/scrawl" # screen capture + narration for agents
 cask "font-sketchybar-app-font"
 cask "vlc"
 cask "zed"
